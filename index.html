@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garv Batra | NTU Portfolio</title>
+  <meta name="description" content="Portfolio of Garv Batra for NTU REP and scholarship review." />
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --panel: #121722;
+      --panel-2: #171d2a;
+      --line: rgba(255, 255, 255, 0.08);
+      --text: #f3f5f7;
+      --muted: #aab4c3;
+      --accent: #7cc7ff;
+      --accent-2: #9a8cff;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      --max: 1180px;
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124, 199, 255, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(154, 140, 255, 0.10), transparent 24%),
+        linear-gradient(180deg, #090b10 0%, #0b0d12 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 88px 0;
+    }
+
+    #recognition {
+      display: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 6vw, 5.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+    }
+
+    h2 {
+      font-size: clamp(1.9rem, 3vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .lead {
+      font-size: clamp(1.05rem, 1.5vw, 1.22rem);
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(8, 10, 14, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-inner {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 20px rgba(124, 199, 255, 0.6);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 6px;
+      font-weight: 500;
+      transition: color 0.22s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: var(--text);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.22s ease;
+    }
+
+    .nav-links a.active {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .nav-links a.active::after {
+      transform: scaleX(1);
+    }
+
+    .hero {
+      position: relative;
+      padding: 56px 0 28px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(124, 199, 255, 0.12), transparent 0 32%),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: auto, 36px 36px, 36px 36px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.28));
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-card {
+      position: relative;
+      min-height: 100%;
+    }
+
+    .hero-copy {
+      padding: 20px 0 12px;
+    }
+
+    .mission-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #d7eaff;
+      border: 1px solid rgba(124, 199, 255, 0.18);
+      background: rgba(9, 17, 30, 0.78);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+    }
+
+    .mission-chip::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(124, 199, 255, 0.8);
+      animation: pulse 2.6s ease-in-out infinite;
+    }
+
+    .hero-kicker {
+      font-size: 0.92rem;
+      color: #d4def0;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin: 20px 0 12px;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.12rem, 1.9vw, 1.38rem);
+      color: #d9e3f3;
+      margin: 22px 0 14px;
+      max-width: 760px;
+    }
+
+    .hero-intro {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 700px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .signal-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .signal-card {
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(15, 21, 34, 0.94), rgba(10, 15, 25, 0.88));
+      border: 1px solid rgba(124, 199, 255, 0.14);
+      box-shadow: var(--shadow);
+    }
+
+    .signal-label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .signal-card strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .signal-card span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+      transition: 0.22s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(124, 199, 255, 0.18), rgba(154, 140, 255, 0.18));
+      border-color: rgba(124, 199, 255, 0.25);
+      box-shadow: 0 12px 30px rgba(27, 60, 100, 0.25);
+    }
+
+    .hero-card {
+      display: grid;
+      gap: 16px;
+      background:
+        radial-gradient(circle at top right, rgba(124, 199, 255, 0.16), transparent 32%),
+        linear-gradient(180deg, rgba(15, 21, 34, 0.98), rgba(10, 15, 24, 0.92));
+      border: 1px solid rgba(124, 199, 255, 0.14);
+      border-radius: 32px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card.photo-only {
+      display: block;
+      padding: 18px;
+    }
+
+    .hero-panel-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      color: #dbe7f8;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #7ef0b7;
+      box-shadow: 0 0 18px rgba(126, 240, 183, 0.8);
+    }
+
+    .hero-map {
+      position: relative;
+      min-height: 250px;
+      border-radius: 26px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 72% 22%, rgba(124, 199, 255, 0.22), transparent 0 20%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .portrait {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      width: min(48%, 220px);
+      aspect-ratio: 4 / 5;
+      border-radius: 22px;
+      overflow: hidden;
+      background:
+        linear-gradient(145deg, rgba(124, 199, 255, 0.18), rgba(154, 140, 255, 0.10)),
+        linear-gradient(180deg, #192132, #0f1420);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 2;
+    }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      transform: scale(1.03);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(124, 199, 255, 0.12);
+    }
+
+    .hero-card.photo-only .portrait {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      width: 100%;
+      min-height: 620px;
+      border-radius: 28px;
+    }
+
+    .hero-card.photo-only .portrait img {
+      transform: scale(1.01);
+    }
+
+    .portrait::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(11, 13, 18, 0) 56%, rgba(11, 13, 18, 0.82) 100%);
+      pointer-events: none;
+    }
+
+    .route-line {
+      position: absolute;
+      inset: auto auto auto auto;
+      border: 1px dashed rgba(124, 199, 255, 0.24);
+      border-radius: 999px;
+      animation: drift 7.5s ease-in-out infinite;
+    }
+
+    .route-line.route-a {
+      top: 24px;
+      left: 28px;
+      width: 200px;
+      height: 110px;
+    }
+
+    .route-line.route-b {
+      top: 88px;
+      left: 84px;
+      width: 240px;
+      height: 126px;
+      animation-delay: -2.5s;
+    }
+
+    .route-line.route-c {
+      top: 34px;
+      right: 94px;
+      width: 150px;
+      height: 210px;
+      animation-delay: -4.5s;
+    }
+
+    .route-node {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(124, 199, 255, 0.78);
+      z-index: 1;
+    }
+
+    .route-node.node-a {
+      top: 50px;
+      left: 46px;
+    }
+
+    .route-node.node-b {
+      top: 148px;
+      left: 188px;
+    }
+
+    .route-node.node-c {
+      top: 86px;
+      right: 146px;
+    }
+
+    .mission-note {
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      z-index: 2;
+      max-width: 220px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(9, 13, 21, 0.78);
+      border: 1px solid rgba(124, 199, 255, 0.14);
+      backdrop-filter: blur(12px);
+    }
+
+    .mission-note strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+    }
+
+    .mission-note span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.25rem;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .snapshot-grid,
+    .proof-grid-top {
+      display: grid;
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .snapshot-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .snapshot-card,
+    .proof-card {
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .snapshot-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 190px;
+    }
+
+    .snapshot-card::after {
+      content: "";
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      right: -38px;
+      bottom: -48px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124, 199, 255, 0.18), transparent 65%);
+      pointer-events: none;
+    }
+
+    .snapshot-value {
+      display: block;
+      margin-bottom: 10px;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+    }
+
+    .snapshot-card h3,
+    .proof-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .snapshot-card p,
+    .proof-card p {
+      color: var(--muted);
+    }
+
+    .proof-grid-top {
+      grid-template-columns: 1.18fr 0.9fr 0.9fr;
+    }
+
+    .proof-card {
+      min-height: 240px;
+      display: grid;
+      gap: 16px;
+      align-content: start;
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .proof-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(124, 199, 255, 0.22);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+    }
+
+    .proof-card-wide {
+      background:
+        radial-gradient(circle at top right, rgba(124, 199, 255, 0.14), transparent 28%),
+        linear-gradient(180deg, #121a27, #101723);
+    }
+
+    .proof-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(124, 199, 255, 0.08);
+      border: 1px solid rgba(124, 199, 255, 0.12);
+    }
+
+    .proof-art {
+      height: 110px;
+      width: 100%;
+      flex: 0 0 110px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 24% 24%, rgba(124, 199, 255, 0.14), transparent 0 24%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
+    }
+
+    .proof-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .proof-art.has-image {
+      background: #151b27;
+    }
+
+    .proof-art.has-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8, 10, 14, 0.06), rgba(8, 10, 14, 0.22));
+      pointer-events: none;
+    }
+
+    .proof-art:not(.has-image)::before,
+    .proof-art::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      border: 1px dashed rgba(124, 199, 255, 0.2);
+    }
+
+    .proof-art:not(.has-image)::before {
+      width: 120px;
+      height: 120px;
+      top: -42px;
+      right: -14px;
+    }
+
+    .proof-art:not(.has-image)::after {
+      width: 82px;
+      height: 82px;
+      left: 18px;
+      bottom: -28px;
+    }
+
+    .proof-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #dce6f7;
+      font-weight: 600;
+    }
+
+    .proof-link span {
+      color: var(--accent);
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.25);
+        opacity: 0.7;
+      }
+    }
+
+    @keyframes drift {
+      0%, 100% {
+        transform: translateY(0px) translateX(0px);
+      }
+
+      50% {
+        transform: translateY(-8px) translateX(6px);
+      }
+    }
+
+    .experience-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .experience-card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .clickable-card {
+      cursor: pointer;
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .clickable-card:hover,
+    .clickable-card:focus {
+      transform: translateY(-4px);
+      border-color: rgba(124, 199, 255, 0.22);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+      outline: none;
+    }
+
+    .experience-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      font-size: 0.8rem;
+      color: #d4ddf2;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 8px 11px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .experience-card p {
+      color: var(--muted);
+    }
+
+    .bullet-list {
+      margin: 16px 0 0;
+      padding-left: 18px;
+      color: #d5ddeb;
+    }
+
+    .bullet-list li {
+      margin: 7px 0;
+    }
+
+    .quote-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .quote {
+      padding: 26px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.018));
+    }
+
+    .quote p {
+      color: #dce5f3;
+    }
+
+    .rep-panel {
+      margin-top: 28px;
+      padding: 28px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at top right, rgba(124, 199, 255, 0.12), transparent 30%),
+        linear-gradient(180deg, #111826, #0d121c);
+      border: 1px solid rgba(124, 199, 255, 0.16);
+      box-shadow: var(--shadow);
+    }
+
+    .rep-columns {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 26px;
+      margin-top: 18px;
+    }
+
+    .rep-columns ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #d9e2f0;
+    }
+
+    .rep-columns li {
+      margin: 10px 0;
+    }
+
+    .footer {
+      padding: 48px 0 70px;
+      color: var(--muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      margin-top: 30px;
+    }
+
+    .footer-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer strong {
+      color: var(--text);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 14, 0.74);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 999;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      width: min(1120px, 100%);
+      max-height: 88vh;
+      overflow-y: auto;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        radial-gradient(circle at top right, rgba(124, 199, 255, 0.10), transparent 28%),
+        linear-gradient(180deg, #121722, #0f1420);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.55);
+      padding: 28px;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 18px;
+    }
+
+    .modal-title-wrap h3 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .modal-subtitle {
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .modal-close {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .modal-main-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .evidence-intro {
+      display: grid;
+      gap: 6px;
+    }
+
+    .evidence-intro p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .achievement-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .modal-card,
+    .achievement-card {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.018));
+      border-radius: 22px;
+      padding: 20px;
+    }
+
+    .modal-card h4,
+    .achievement-card h4 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      color: #dce6f7;
+    }
+
+    .modal-card p,
+    .modal-card li,
+    .achievement-card p,
+    .achievement-card li {
+      color: var(--muted);
+    }
+
+    .achievement-media {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .evidence-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 0.76rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .evidence-label::before {
+      content: "";
+      width: 18px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .achievement-media img {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .achievement-links {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .modal-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      color: #dce6f7;
+    }
+
+    .modal-link:hover {
+      border-color: rgba(124, 199, 255, 0.22);
+    }
+
+    .pdf-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .pdf-frame {
+      width: 100%;
+      height: 420px;
+      border: none;
+      display: block;
+      background: white;
+    }
+
+    @media (max-width: 980px) {
+
+      .hero-grid,
+      .signal-strip,
+      .snapshot-grid,
+      .proof-grid-top,
+      .experience-grid,
+      .quote-grid,
+      .rep-columns {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .achievement-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+
+      .container,
+      .nav-inner {
+        width: min(var(--max), calc(100% - 28px));
+      }
+
+      .section {
+        padding: 68px 0;
+      }
+
+      .hero {
+        padding-top: 38px;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel-top,
+      .mission-note {
+        position: static;
+      }
+
+      .portrait {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        width: 100%;
+        max-width: 220px;
+        margin: 18px auto 0;
+      }
+
+      .hero-card.photo-only .portrait {
+        max-width: none;
+        min-height: 420px;
+        margin: 0;
+      }
+
+      .hero-map {
+        min-height: auto;
+        padding: 18px;
+      }
+
+      .experience-top {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .modal {
+        padding: 20px;
+      }
+
+      .pdf-frame {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#top" class="brand">
+        <span class="brand-dot"></span>
+        <span>Garv Batra</span>
+      </a>
+      <div class="nav-links">
+        <a href="#identity">Snapshot</a>
+        <a href="#proof-hub">Proof</a>
+        <a href="#experiences">Experiences</a>
+        <a href="#rep">Why NTU REP</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="mission-chip">Portfolio Briefing • REP & Scholarship Review</div>
+          <div class="hero-kicker">Pressure-Tested Builder</div>
+          <h1>GARV<br>BATRA</h1>
+          <p class="hero-subtitle">Aviation discipline, engineering curiosity, and execution under real-world pressure.</p>
+          <p class="hero-intro">This portfolio is designed as a fast reviewer brief: a compact record of the
+            environments I chose, the standards I met, and the evidence that those experiences were substantive rather
+            than performative.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#proof-hub">View Featured Proof</a>
+            <a class="btn" href="#experiences">Explore Experiences</a>
+            <a class="btn" href="#rep">Why NTU REP</a>
+          </div>
+          <div class="signal-strip">
+            <div class="signal-card">
+              <span class="signal-label">Operating Theme</span>
+              <strong>Discipline Under Stakes</strong>
+              <span>Flight training and technical work taught calm execution when the margin for error is low.</span>
+            </div>
+            <div class="signal-card">
+              <span class="signal-label">Working Style</span>
+              <strong>Build, Test, Refine</strong>
+              <span>I learn best through systems, prototypes, feedback loops, and public accountability.</span>
+            </div>
+            <div class="signal-card">
+              <span class="signal-label">Why It Matters</span>
+              <strong>Human-Centred Engineering</strong>
+              <span>I want to build things that are technically rigorous and demonstrably useful in the real world.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card photo-only">
+          <div class="portrait">
+            <img src="assets/images/profile.jpg" alt="Garv Batra Profile" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="identity">
+      <div class="container">
+        <div class="eyebrow">Reviewer Snapshot</div>
+        <h2>A fast scan of the strongest signals before the long-form detail.</h2>
+        <p class="lead">This section is intentionally concise. It is built to help a panel identify seriousness,
+          consistency, and external validation within seconds.</p>
+
+        <div class="snapshot-grid">
+          <div class="snapshot-card">
+            <span class="snapshot-value">76+</span>
+            <h3>Flight Hours Logged</h3>
+            <p>Structured aviation training over 1.5 years, including solo progression, navigation work, and final test
+              preparation.</p>
+          </div>
+          <div class="snapshot-card">
+            <span class="snapshot-value">7</span>
+            <h3>CAAS Theory Papers Cleared</h3>
+            <p>Demonstrated technical discipline and sustained study while balancing A-Levels, cricket, and leadership
+              commitments.</p>
+          </div>
+          <div class="snapshot-card">
+            <span class="snapshot-value">Top 10</span>
+            <h3>National Engineering Recognition</h3>
+            <p>Engineers Innovation Challenge placement and World Engineers Summit exposure validated both the problem
+              framing and the technical concept.</p>
+          </div>
+          <div class="snapshot-card">
+            <span class="snapshot-value">SGD 1.7K</span>
+            <h3>Revenue Generated</h3>
+            <p>WebForce moved beyond a hobby build into a product with paying users, repeat interest, and external
+              article coverage.</p>
+          </div>
+          <div class="snapshot-card">
+            <span class="snapshot-value">10+</span>
+            <h3>Countries Reached</h3>
+            <p>The app reached a distributed international user base, showing traction beyond the original niche use
+              case.</p>
+          </div>
+          <div class="snapshot-card">
+            <span class="snapshot-value">2024</span>
+            <h3>REN Member of the Year</h3>
+            <p>Recognition for consistent initiative, contribution, and leadership through entrepreneurship projects and
+              event execution.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="proof-hub">
+      <div class="container">
+        <div class="eyebrow">Featured Proof</div>
+        <h2>The most review-worthy evidence, surfaced before the full narrative.</h2>
+        <p class="lead">The requirement is clear: the portfolio URL should contain visible proof. This proof hub brings
+          key articles, recognitions, product traction, and flight evidence forward so the strongest signals are not
+          buried deep in the page.</p>
+
+        <div class="proof-grid-top">
+          <a class="proof-card proof-card-wide" href="#experience-ppl"
+            aria-label="Jump to Private Pilot Licence experience card">
+            <span class="proof-meta">Aviation Credential</span>
+            <div class="proof-art has-image">
+              <img src="assets/images/da40.jpg" alt="Private Pilot Licence evidence">
+            </div>
+            <h3>Private Pilot Licence Journey</h3>
+            <p>Flight images, training milestones, theory progression, and public-facing recognition are grouped into a
+              single evidence trail.</p>
+            <div class="proof-link">Open aviation proof <span>↗</span></div>
+          </a>
+
+          <a class="proof-card" href="#experience-webforce" aria-label="Jump to WebForce experience card">
+            <span class="proof-meta">Product Traction</span>
+            <div class="proof-art has-image">
+              <img src="assets/images/WebForceBanner.png" alt="WebForce product screenshot">
+            </div>
+            <h3>WebForce on Google Play</h3>
+            <p>A live product listing that supports the claim that the app moved beyond concept into public distribution
+              and paid use.</p>
+            <div class="proof-link">Open WebForce card <span>↗</span></div>
+          </a>
+
+          <a class="proof-card" href="#experience-webforce" aria-label="Jump to WebForce experience card">
+            <span class="proof-meta">Article Mention</span>
+            <div class="proof-art has-image">
+              <img src="assets/images/WebForceBanner.png" alt="Article mention screenshot">
+            </div>
+            <h3>Independent Coverage</h3>
+            <p>External writing on WebForce adds third-party visibility to the product rather than relying only on
+              self-description.</p>
+            <div class="proof-link">Open WebForce card <span>↗</span></div>
+          </a>
+
+          <a class="proof-card" href="#experience-eic"
+            aria-label="Jump to Engineers Innovation Challenge experience card">
+            <span class="proof-meta">National Recognition</span>
+            <div class="proof-art has-image">
+              <img src="assets/images/EIC_POSTER.jpg" alt="Engineers Innovation Challenge presentation">
+            </div>
+            <h3>Engineers Innovation Challenge</h3>
+            <p>Prototype documents, presentation images, and award records show the engineering work was reviewed beyond
+              the classroom.</p>
+            <div class="proof-link">Open engineering proof <span>↗</span></div>
+          </a>
+
+          <a class="proof-card" href="#experience-ren"
+            aria-label="Jump to Raffles Entrepreneurs Network experience card">
+            <span class="proof-meta">Leadership Recognition</span>
+            <div class="proof-art has-image">
+              <img src="assets/images/REN_MemberOfTheYear.jpg" alt="REN Member of the Year evidence">
+            </div>
+            <h3>REN Member of the Year</h3>
+            <p>Award imagery and event execution evidence support the leadership claims without adding extra narrative
+              bulk.</p>
+            <div class="proof-link">Open leadership proof <span>↗</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experiences">
+      <div class="container">
+        <div class="eyebrow">Featured Experiences</div>
+        <h2>The longer-form stories behind the signals above.</h2>
+        <p class="lead">Each module opens into narrative and evidence together. The goal is to keep the front page
+          scannable, while still making the deeper context accessible to a reviewer who wants to inspect substance.</p>
+
+        <div class="experience-grid">
+          <article class="experience-card clickable-card" id="experience-ppl" tabindex="0" role="button" data-modal="ppl"
+            aria-label="Open details for Private Pilot Licence">
+            <div class="experience-top">
+              <div>
+                <h3>Private Pilot Licence • Singapore Youth Flying Club</h3>
+                <p>1.5 years of flight, ground, and emergency-response training that demanded precision, judgement, and
+                  consistency under pressure.</p>
+              </div>
+              <span class="tag">Aviation</span>
+            </div>
+            <ul class="bullet-list">
+              <li>Logged nearly 80 flight hours, including solo flights, circuit work, navigation exercises, and final
+                test progression.</li>
+              <li>Cleared 7 CAAS theory papers while managing A-Levels, cricket, and REN commitments alongside training.
+              </li>
+              <li>Trained to make calm, procedural decisions in high-stakes situations where hesitation, inaccuracy, or
+                poor judgement had immediate consequences.</li>
+            </ul>
+          </article>
+
+          <article class="experience-card clickable-card" id="experience-eic" tabindex="0" role="button" data-modal="eic"
+            aria-label="Open details for Engineers Innovation Challenge 2023">
+            <div class="experience-top">
+              <div>
+                <h3>Engineers Innovation Challenge 2023 • Top 10 Nationwide</h3>
+                <p>A national engineering project where my team designed an AI-assisted concept to address elderly
+                  loneliness and cognitive decline risk.</p>
+              </div>
+              <span class="tag">Engineering</span>
+            </div>
+            <ul class="bullet-list">
+              <li>Helped develop a table-mounted assistant concept aimed at supporting elderly individuals living alone
+                through interaction and engagement.</li>
+              <li>Worked through prototype constraints, feasibility questions, and iterative design decisions as part of
+                a multidisciplinary team.</li>
+              <li>Shortlisting in the national top 10 and presentation exposure at the World Engineers Summit
+                strengthened my interest in engineering that solves human problems, not just technical ones.</li>
+            </ul>
+          </article>
+
+          <article class="experience-card clickable-card" id="experience-ren" tabindex="0" role="button" data-modal="ren"
+            aria-label="Open details for Raffles Entrepreneurs Network">
+            <div class="experience-top">
+              <div>
+                <h3>Raffles Entrepreneurs Network • Member of the Year</h3>
+                <p>A leadership experience shaped by initiative, team coordination, and the responsibility of helping
+                  drive school-wide entrepreneurship projects.</p>
+              </div>
+              <span class="tag">Leadership</span>
+            </div>
+            <ul class="bullet-list">
+              <li>Helped spearhead EntreWeek, a school-wide initiative promoting sustainable entrepreneurship through
+                speaker sessions, engagement activities, and event coordination.</li>
+              <li>Worked across planning, people management, and execution under time pressure, rather than staying
+                within a narrow assigned role.</li>
+              <li>Taught me that effective leadership is not just directing outcomes quickly, but creating ownership so
+                that people contribute with greater commitment.</li>
+            </ul>
+          </article>
+
+          <article class="experience-card clickable-card" id="experience-webforce" tabindex="0" role="button" data-modal="webforce"
+            aria-label="Open details for WebForce">
+            <div class="experience-top">
+              <div>
+                <h3>WebForce • Android App for Magicians</h3>
+                <p>A niche-market Android product built to solve a real performance need, then refined through live user
+                  feedback and practical testing.</p>
+              </div>
+              <span class="tag">Product Building</span>
+            </div>
+            <ul class="bullet-list">
+              <li>Co-developed the app after identifying a gap in the magician tools market, where Android alternatives
+                were limited or absent.</li>
+              <li>Iterated features and reliability based on performer feedback from real-use settings, focusing on
+                practical usability rather than just building features.</li>
+              <li>Reached users across 10 countries, generated revenue, and attracted distributor interest, showing that
+                the product had real traction beyond the initial concept.</li>
+            </ul>
+          </article>
+
+          <article class="experience-card clickable-card" tabindex="0" role="button" data-modal="teaching"
+            aria-label="Open details for Teaching and Mentoring">
+            <div class="experience-top">
+              <div>
+                <h3>Teaching, Mentoring, and Community Support</h3>
+                <p>Academic mentoring that developed my patience, communication, and ability to make difficult ideas
+                  understandable.</p>
+              </div>
+              <span class="tag">Service</span>
+            </div>
+            <ul class="bullet-list">
+              <li>Partnered with my primary school and a community centre to support Primary 6 students in Maths and
+                Science.</li>
+              <li>Created educational content to explain methods and problem-solving techniques more accessibly beyond
+                in-person sessions.</li>
+              <li>Learned how to adapt explanations to different students instead of assuming one way of teaching works
+                for everyone.</li>
+            </ul>
+          </article>
+
+          <article class="experience-card clickable-card" tabindex="0" role="button" data-modal="internship"
+            aria-label="Open details for ExpertConnect Asia Internship">
+            <div class="experience-top">
+              <div>
+                <h3>ExpertConnect Asia Internship</h3>
+                <p>Industry exposure that placed me in a fast-moving environment requiring initiative, adaptability, and
+                  quick learning.</p>
+              </div>
+              <span class="tag">Industry Exposure</span>
+            </div>
+            <ul class="bullet-list">
+              <li>Contributed to business-facing and digital work, including support on interface development and
+                related project tasks.</li>
+              <li>Adapted to changing needs across product, research, and execution instead of working within a fixed
+                routine.</li>
+              <li>Confirmed that I work best in environments where I am expected to learn quickly, take ownership, and
+                contribute beyond narrow instructions.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="recognition">
+      <div class="container">
+        <div class="eyebrow">Recognition & Outcomes</div>
+        <h2>External validation of the work above, without repeating the same stories.</h2>
+        <p class="lead">This section stays compressed for scan value. The detailed stories and supporting evidence now
+          sit inside each expandable experience module, so a reviewer can move from claim to proof without jumping
+          between sections.</p>
+
+        <div class="recognition-grid">
+          <div class="recognition-card">
+            <div class="recognition-meta">
+              <h3>High-commitment milestones</h3>
+              <span class="recognition-year">2023–2024</span>
+            </div>
+            <p>Private Pilot Licence, national engineering recognition, competitive cricket representation, and REN
+              Member of the Year collectively show sustained performance across very different environments rather than
+              isolated success in one area.</p>
+          </div>
+
+          <div class="recognition-card">
+            <div class="recognition-meta">
+              <h3>What this signals</h3>
+              <span class="recognition-year">Reviewer lens</span>
+            </div>
+            <p>These recognitions reinforce that the experiences above were not casual participation. They involved real
+              commitment, external standards, and outcomes visible beyond self-description.</p>
+          </div>
+        </div>
+
+        <div class="recognition-strip">
+          <div class="recognition-pill">
+            <strong>PPL Earned</strong>
+            <span>SYFC • 2024</span>
+          </div>
+          <div class="recognition-pill">
+            <strong>Member of the Year</strong>
+            <span>REN • 2024</span>
+          </div>
+          <div class="recognition-pill">
+            <strong>Top 10 Nationwide</strong>
+            <span>EIC • 2023</span>
+          </div>
+          <div class="recognition-pill">
+            <strong>NSG Representation</strong>
+            <span>Cricket • 2023–2024</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="eyebrow">Personal Reflection</div>
+        <h2>The ideas that connect my experiences.</h2>
+        <div class="quote-grid">
+          <div class="quote">
+            <h3>How flying shaped my problem-solving</h3>
+            <p>Flying taught me that pressure does not excuse poor thinking. It demands better thinking. In the cockpit,
+              hesitation, overconfidence, and sloppy preparation have consequences. That mindset has carried into how I
+              study, build, and lead.</p>
+          </div>
+          <div class="quote">
+            <h3>Why I am drawn to engineering</h3>
+            <p>I am fascinated by how complex systems become usable realities. Engineering, to me, is not abstract
+              theory alone. It is disciplined creativity applied to make difficult things work reliably in the real
+              world.</p>
+          </div>
+          <div class="quote">
+            <h3>Why building matters to me</h3>
+            <p>I do not just want to understand ideas. I want to test them, refine them, and turn them into things that
+              people can actually use. That is why product-building, entrepreneurship, and technical problem-solving
+              appeal to me so strongly.</p>
+          </div>
+          <div class="quote">
+            <h3>What I value in a learning environment</h3>
+            <p>I am looking for a place that does not separate technical depth from initiative, global perspective, and
+              execution. I grow most in environments that are rigorous, interdisciplinary, and demanding.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="rep">
+      <div class="container">
+        <div class="eyebrow">Why NTU REP</div>
+        <h2>REP aligns with how I want to grow and what I want to build.</h2>
+        <div class="rep-panel">
+          <p class="lead">What draws me most to REP is its refusal to keep engineering isolated from leadership,
+            business thinking, and global exposure. I am applying to engineering not only because I enjoy systems and
+            technical problem-solving, but because I want to use them to build solutions that matter beyond the
+            classroom.</p>
+          <div class="rep-columns">
+            <div>
+              <h3>Why the programme fits me</h3>
+              <ul>
+                <li>The engineering rigour matches my appetite for demanding, high-discipline environments.</li>
+                <li>The business dimension reflects my longstanding interest in entrepreneurship and building useful
+                  products.</li>
+                <li>The overseas immersion component aligns with my desire to learn from broader systems, cultures, and
+                  markets.</li>
+                <li>The interdisciplinary nature of REP mirrors the way I already think: problems rarely belong to one
+                  domain alone.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>What I hope to contribute</h3>
+              <ul>
+                <li>A disciplined, pressure-tested mindset shaped by aviation training.</li>
+                <li>Initiative and execution built through entrepreneurship and product development.</li>
+                <li>A collaborative style that values trust, ownership, and practical contribution.</li>
+                <li>A genuine interest in building solutions that are technically sound and humanly relevant.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-box">
+      <div>
+        <strong>Garv Batra</strong><br>
+        <span>Portfolio prepared for NTU undergraduate admissions, REP, and scholarship review.</span>
+      </div>
+      <div>
+        <a href="mailto:garvbatracrown@gmail.com">garvbatracrown@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="activityModalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3 id="modalTitle">Activity Title</h3>
+          <p class="modal-subtitle" id="modalSubtitle">Expanded content</p>
+        </div>
+        <button class="modal-close" id="modalCloseBtn" aria-label="Close">×</button>
+      </div>
+
+      <div class="modal-main-stack">
+        <div class="modal-card">
+          <h4>Experience Narrative</h4>
+          <div id="modalBody"></div>
+        </div>
+        <div class="evidence-intro">
+          <h4>Selected Evidence & Outcomes</h4>
+          <p>Proof is attached directly to each experience so the supporting material stays beside the claim it verifies.</p>
+        </div>
+        <div id="modalAchievements" class="achievement-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modalData = {
+      ppl: {
+        title: "Private Pilot Licence • Singapore Youth Flying Club",
+        subtitle: "Aviation training that built discipline, calmness under pressure, and systems thinking.",
+        body: `
+          <p>My SYFC journey was one of the most demanding experiences of my JC years. Over 1.5 years, I trained through ground school, simulator work, dual flights, solo flights, and final test preparation while balancing academics, cricket, and entrepreneurship commitments.</p>
+          <br>
+          <p>What made this experience meaningful was not just the outcome of earning the licence, but the way it reshaped how I think. Flying trained me to stay composed under pressure, respect procedures, make decisions with incomplete information, and understand how multiple systems must work together reliably.</p>
+        `,
+        achievements: [
+          {
+            heading: "Flight Hours and Solo Progression",
+            text: "Completed nearly 80 flight hours through structured progression, including dual flights, solo sorties, and final test readiness.",
+            images: ["assets/images/profile.jpg", "assets/images/B_Garv.jpg"],
+            pdfs: [],
+            links: []
+          },
+          {
+            heading: "Aviation Theory and Technical Discipline",
+            text: "Cleared 7 aviation theory papers while balancing A-Levels, cricket, and Leadership in REN. This demanded disciplined study habits and respect for procedural detail, finally earning my Private Pilot's License (PPL) a week before my Y6-prelim examinations",
+            images: ["assets/images/SYFC_PPL.jpg"],
+            pdfs: [],
+            links: []
+          },
+          {
+            heading: "Public Recognition",
+            text: "My aviation journey also received public-facing recognition, adding external validation to the milestone.",
+            images: [],
+            pdfs: [],
+            links: [{ label: "Public Article / Recognition", href: "https://share.google/JnxtzzweOzFFzPUp9" }]
+          }
+        ]
+      },
+      eic: {
+        title: "Engineers Innovation Challenge 2023",
+        subtitle: "A human-centred engineering project focused on elderly loneliness and dementia risk.",
+        body: `
+          <p>Our team identified elderly social isolation as a meaningful problem, especially in the context of ageing populations and seniors living alone. We designed a table-mounted AI concept intended to provide interaction and emotional support.</p>
+          <br>
+          <p>The project pushed me to think beyond technical novelty. It forced me to ask whether what we were building was actually relevant, usable, and responsive to a real social need. That is what drew me further toward engineering as a means of solving real-world problems.</p>
+        `,
+        achievements: [
+          {
+            heading: "Problem Identification and Prototype Concept",
+            text: "We focused on elderly loneliness as a real social problem and built an AI-assisted concept to support engagement and reduce isolation risk.",
+            images: [],
+            pdfs: ["assets/documents/EIC_Report_Final.pdf"],
+            links: []
+          },
+          {
+            heading: "National Recognition",
+            text: "The project was shortlisted in the top 10 nationally, validating both the problem framing and the engineering approach.",
+            images: ["assets/images/EIC_NED_AWARD_PRESENTATION.jpg"],
+            pdfs: ["assets/documents/eic_award.pdf"],
+            links: []
+          },
+          {
+            heading: "World Engineers Summit Exposure",
+            text: "The opportunity to present at the World Engineers Summit deepened my conviction that engineering should serve real human needs, not just technical novelty.",
+            images: ["assets/images/EIC_NED_GROUP_PHOTO.jpg"],
+            pdfs: [],
+            links: []
+          }
+        ]
+      },
+      ren: {
+        title: "Raffles Entrepreneurs Network • Member of the Year",
+        subtitle: "Leadership, initiative, and execution through entrepreneurship activities and EntreWeek.",
+        body: `
+          <p>REN was where I developed confidence in taking initiative and turning ideas into action. A defining moment was helping spearhead EntreWeek, a school-wide event around sustainable entrepreneurship. It involved managing moving parts across people, logistics, and timelines.</p>
+          <br>
+          <p>This experience taught me that leadership is not simply about taking charge. It is about creating ownership, building trust, and keeping a team moving when uncertainty and pressure rise.</p>
+        `,
+        achievements: [
+          {
+            heading: "Member of the Year Recognition",
+            text: "I was recognised for consistent contribution, initiative, and going beyond baseline participation across REN activities and projects.",
+            images: ["assets/images/REN_MemberOfTheYear.jpg"],
+            pdfs: [],
+            links: []
+          },
+          {
+            heading: "EntreWeek Execution",
+            text: "I helped drive EntreWeek by coordinating moving parts across speakers, logistics, vendors, and student engagement under time pressure.",
+            images: ["assets/images/REN_EntreWeek_1.jpg", "assets/images/REN_EntreWeek_2.jpg"],
+            pdfs: [],
+            links: []
+          },
+          {
+            heading: "Leadership Style",
+            text: "This experience shaped my understanding that effective leadership is less about directing people and more about building trust, ownership, and follow-through.",
+            images: [],
+            pdfs: [],
+            links: []
+          }
+        ]
+      },
+      webforce: {
+        title: "WebForce • Android App for Magicians",
+        subtitle: "A niche-market product built from a real user problem into a live distributed app.",
+        body: `
+          <p>WebForce began with a practical need from a magician who needed a reliable phone-based tool during performances. What started as a focused solution for one use case gradually evolved into a broader product through live feedback, iterative refinement, and feature development.</p>
+          <br>
+          <p>This project mattered to me because it exposed the difference between simply building something and building something people actually trust enough to use. Reliability, usability, and feedback loops became central.</p>
+        `,
+        achievements: [
+          {
+            heading: "Identified and Built for a Real Niche Need",
+            text: "WebForce was not built as a theory project. It came from a real performance problem and had to be useful in practice, not just functional in testing.",
+            images: ["assets/images/WebForcePro.jpg"],
+            pdfs: [],
+            links: []
+          },
+          {
+            heading: "Distribution and User Reach",
+            text: "The product was distributed through Google Play and reached users across multiple countries, proving there was real traction beyond the original use case.",
+            bullets: [
+              "Generated close to SGD 1,700 in revenue.",
+              "Reached close to 60 users across 10+ countries."
+            ],
+            images: [],
+            pdfs: [],
+            links: [
+              { label: "WebForce | Google Play Listing", href: "https://play.google.com/store/apps/details?id=com.webforce.webforce" },
+              { label: "WebForce | The Daily Magician Article", href: "https://thedailymagician.com/webforce" }
+            ]
+          },
+          {
+            heading: "Product Thinking and Reliability",
+            text: "This project taught me that user trust comes from reliability, iteration, and responsiveness to feedback — not from building features in isolation.",
+            images: [],
+            pdfs: [],
+            links: []
+          }
+        ]
+      },
+      teaching: {
+        title: "Teaching, Mentoring, and Community Support",
+        subtitle: "Giving back through academic mentoring, educational content, and practical guidance.",
+        body: `
+          <p>Teaching became meaningful to me because it forced me to simplify, adapt, and understand how others think. Through community mentoring, school support, and educational content, I worked with students who needed not just explanation, but encouragement and patience.</p>
+          <br>
+          <p>It made me more aware that impact is not always dramatic. Sometimes it is the steady act of helping someone understand what once felt difficult or out of reach.</p>
+        `,
+        achievements: [
+          {
+            heading: "Community Tutoring",
+            text: "I taught primary school students through community support settings, focusing on Maths and Science while helping them build confidence alongside concepts.",
+            images: ["assets/images/SKEYN_Volunteering.jpg"],
+            pdfs: [],
+            links: []
+          },
+          {
+            heading: "Educational YouTube Channel",
+            text: "I created a YouTube channel to broaden access to explanations and problem-solving methods beyond in-person teaching.",
+            images: [],
+            pdfs: [],
+            links: [{ label: "My YouTube Channel", href: "https://www.youtube.com/@garvbatra3103" }]
+          },
+          {
+            heading: "Communication and Patience",
+            text: "Teaching strengthened my ability to explain the same concept in different ways, depending on how the student understood it.",
+            images: [],
+            pdfs: [],
+            links: []
+          }
+        ]
+      },
+      internship: {
+        title: "ExpertConnect Asia Internship",
+        subtitle: "Fast learning and contribution in a business and product-oriented environment.",
+        body: `
+          <p>During my internship, I worked across product development, market research, and interface improvement in a consultancy setting. It required me to learn quickly, adapt to changing requirements, and contribute across both technical and business-facing work.</p>
+          <br>
+          <p>This reinforced that I perform well in environments where initiative matters, ambiguity is normal, and value comes from understanding both the problem and the user.</p>
+        `,
+        achievements: [
+          {
+            heading: "Cross-Functional Contribution",
+            text: "I contributed across product-facing, market-facing, and interface-related work, which required fast learning and comfort with changing requirements.",
+            images: [],
+            pdfs: [],
+            links: []
+          },
+          {
+            heading: "Professional Validation",
+            text: "The internship reinforced that I can operate effectively in fast-moving environments where initiative, adaptability, and collaboration matter.",
+            images: [],
+            pdfs: ["assets/images/REN_ECA_Internship_review.jpg"],
+            links: []
+          }
+        ]
+      }
+    };
+
+    const overlay = document.getElementById("activityModalOverlay");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalSubtitle = document.getElementById("modalSubtitle");
+    const modalBody = document.getElementById("modalBody");
+    const modalAchievements = document.getElementById("modalAchievements");
+    const closeBtn = document.getElementById("modalCloseBtn");
+    const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
+
+    function openModal(key) {
+      const data = modalData[key];
+      if (!data) return;
+
+      modalTitle.textContent = data.title;
+      modalSubtitle.textContent = data.subtitle;
+      modalBody.innerHTML = data.body;
+
+      modalAchievements.innerHTML = (data.achievements || []).map(item => {
+        const hasEvidence = Boolean(
+          (item.images && item.images.length) ||
+          (item.pdfs && item.pdfs.length) ||
+          (item.links && item.links.length)
+        );
+        let mediaHTML = "";
+
+        if (item.images && item.images.length) {
+          mediaHTML += item.images.map(src => `<img src="${src}" alt="${item.heading}" loading="lazy">`).join("");
+        }
+
+        if (item.pdfs && item.pdfs.length) {
+          mediaHTML += item.pdfs.map(src => `
+            <div class="pdf-wrap">
+              <iframe src="${src}" class="pdf-frame" title="${item.heading} PDF"></iframe>
+            </div>
+          `).join("");
+        }
+
+        const linksHTML = (item.links || []).map(link =>
+          `<a class="modal-link" href="${link.href}" target="_blank" rel="noopener noreferrer">${link.label}<span>↗</span></a>`
+        ).join("");
+
+        return `
+          <div class="achievement-card">
+            <div class="evidence-label">${hasEvidence ? "Evidence Attached" : "Key Outcome"}</div>
+            <h4>${item.heading}</h4>
+            <p>${item.text}</p>
+            ${item.bullets && item.bullets.length ? `<ul class="bullet-list">${item.bullets.map(bullet => `<li>${bullet}</li>`).join("")}</ul>` : ""}
+            ${mediaHTML ? `<div class="achievement-media">${mediaHTML}</div>` : ""}
+            ${linksHTML ? `<div class="achievement-links">${linksHTML}</div>` : ""}
+          </div>
+        `;
+      }).join("");
+
+      overlay.classList.add("active");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      overlay.classList.remove("active");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".clickable-card").forEach(card => {
+      card.addEventListener("click", () => openModal(card.dataset.modal));
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openModal(card.dataset.modal);
+        }
+      });
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) closeModal(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+    const sectionIds = ["identity", "proof-hub", "experiences", "rep"];
+    const sections = sectionIds
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    function setActiveNav(id) {
+      navLinks.forEach(link => {
+        const isActive = link.getAttribute("href") === `#${id}`;
+        link.classList.toggle("active", isActive);
+        link.setAttribute("aria-current", isActive ? "page" : "false");
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+      if (visible[0]) {
+        setActiveNav(visible[0].target.id);
+      }
+    }, {
+      root: null,
+      rootMargin: "-25% 0px -55% 0px",
+      threshold: [0.1, 0.25, 0.4, 0.6]
+    });
+
+    sections.forEach(section => observer.observe(section));
+    setActiveNav("identity");
+  </script>
+</body>
+
+</html>
