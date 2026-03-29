@@ -1,0 +1,2520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garv Batra — Portfolio</title>
+  <meta name="description" content="Portfolio of Garv Batra — Pilot, Builder, Engineer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #06080d;
+      --ink: #f0f4ff;
+      --muted: #7a8399;
+      --gold: #d4a843;
+      --blue: #4a9eff;
+      --cyan: #3dd6c8;
+      --line: rgba(255, 255, 255, 0.07);
+      --panel: rgba(255, 255, 255, 0.04);
+      --r: 18px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    #cursor {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s, width 0.25s, height 0.25s, background 0.25s;
+      mix-blend-mode: difference;
+    }
+
+    #cursor-ring {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(212, 168, 67, 0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s ease, width 0.25s, height 0.25s, opacity 0.25s;
+    }
+
+    body:has(a:hover) #cursor,
+    body:has(button:hover) #cursor {
+      width: 6px;
+      height: 6px;
+    }
+
+    body:has(a:hover) #cursor-ring,
+    body:has(button:hover) #cursor-ring {
+      width: 60px;
+      height: 60px;
+      opacity: 0.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(6, 8, 13, 0);
+      transition: background 0.4s, border-bottom 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(6, 8, 13, 0.88);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a.active {
+      color: var(--ink);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 100%;
+      height: 1px;
+      background: var(--gold);
+      transition: right 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    .nav-links a:hover::after {
+      right: 0;
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--ink);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-toggle.open span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .nav-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.open span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .mobile-nav {
+      position: fixed;
+      top: 64px;
+      left: 20px;
+      right: 20px;
+      z-index: 95;
+      display: none;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(9, 12, 18, 0.96);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+      backdrop-filter: blur(18px);
+    }
+
+    .mobile-nav.open {
+      display: grid;
+      gap: 8px;
+    }
+
+    .mobile-nav a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .mobile-nav a.active {
+      color: var(--ink);
+      border-color: rgba(212, 168, 67, 0.2);
+      background: rgba(212, 168, 67, 0.08);
+    }
+
+    /* ── SCROLL PROGRESS ── */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--blue));
+      z-index: 200;
+      width: 0%;
+      transition: width 0.1s;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      position: relative;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 60px));
+      margin: 0 auto;
+    }
+
+    /* ── REVEAL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .stagger-1 {
+      transition-delay: 0.1s !important;
+    }
+
+    .stagger-2 {
+      transition-delay: 0.22s !important;
+    }
+
+    .stagger-3 {
+      transition-delay: 0.34s !important;
+    }
+
+    .stagger-4 {
+      transition-delay: 0.46s !important;
+    }
+
+    .stagger-5 {
+      transition-delay: 0.58s !important;
+    }
+
+    .stagger-6 {
+      transition-delay: 0.70s !important;
+    }
+
+    /* ══════════════════════════════════════
+       HERO — CINEMATIC OPENING
+    ══════════════════════════════════════ */
+    #hero {
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 64px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 70% 30%, rgba(74, 158, 255, 0.08), transparent),
+        radial-gradient(ellipse 50% 50% at 20% 80%, rgba(212, 168, 67, 0.06), transparent),
+        radial-gradient(ellipse 80% 80% at 50% 50%, rgba(61, 214, 200, 0.03), transparent);
+    }
+
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    }
+
+    #hero .container {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 560px) minmax(320px, 1fr);
+      gap: 48px;
+      align-items: center;
+      min-height: calc(100vh - 64px);
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 520px;
+      opacity: 0;
+      animation: fadeUp 1s 1.05s forwards;
+    }
+
+    .aircraft-panel {
+      position: relative;
+      width: min(100%, 560px);
+      aspect-ratio: 1 / 1;
+      border-radius: 28px;
+      border: 1px solid rgba(74, 158, 255, 0.12);
+      background:
+        radial-gradient(circle at center, rgba(61, 214, 200, 0.08), transparent 48%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+        0 36px 90px rgba(0, 0, 0, 0.34);
+      overflow: hidden;
+      cursor: grab;
+    }
+
+    .aircraft-panel:active {
+      cursor: grabbing;
+    }
+
+    .aircraft-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(74, 158, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(74, 158, 255, 0.08) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle at center, black 34%, transparent 94%);
+      opacity: 0.42;
+      pointer-events: none;
+    }
+
+    .aircraft-panel::after {
+      content: '';
+      position: absolute;
+      inset: 11%;
+      border-radius: 50%;
+      border: 1px solid rgba(74, 158, 255, 0.14);
+      box-shadow:
+        0 0 0 36px rgba(74, 158, 255, 0.035),
+        0 0 0 92px rgba(74, 158, 255, 0.02);
+      pointer-events: none;
+    }
+
+    .aircraft-stage {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+
+    .aircraft-stage canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .aircraft-status {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      z-index: 3;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(74, 158, 255, 0.16);
+      background: rgba(6, 10, 18, 0.72);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #98c9ff;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 1s 0.3s forwards;
+    }
+
+    .hero-headline {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.6rem, 8vw, 7.2rem);
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      opacity: 0;
+      animation: fadeUp 1s 0.5s forwards;
+    }
+
+    .hero-headline .line-2 {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(240, 244, 255, 0.35);
+    }
+
+    .hero-sub {
+      margin-top: 32px;
+      max-width: 540px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.75;
+      opacity: 0;
+      animation: fadeUp 1s 0.75s forwards;
+    }
+
+    .hero-sub strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .hero-cta-row {
+      margin-top: 40px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 1s 0.95s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--gold);
+      color: #0a0b0f;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(212, 168, 67, 0.35);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-ghost:hover {
+      color: var(--ink);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .hero-stats-row {
+      margin-top: 64px;
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--line);
+      padding-top: 32px;
+      opacity: 0;
+      animation: fadeUp 1s 1.2s forwards;
+    }
+
+    .hero-stat span {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    .hero-stat p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeIn 1s 2s forwards;
+      z-index: 1;
+    }
+
+    .scroll-hint p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .scroll-mouse {
+      width: 22px;
+      height: 36px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .scroll-mouse::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 999px;
+      animation: scrollBob 2s infinite;
+    }
+
+    @keyframes scrollBob {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+      }
+
+      80% {
+        transform: translateX(-50%) translateY(10px);
+        opacity: 0;
+      }
+    }
+
+    /* ══════════════════════════════════════
+       CHAPTER DIVIDER
+    ══════════════════════════════════════ */
+    .chapter-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .chapter-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+    }
+
+    .chapter-line {
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    /* ══════════════════════════════════════
+       TIMELINE — JOURNEY
+    ══════════════════════════════════════ */
+    #journey {
+      padding: 140px 0;
+    }
+
+    .journey-header {
+      max-width: 660px;
+      margin-bottom: 80px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+
+    .section-lead {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 580px;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 48px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 12px;
+      bottom: 12px;
+      width: 1px;
+      background: linear-gradient(180deg, var(--gold) 0%, var(--blue) 60%, transparent 100%);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 64px 40px;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -44px;
+      top: 6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--gold);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    .timeline-item:hover .timeline-dot {
+      background: var(--gold);
+      box-shadow: 0 0 20px rgba(212, 168, 67, 0.5);
+    }
+
+    .timeline-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .timeline-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+
+    .timeline-body {
+      color: var(--muted);
+      max-width: 560px;
+    }
+
+    /* ══════════════════════════════════════
+       EXPERIENCES — THE CORE
+    ══════════════════════════════════════ */
+    #experiences {
+      padding: 140px 0;
+      background: linear-gradient(180deg, var(--bg) 0%, rgba(10, 14, 22, 1) 100%);
+    }
+
+    .exp-header {
+      margin-bottom: 80px;
+    }
+
+    .exp-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .exp-card {
+      position: relative;
+      padding: 32px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      cursor: pointer;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      overflow: hidden;
+    }
+
+    .exp-media {
+      width: 100%;
+      height: 124px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      margin-bottom: 18px;
+    }
+
+    .exp-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+
+    .exp-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(212, 168, 67, 0.04), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .exp-card:hover {
+      border-color: rgba(212, 168, 67, 0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .exp-card:hover .exp-media img {
+      transform: scale(1.04);
+    }
+
+    .exp-card:hover::before {
+      opacity: 1;
+    }
+
+    .exp-card.span-2 {
+      grid-column: span 2;
+    }
+
+    .exp-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    .exp-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .exp-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .exp-card p {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .exp-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .chip {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .exp-open {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .exp-open svg {
+      transition: transform 0.2s;
+    }
+
+    .exp-card:hover .exp-open svg {
+      transform: translateX(4px);
+    }
+
+    .exp-card.span-2 .exp-inner {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .exp-card.span-2 .exp-media {
+      height: 180px;
+      margin-bottom: 0;
+    }
+
+    /* ══════════════════════════════════════
+       PROOF — THE EVIDENCE
+    ══════════════════════════════════════ */
+    #proof {
+      display: none;
+      padding: 140px 0;
+      background:
+        radial-gradient(ellipse 72% 50% at 50% 0%, rgba(74, 158, 255, 0.08), transparent 62%),
+        linear-gradient(180deg, rgba(8, 10, 15, 0.98) 0%, rgba(10, 13, 20, 1) 100%);
+    }
+
+    .proof-header {
+      margin-bottom: 80px;
+    }
+
+    .proof-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 22px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(74, 158, 255, 0.15);
+      background: rgba(74, 158, 255, 0.08);
+      color: #c5d8f7;
+      font-size: 0.9rem;
+    }
+
+    .proof-kicker strong {
+      color: var(--ink);
+    }
+
+    .proof-item {
+      position: relative;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      transition: border-color 0.3s, transform 0.3s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      padding: 24px;
+    }
+
+    .proof-item.featured {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+        radial-gradient(circle at top right, rgba(74, 158, 255, 0.14), transparent 28%);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.24);
+    }
+
+    .proof-list .proof-img,
+    .proof-grid .proof-img {
+      display: none;
+    }
+
+    .proof-item:hover {
+      border-color: rgba(74, 158, 255, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .proof-body {
+      padding: 0;
+    }
+
+    .proof-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+
+    .proof-body h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .proof-body p {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .proof-arrow {
+      position: static;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+      margin-bottom: 18px;
+    }
+
+    .proof-item:hover .proof-arrow {
+      background: var(--blue);
+      color: white;
+      border-color: transparent;
+    }
+
+    .proof-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    /* ══════════════════════════════════════
+       WHY REP — TARGETED
+    ══════════════════════════════════════ */
+    #why-rep {
+      padding: 140px 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74, 158, 255, 0.05), transparent 60%);
+    }
+
+    .why-rep-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .why-rep-points {
+      display: grid;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .rep-point {
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      transition: border-color 0.3s;
+    }
+
+    .rep-point:hover {
+      border-color: rgba(74, 158, 255, 0.2);
+    }
+
+    .rep-point-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--blue);
+      letter-spacing: 0.14em;
+      margin-bottom: 10px;
+    }
+
+    .rep-point h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .rep-point p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .why-rep-quote {
+      position: sticky;
+      top: 100px;
+    }
+
+    .big-quote {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+    }
+
+    .big-quote em {
+      font-style: normal;
+      color: var(--blue);
+    }
+
+    .bring-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .bring-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .bring-icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: rgba(74, 158, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    .bring-item p {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .bring-item strong {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+
+    /* ══════════════════════════════════════
+       PERSON — THE FINAL WORD
+    ══════════════════════════════════════ */
+    #person {
+      padding: 140px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .person-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .person-photo-wrap {
+      position: relative;
+    }
+
+    .person-photo-inner {
+      border-radius: 28px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+    }
+
+    .person-photo-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .person-photo-tag {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      background: var(--gold);
+      color: #0a0b0f;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .person-copy .section-title {
+      margin-bottom: 28px;
+    }
+
+    .person-copy p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 20px;
+    }
+
+    .person-copy p:last-of-type {
+      color: var(--ink);
+    }
+
+    .person-traits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 32px;
+    }
+
+    .trait {
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    footer {
+      padding: 56px 0 70px;
+      border-top: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(7, 9, 14, 0.8), rgba(4, 6, 10, 1));
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .footer-right {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .footer-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .footer-right a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .footer-right a:hover {
+      color: var(--ink);
+    }
+
+    /* ══════════════════════════════════════
+       MODAL
+    ══════════════════════════════════════ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(4, 6, 10, 0.85);
+      backdrop-filter: blur(16px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      width: min(800px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #0d1018;
+      padding: 40px;
+      position: relative;
+      animation: modalIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .modal-close:hover {
+      color: var(--ink);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .modal-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .modal h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+
+    .modal-subtitle {
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .modal-body p {
+      color: #c0c8d8;
+      margin-bottom: 18px;
+    }
+
+    .modal-hero-image {
+      width: 100%;
+      max-height: 260px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: block;
+      margin: 0 0 24px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .modal-divider {
+      height: 1px;
+      background: var(--line);
+      margin: 32px 0;
+    }
+
+    .evidence-heading {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.8rem;
+    }
+
+    .evidence-cards {
+      display: grid;
+      gap: 14px;
+    }
+
+    .ev-card {
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.025);
+      padding: 20px;
+    }
+
+    .ev-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 8px;
+    }
+
+    .ev-card h4 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .ev-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .ev-links {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .ev-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .ev-link:hover {
+      color: var(--ink);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .pdf-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      margin-top: 12px;
+    }
+
+    .pdf-frame {
+      width: 100%;
+      height: 380px;
+      border: none;
+      background: white;
+      display: block;
+    }
+
+    /* ══════════════════════════════════════
+       KEYFRAMES
+    ══════════════════════════════════════ */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 900px) {
+      body {
+        cursor: auto;
+      }
+
+      #cursor,
+      #cursor-ring {
+        display: none;
+      }
+
+      nav {
+        padding: 0 24px;
+      }
+
+      #hero .container {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+      }
+
+      .hero-stats-row {
+        gap: 28px;
+      }
+
+      .hero-visual {
+        min-height: 420px;
+      }
+
+      .aircraft-panel {
+        max-width: 460px;
+      }
+
+      .exp-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .exp-card.span-2 {
+        grid-column: 1;
+      }
+
+      .exp-card.span-2 .exp-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .proof-list {
+        grid-template-columns: 1fr;
+      }
+
+      .why-rep-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .why-rep-quote {
+        position: static;
+      }
+
+      .person-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .person-photo-wrap {
+        max-width: 360px;
+      }
+
+      .timeline {
+        padding-left: 32px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .proof-list {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-headline {
+        font-size: 3.2rem;
+      }
+
+      .container {
+        width: calc(100% - 40px);
+      }
+
+      .hero-visual {
+        min-height: 320px;
+      }
+
+      .aircraft-panel {
+        aspect-ratio: 1.05 / 1;
+        border-radius: 22px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Custom cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Scroll progress bar -->
+  <div id="progress-bar"></div>
+
+  <!-- ── NAV ── -->
+  <nav id="nav">
+    <a class="nav-brand" href="#top">GB</a>
+    <ul class="nav-links">
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#experiences">Stories</a></li>
+      <li><a href="#why-rep">Why REP</a></li>
+      <li><a href="#person">The Person</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#journey">Journey</a>
+    <a href="#experiences">Stories</a>
+    <a href="#why-rep">Why REP</a>
+    <a href="#person">The Person</a>
+  </div>
+
+  <!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+  <section id="hero" id="top">
+    <div class="hero-bg"></div>
+    <div class="grid-overlay"></div>
+    <div class="container">
+      <div class="hero-copy">
+        <p class="hero-eyebrow">NTU REP & Scholarship Application · Garv Batra</p>
+        <h1 class="hero-headline">
+          Pilot.<br>
+          <span class="line-2">Builder.</span>
+        </h1>
+        <p class="hero-sub">
+          I flew solo at 17. Built an app used on stage in 10 countries. Came back from a family crisis to finish A-Levels
+          with 5 distinctions. <strong>This is the work behind the words.</strong>
+        </p>
+        <div class="hero-cta-row">
+          <a class="btn-primary" href="#experiences">Read the Stories</a>
+          <!-- <a class="btn-ghost" href="#experiences">Open the Stories →</a> -->
+        </div>
+        <div class="hero-stats-row">
+          <div class="hero-stat">
+            <span id="stat-hours">0+</span>
+            <p>Flight hours, SYFC</p>
+          </div>
+          <div class="hero-stat">
+            <span id="stat-countries">0+</span>
+            <p>Countries, WebForce</p>
+          </div>
+          <div class="hero-stat">
+            <span>Top 10</span>
+            <p>Nationwide, EIC 2023</p>
+          </div>
+          <div class="hero-stat">
+            <span id="stat-rev">SGD 1700</span>
+            <p>Revenue, built in NS</p>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="aircraft-panel" id="aircraftPanel">
+          <div class="aircraft-stage" id="aircraftStage"></div>
+          <div class="aircraft-status" id="aircraftStatus">Loading GLB</div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="scroll-hint">
+      <div class="scroll-mouse"></div>
+      <p>Scroll</p>
+    </div> -->
+  </section>
+
+  <!-- ══════════════════════════════════════
+     JOURNEY
+══════════════════════════════════════ -->
+  <section id="journey">
+    <div class="container">
+      <div class="journey-header">
+        <div class="chapter-divider reveal">
+          <span class="chapter-num">01 / Journey</span>
+          <div class="chapter-line"></div>
+        </div>
+        <h2 class="section-title reveal">One thread runs through<br>everything.</h2>
+        <p class="section-lead reveal">I keep moving toward situations where reliability is non-negotiable — and then
+          building things that have to hold.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item reveal stagger-1">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">Secondary School</div>
+          <h3 class="timeline-title">Started teaching because good tutoring was out of reach for most students.</h3>
+          <p class="timeline-body">A YouTube channel and community centre sessions — the first time I built something
+            because I had seen the gap directly.</p>
+        </div>
+        <div class="timeline-item reveal stagger-2">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">JC1 – JC2</div>
+          <h3 class="timeline-title">Flight training turned discipline into instinct.</h3>
+          <p class="timeline-body">76+ hours at SYFC, 7 aviation theory papers, and a Final Flying Test cleared one week
+            before JC2 prelims. The cockpit taught me that calm is something you build deliberately — one difficult
+            situation at a time.</p>
+        </div>
+        <div class="timeline-item reveal stagger-3">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2023</div>
+          <h3 class="timeline-title">EIC made engineering feel like something that owed the real world an answer.</h3>
+          <p class="timeline-body">Top 10 nationwide. Presented at the World Engineers Summit. The problem was elderly
+            loneliness — and it was personal. My grandfather had suffered a spinal injury the year before.</p>
+        </div>
+        <div class="timeline-item reveal stagger-4">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2024</div>
+          <h3 class="timeline-title">Leading EntreWeek showed me that ownership scales better than control.</h3>
+          <p class="timeline-body">My team wanted me to make every decision. I split them into groups that owned their
+            parts instead. We engaged 85% of the school. REN Member of the Year — awarded to one person annually.</p>
+        </div>
+        <div class="timeline-item reveal stagger-5">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">National Service</div>
+          <h3 class="timeline-title">WebForce proved I build for users who cannot afford failure.</h3>
+          <p class="timeline-body">Magicians use it live, on stage, in front of audiences. It had to be reliable — not
+            impressive in a demo, but trustworthy when it actually mattered. 60+ installs. 10 countries. SGD 1,700
+            revenue. Now scaling through a UK distributor.</p>
+        </div>
+        <div class="timeline-item reveal stagger-6">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">Next</div>
+          <h3 class="timeline-title">REP is the logical continuation.</h3>
+          <p class="timeline-body">The first environment that combines engineering depth, interdisciplinary thinking,
+            and operating in the real world the way I already prefer to work.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+     EXPERIENCES — THE STORIES
+══════════════════════════════════════ -->
+  <section id="experiences">
+    <div class="container">
+      <div class="exp-header">
+        <div class="chapter-divider reveal">
+          <span class="chapter-num">02 / Stories</span>
+          <div class="chapter-line"></div>
+        </div>
+        <h2 class="section-title reveal">The moments that<br>actually changed things.</h2>
+        <p class="section-lead reveal">Click any card to read the full story and see the evidence.</p>
+      </div>
+
+      <div class="exp-cards">
+        <!-- PPL -->
+        <article class="exp-card reveal stagger-1" onclick="openModal('ppl')" tabindex="0" role="button">
+          <div class="exp-media">
+            <img src="assets/images/da40.jpg" alt="Private Pilot Licence flight photograph">
+          </div>
+          <div class="exp-tag">Aviation</div>
+          <h3>Private Pilot Licence — Earned in JC</h3>
+          <p>An engine failure simulated mid-flight. Throttle cut, cockpit silent. Then training took over. What I
+            carried out of the cockpit wasn't a checklist — it was the understanding that calm is a choice.</p>
+          <div class="exp-chips">
+            <span class="chip">76+ hours</span>
+            <span class="chip">7 theory exams</span>
+            <span class="chip">Solo sorties</span>
+            <span class="chip">FFT one week before prelims</span>
+          </div>
+          <div class="exp-open">
+            Read full story
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+        </article>
+
+        <!-- WebForce -->
+        <article class="exp-card reveal stagger-2" onclick="openModal('webforce')" tabindex="0" role="button">
+          <div class="exp-media">
+            <img src="assets/images/WebForceBanner.png" alt="WebForce product image">
+          </div>
+          <div class="exp-tag">Product</div>
+          <h3>WebForce — Android App for Magicians</h3>
+          <p>It started with a friend who needed a tool that didn't exist. It became a product used by performers in 10
+            countries who trust it on stage in front of live audiences.</p>
+          <div class="exp-chips">
+            <span class="chip">Live on Google Play</span>
+            <span class="chip">10 countries</span>
+            <span class="chip">SGD 1.7K revenue</span>
+            <span class="chip">UK distributor</span>
+          </div>
+          <div class="exp-open">
+            Read full story
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+        </article>
+
+        <!-- EIC — spans 2 columns -->
+        <article class="exp-card span-2 reveal stagger-3" onclick="openModal('eic')" tabindex="0" role="button">
+          <div class="exp-inner">
+            <div>
+              <div class="exp-tag">Engineering</div>
+              <h3>Engineers Innovation Challenge 2023 — Top 10 Nationwide</h3>
+              <p>My grandfather had suffered a spinal injury the year before. Elderly loneliness stopped being an
+                abstract prompt and became something I needed to actually solve. We built an AI device that noticed —
+                even on the days when no one called.</p>
+            </div>
+            <div>
+              <div class="exp-media">
+                <img src="assets/images/EIC_POSTER.jpg" alt="EIC project poster">
+              </div>
+              <div class="exp-chips" style="margin-top: 28px;">
+                <span class="chip">Top 10 nationally</span>
+                <span class="chip">World Engineers Summit</span>
+                <span class="chip">AI + hardware</span>
+                <span class="chip">Marina Bay Sands</span>
+              </div>
+              <div class="exp-open" style="margin-top: 20px;">
+                Read full story
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- REN -->
+        <article class="exp-card reveal stagger-4" onclick="openModal('ren')" tabindex="0" role="button">
+          <div class="exp-media">
+            <img src="assets/images/REN_MemberOfTheYear.jpg" alt="REN Member of the Year recognition">
+          </div>
+          <div class="exp-tag">Leadership</div>
+          <h3>REN — Member of the Year</h3>
+          <p>EntreWeek taught me that telling people what to do is easy. Making them care is the actual work. When my
+            team pushed me to centralise every decision, I pushed back — and split ownership instead.</p>
+          <div class="exp-chips">
+            <span class="chip">85% school engagement</span>
+            <span class="chip">Member of the Year</span>
+            <span class="chip">Ownership-led</span>
+          </div>
+          <div class="exp-open">
+            Read full story
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+        </article>
+
+        <!-- Teaching -->
+        <article class="exp-card reveal stagger-5" onclick="openModal('teaching')" tabindex="0" role="button">
+          <div class="exp-media">
+            <img src="assets/images/SKEYN_Volunteering.jpg" alt="Teaching and volunteering">
+          </div>
+          <div class="exp-tag">Teaching</div>
+          <h3>Teaching, Mentoring, Giving Back</h3>
+          <p>A student I had never met commented on my YouTube video: my explanation finally made circles click for
+            them. That comment stayed longer than most awards have.</p>
+          <div class="exp-chips">
+            <span class="chip">Educational YouTube</span>
+            <span class="chip">Community tutoring</span>
+            <span class="chip">Coding bootcamps</span>
+          </div>
+          <div class="exp-open">
+            Read full story
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+     PROOF
+══════════════════════════════════════ -->
+  <section id="proof">
+    <div class="container">
+      <div class="proof-header">
+        <div class="chapter-divider reveal">
+          <span class="chapter-num">03 / Evidence</span>
+          <div class="chapter-line"></div>
+        </div>
+        <h2 class="section-title reveal">Claims without proof<br>are just stories.</h2>
+        <p class="section-lead reveal">Here is everything verifiable, in one place.</p>
+        <div class="proof-kicker reveal">Fast verification: <strong>public links</strong>, <strong>award records</strong>, and <strong>attached evidence</strong>.</div>
+      </div>
+
+      <div class="proof-list">
+        <a class="proof-item featured span-2 reveal stagger-1"
+          href="https://play.google.com/store/apps/details?id=com.webforce.webforce" target="_blank" rel="noopener">
+          <div class="proof-arrow">↗</div>
+          <div class="proof-img">
+            <img src="assets/images/WebForceBanner.png" alt="WebForce on Google Play">
+          </div>
+          <div class="proof-body">
+            <div class="proof-label">Live Product</div>
+            <h3>WebForce — Google Play</h3>
+            <p>Publicly listed, verifiable, in active use. Not a concept.</p>
+          </div>
+        </a>
+
+        <a class="proof-item reveal stagger-2" href="https://thedailymagician.com/webforce" target="_blank"
+          rel="noopener">
+          <div class="proof-arrow">↗</div>
+          <div class="proof-img">
+            <img src="assets/images/WebForceBanner.png" alt="Independent press coverage">
+          </div>
+          <div class="proof-body">
+            <div class="proof-label">Independent Press</div>
+            <h3>Third-Party Coverage</h3>
+            <p>WebForce covered independently — by someone with no stake in making it look good.</p>
+          </div>
+        </a>
+
+        <div class="proof-item reveal stagger-3" onclick="openModal('ppl')" style="cursor:pointer;">
+          <div class="proof-arrow">→</div>
+          <div class="proof-img">
+            <img src="assets/images/da40.jpg" alt="Private Pilot Licence">
+          </div>
+          <div class="proof-body">
+            <div class="proof-label">Aviation Credential</div>
+            <h3>Private Pilot Licence</h3>
+            <p>Flight photographs, training log, public recognition. Open to verify.</p>
+          </div>
+        </div>
+
+        <div class="proof-item reveal stagger-4" onclick="openModal('eic')" style="cursor:pointer;">
+          <div class="proof-arrow">→</div>
+          <div class="proof-img">
+            <img src="assets/images/EIC_POSTER.jpg" alt="EIC National Award">
+          </div>
+          <div class="proof-body">
+            <div class="proof-label">National Engineering Award</div>
+            <h3>EIC 2023 — Top 10</h3>
+            <p>Award records and presentation documents attached in the experience modal.</p>
+          </div>
+        </div>
+
+        <div class="proof-item reveal stagger-5" onclick="openModal('ren')" style="cursor:pointer;">
+          <div class="proof-arrow">→</div>
+          <div class="proof-img">
+            <img src="assets/images/REN_MemberOfTheYear.jpg" alt="REN Member of the Year">
+          </div>
+          <div class="proof-body">
+            <div class="proof-label">Leadership Recognition</div>
+            <h3>REN Member of the Year</h3>
+            <p>One award, one recipient per year. The photo is here.</p>
+          </div>
+        </div>
+
+        <a class="proof-item reveal stagger-6" href="https://share.google/JnxtzzweOzFFzPUp9" target="_blank"
+          rel="noopener">
+          <div class="proof-arrow">↗</div>
+          <div class="proof-img"
+            style="display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.03);">
+            <span style="font-family:'DM Mono',monospace;font-size:2rem;color:var(--gold);">✦</span>
+          </div>
+          <div class="proof-body">
+            <div class="proof-label">Public Recognition</div>
+            <h3>PPL — External Feature</h3>
+            <p>Recognition beyond the school community for completing the PPL.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+     WHY REP
+══════════════════════════════════════ -->
+  <section id="why-rep">
+    <div class="container">
+      <div class="chapter-divider reveal">
+        <span class="chapter-num">04 / Fit</span>
+        <div class="chapter-line"></div>
+      </div>
+      <div class="why-rep-layout">
+        <div>
+          <h2 class="section-title reveal">Why REP,<br>specifically.</h2>
+
+          <div class="why-rep-points">
+            <div class="rep-point reveal stagger-1">
+              <div class="rep-point-num">01</div>
+              <h4>Real problems ignore subject boundaries.</h4>
+              <p>REP's interdisciplinary structure mirrors something I've learnt the hard way — in the cockpit, in
+                product work, in leading a team through conflicting priorities. No hard problem I've encountered
+                belonged entirely to one field.</p>
+            </div>
+            <div class="rep-point reveal stagger-2">
+              <div class="rep-point-num">02</div>
+              <h4>The entrepreneurship track is not extra-curricular for me — it's operational.</h4>
+              <p>WebForce is a functioning commercial product. ExpertConnect Asia placed me in environments with
+                shifting briefs and no blueprint. I already work this way. REP builds the engineering foundation
+                underneath it.</p>
+            </div>
+            <div class="rep-point reveal stagger-3">
+              <div class="rep-point-num">03</div>
+              <h4>I want to build things people depend on — not just things that impress reviewers.</h4>
+              <p>The standard in flying: the aircraft either holds or it doesn't. The standard in WebForce: the app
+                either works on stage or it doesn't. REP is where I develop the engineering rigour to hold that standard
+                at scale.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="why-rep-quote reveal-right">
+          <p class="big-quote">"Engineering earns its meaning when it <em>serves people</em> who actually need it."</p>
+
+          <div class="bring-grid">
+            <div class="bring-item">
+              <div class="bring-icon">✦</div>
+              <div>
+                <strong>Calm under genuine pressure</strong>
+                <p>Built over 76 hours in the air and a family crisis carried quietly through exam season. Not claimed —
+                  demonstrated.</p>
+              </div>
+            </div>
+            <div class="bring-item">
+              <div class="bring-icon">⬡</div>
+              <div>
+                <strong>Products that have to work</strong>
+                <p>Every build I've shipped has had real stakes — performer trust, live audiences, paying users. I don't
+                  build for demos.</p>
+              </div>
+            </div>
+            <div class="bring-item">
+              <div class="bring-icon">◈</div>
+              <div>
+                <strong>Leadership through ownership</strong>
+                <p>85% school engagement because the team felt it was theirs, not mine. Direction is easy — ownership is
+                  the work.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+     THE PERSON
+══════════════════════════════════════ -->
+  <section id="person">
+    <div class="container">
+      <div class="chapter-divider reveal">
+        <span class="chapter-num">05 / The Person</span>
+        <div class="chapter-line"></div>
+      </div>
+      <div class="person-layout">
+        <div class="person-photo-wrap reveal-left">
+          <div class="person-photo-inner">
+            <img src="assets/images/B_Garv.jpg" alt="Garv Batra">
+          </div>
+          <div class="person-photo-tag">Garv Batra</div>
+        </div>
+
+        <div class="person-copy reveal-right">
+          <h2 class="section-title">The operating style<br>behind the achievements.</h2>
+          <p>I care most about becoming the kind of engineer people trust when the stakes are real — when a system has
+            to hold, when a product cannot fail publicly, when a team needs calm instead of noise.</p>
+          <p>Flying taught me composure. Building taught me iteration. Teaching taught me patience. Leadership taught me
+            that ownership scales better than control.</p>
+          <p>If there is a common thread: I do not want to be adjacent to difficult work. I want to be responsible for
+            it.</p>
+          <div class="person-traits">
+            <span class="trait">Comfortable under pressure</span>
+            <span class="trait">Builds for real users</span>
+            <span class="trait">Leads through ownership</span>
+            <span class="trait">Bias toward useful work</span>
+            <span class="trait">Cricket — NSG</span>
+            <span class="trait">Private Pilot</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">Garv Batra</div>
+        <div class="footer-right">
+          <div class="footer-note">NTU REP &amp; Scholarship Application</div>
+          <a href="mailto:garvbatracrown@gmail.com">garvbatracrown@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════
+     MODAL
+══════════════════════════════════════ -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+    <div class="modal" id="modalContent">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+      <div class="modal-tag" id="modalTag"></div>
+      <h2 id="modalTitle"></h2>
+      <p class="modal-subtitle" id="modalSubtitle"></p>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-divider"></div>
+      <div class="evidence-heading">Evidence & Outcomes</div>
+      <div class="evidence-cards" id="modalEvidence"></div>
+    </div>
+  </div>
+
+  <script>
+    // ── CURSOR ──
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function animCursor() {
+      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+      rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animCursor);
+    }
+    animCursor();
+
+    // ── NAV SCROLL ──
+    const nav = document.getElementById('nav');
+    const navToggle = document.getElementById('navToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    const progressBar = document.getElementById('progress-bar');
+    const navAnchors = Array.from(document.querySelectorAll('.nav-links a, .mobile-nav a'));
+    const trackedSections = ['journey', 'experiences', 'why-rep', 'person']
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    function setActiveNav(id) {
+      navAnchors.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+      });
+    }
+
+    if (navToggle && mobileNav) {
+      navToggle.addEventListener('click', () => {
+        const isOpen = navToggle.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        mobileNav.classList.toggle('open', isOpen);
+      });
+
+      mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navToggle.classList.remove('open');
+          navToggle.setAttribute('aria-expanded', 'false');
+          mobileNav.classList.remove('open');
+        });
+      });
+    }
+
+    function updateChrome() {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+      const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      progressBar.style.width = pct + '%';
+
+      const probe = window.innerHeight * 0.28;
+      let activeId = trackedSections[0]?.id;
+      trackedSections.forEach(section => {
+        if (section.getBoundingClientRect().top <= probe) activeId = section.id;
+      });
+      if (activeId) setActiveNav(activeId);
+    }
+
+    window.addEventListener('scroll', updateChrome);
+    window.addEventListener('resize', updateChrome);
+    updateChrome();
+
+    // Visible copy cleanup for this preview file
+    const textFixes = new Map([
+      ['Â·', '·'],
+      ['â€”', '—'],
+      ['â€“', '–'],
+      ['â†—', '↗'],
+      ['â†’', '→'],
+      ['â€¢', '•'],
+      ['âœ¦', '✦'],
+      ['â—ˆ', '◈'],
+      ['â¬¡', '⬡']
+    ]);
+
+    function cleanMojibake(root = document.body) {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      let node;
+      while ((node = walker.nextNode())) {
+        let value = node.nodeValue;
+        let next = value;
+        textFixes.forEach((fixed, broken) => {
+          next = next.split(broken).join(fixed);
+        });
+        if (next !== value) node.nodeValue = next;
+      }
+    }
+
+    cleanMojibake();
+
+    // ── COUNTUP HERO STATS ──
+    function countUp(el, target, prefix = '', suffix = '', duration = 1600) {
+      const start = performance.now();
+      function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        const val = Math.round(target * ease);
+        el.textContent = prefix + val + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    // Trigger countup when hero stats become visible
+    let countupDone = false;
+    const statsRow = document.querySelector('.hero-stats-row');
+    const statsObs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && !countupDone) {
+        countupDone = true;
+        countUp(document.getElementById('stat-hours'), 76, '', '+');
+        countUp(document.getElementById('stat-countries'), 10, '', '+');
+        countUp(document.getElementById('stat-rev'), 1700, 'SGD ', '');
+      }
+    }, { threshold: 0.5 });
+    statsObs.observe(statsRow);
+
+    // ── REVEAL ON SCROLL ──
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // ── KEYBOARD for cards ──
+    document.querySelectorAll('[role="button"]').forEach(el => {
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+      });
+    });
+
+    // ── MODAL DATA ──
+    const modalData = {
+      ppl: {
+        tag: 'Aviation · Private Pilot Licence',
+        title: 'Private Pilot Licence',
+        subtitle: 'The experience that taught me calm is a skill you build — not a trait you either have or don\'t.',
+        coverImage: { src: 'assets/images/da40.jpg', alt: 'Private Pilot Licence flight photograph' },
+        body: `
+        <p>I joined SYFC because I had wanted to fly for as long as I could remember. What I didn't expect was that flying would change the way I think about everything else.</p>
+        <p>Over 1.5 years, I trained through ground school, simulator sessions, dual flights, and solo sorties — while sitting A-Level subjects, playing cricket for school, and leading entrepreneurship projects in REN. There was no quiet period to focus. I had to learn to manage everything simultaneously, and I had to do it at a standard where mistakes had real consequences.</p>
+        <p>The moment that stayed with me wasn't my first solo. It was an engine failure scenario my instructor simulated mid-flight — throttle cut, cockpit quiet, no warning. For a fraction of a second, my mind went blank. Then training took over. I stabilised the aircraft, ran through the checks, scanned for landing options, and committed. What I understood in that moment: panic is a choice. Thinking clearly is also a choice. You prepare for one so you can make the other.</p>
+        <p>I cleared the Final Flying Test one week before my JC2 preliminary examinations. I didn't defer it. I didn't ask for more time. I knew if I had earned the licence, I had earned it — and that knowledge going into prelims was worth more than an extra week of study.</p>
+      `,
+        evidence: [
+          { label: 'Flight Hours', heading: 'Nearly 80 hours logged', text: 'Across structured progression — circuits, navigation sorties, cross-country planning, emergency procedures, and final test readiness. 12.6 of those hours were solo, no instructor beside me.', images: ['assets/images/profile.jpg', 'assets/images/B_Garv.jpg'] },
+          { label: '7 Theory Exams', heading: 'Alongside A-Levels', text: 'Air law, flight mechanics, meteorology, radiotelephony, navigation, aircraft systems, human performance — cleared while managing 5 A-Level subjects, cricket NSG, and REN leadership. The schedule had no margin. That is precisely why it was worth doing.', images: ['assets/images/SYFC_PPL.jpg'] },
+          { label: 'Public Recognition', heading: 'External Feature', text: 'Recognition beyond the school community — external validation that this was not a typical student extracurricular.', links: [{ href: 'https://share.google/JnxtzzweOzFFzPUp9', label: 'Read feature article' }] }
+        ]
+      },
+      webforce: {
+        tag: 'Product · Android App',
+        title: 'WebForce',
+        subtitle: 'It started with a friend\'s problem. It became a product trusted on stage in 10 countries.',
+        coverImage: { src: 'assets/images/WebForceBanner.png', alt: 'WebForce product image' },
+        body: `
+        <p>A friend who performed magic professionally asked me a simple question: is there an Android app that does what the iOS tools do? There wasn't. I built the first version to solve one person's problem.</p>
+        <p>What I didn't anticipate was that the problems would keep coming. Performers would find edge cases. The app had to work at the exact moment it was needed — on stage, in front of an audience, under pressure. There was no room for "it usually works." The feedback loop was brutal and direct, and every iteration made the product more trustworthy.</p>
+        <p>iOS had tools for phone-based magic performance. Android had nothing reliable. That gap — and the community of performers who needed it filled — was the entire brief.</p>
+        <p>60+ installs across 10 countries. SGD 1,700 in revenue. Now scaling through a UK distributor. The numbers aren't the point. The trust is. When a performer in the UK chooses WebForce for a live show, that is the measure that matters.</p>
+      `,
+        evidence: [
+          { label: 'Live on Google Play', heading: 'Publicly verifiable product', text: 'Listed, active, and downloadable. Not a portfolio piece — a real product.', links: [{ href: 'https://play.google.com/store/apps/details?id=com.webforce.webforce', label: 'Google Play listing' }, { href: 'https://thedailymagician.com/webforce', label: 'Independent press coverage' }] },
+          { label: 'Coverage', heading: 'Third-party article', text: 'An independent publication covered WebForce without any involvement from our team. That kind of validation is not something you can manufacture.' }
+        ]
+      },
+      eic: {
+        tag: 'Engineering · National Competition',
+        title: 'Engineers Innovation Challenge 2023',
+        subtitle: 'We didn\'t build a device. We tried to solve loneliness — with engineering.',
+        coverImage: { src: 'assets/images/EIC_POSTER.jpg', alt: 'EIC project poster' },
+        body: `
+        <p>The EIC prompt asked teams to address Singapore's ageing population. My team chose something specific: elderly people living alone, and the risk of cognitive decline that comes from prolonged social isolation.</p>
+        <p>My grandfather had suffered a spinal injury the year before. I had spent months watching how quickly isolation affects a person's sharpness and spirit. That made this problem personal, not academic.</p>
+        <p>We designed a table-mounted AI device that could hold conversations with elderly individuals, detect emotional cues through voice analysis, and respond in ways that were supportive and mentally engaging. The goal was not to replace human connection — it was to make sure that on the days when no one called, there was still something that noticed.</p>
+        <p>Working through the prototype forced me to confront a question I think about constantly: what is the difference between a technically functioning solution and one that a real person would actually trust and use? That question drove every iteration.</p>
+        <p>Being shortlisted in the national top 10 and invited to present at the World Engineers Summit mattered. But what I took away was quieter: even as a student, you can work on problems that genuinely need solving. The engineering doesn't have to wait.</p>
+      `,
+        evidence: [
+          { label: 'National Recognition', heading: 'Top 10 Nationwide', text: 'Shortlisted from submissions across Singapore. Invited to present at the World Engineers Summit at Marina Bay Sands.', images: ['assets/images/EIC_NED_AWARD_PRESENTATION.jpg', 'assets/images/EIC_NED_GROUP_PHOTO.jpg'] },
+          { label: 'The Problem', heading: 'Why we chose elderly loneliness', text: 'We didn\'t pick it because it was safe. We picked it because it was real — and because I had seen it directly, through my grandfather, in the year before the competition.' }
+        ]
+      },
+      ren: {
+        tag: 'Leadership · Raffles Entrepreneurs Network',
+        title: 'Raffles Entrepreneurs Network',
+        subtitle: 'Member of the Year. But the title wasn\'t the point.',
+        coverImage: { src: 'assets/images/REN_MemberOfTheYear.jpg', alt: 'REN Member of the Year recognition' },
+        body: `
+        <p>I joined REN because entrepreneurship was the thing I was already doing — not because I wanted another line on a CV. What I didn't expect was that leading a school-wide event would teach me more about how teams actually work than anything else I had done.</p>
+        <p>EntreWeek was a week-long school event on sustainable entrepreneurship — speakers, vendors, student-run activities, and coordination across a team with very different ideas of how it should go. The timeline was tight. The brief was vague. The team kept looking to me to make every decision, because it was faster.</p>
+        <p>I pushed back. I split the team into groups that owned specific parts of the event — and made clear that their ownership meant their judgment, not mine. It slowed us down at first. It made the event far stronger.</p>
+        <p>We engaged 85% of the student population that week. The Member of the Year award came after. But the thing I remember is that every person on the team felt the event was theirs.</p>
+      `,
+        evidence: [
+          { label: 'Member of the Year', heading: 'One award, one recipient annually', text: 'The citation noted consistent effort, genuine ownership, and a willingness to go further without being asked.', images: ['assets/images/REN_MemberOfTheYear.jpg'] },
+          { label: 'EntreWeek', heading: '85% school engagement', text: 'A school-wide entrepreneurship event — managed from brief to execution, with a team operating autonomously rather than waiting for direction.' }
+        ]
+      },
+      teaching: {
+        tag: 'Teaching · Mentoring',
+        title: 'Teaching, Mentoring, Giving Back',
+        subtitle: 'Patience, not authority, is what earns you the right to guide someone.',
+        coverImage: { src: 'assets/images/SKEYN_Volunteering.jpg', alt: 'Teaching and volunteering' },
+        body: `
+        <p>I started a YouTube channel teaching PSLE Maths and Science after realising something obvious and uncomfortable: good tutoring was not equally accessible. The students who needed it most were the ones least able to pay for it.</p>
+        <p>The channel was small. But a comment from a student I had never met — saying my explanation finally made circles click for them — stayed with me longer than most recognition I have received. That kind of impact is quiet and invisible and completely real.</p>
+        <p>I also mentored Primary 6 students at my own alma mater and through community centres. The discipline that teaching requires is different from any other kind of work: you cannot move on until the person in front of you has understood. That forces you to explain the same concept in seven different ways until one of them lands. It changed how I think about communication.</p>
+        <p>Later, I led coding bootcamps for younger students through REN. The goal was the same: make something accessible that wouldn't be otherwise.</p>
+      `,
+        evidence: [
+          { label: 'Educational YouTube', heading: 'PSLE Maths & Science', text: 'Free, publicly accessible content for students who couldn\'t access private tutoring. Small in scale, real in intent.' },
+          { label: 'Mentoring', heading: 'Community and school mentoring', text: 'Primary 6 students at my alma mater and community centres. Coding bootcamps through REN for younger students in JC.' }
+        ]
+      }
+    };
+
+    function openModal(key) {
+      const d = modalData[key];
+      if (!d) return;
+      document.getElementById('modalTag').textContent = d.tag;
+      document.getElementById('modalTitle').textContent = d.title;
+      document.getElementById('modalSubtitle').textContent = d.subtitle;
+      const coverImageHTML = d.coverImage
+        ? `<img src="${d.coverImage.src}" alt="${d.coverImage.alt || d.title}" class="modal-hero-image">`
+        : '';
+      document.getElementById('modalBody').innerHTML = `${coverImageHTML}${d.body}`;
+
+      const evEl = document.getElementById('modalEvidence');
+      evEl.innerHTML = d.evidence.map(ev => {
+        let media = '';
+        if (ev.images) media += ev.images.map(src => `<img src="${src}" alt="${ev.heading}" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,0.07);margin-top:12px;">`).join('');
+        if (ev.pdfs) media += ev.pdfs.map(src => `<div class="pdf-wrap"><iframe src="${src}" class="pdf-frame" title="${ev.heading}"></iframe></div>`).join('');
+        const links = ev.links ? ev.links.map(l => `<a class="ev-link" href="${l.href}" target="_blank" rel="noopener">${l.label} ↗</a>`).join('') : '';
+        return `
+        <div class="ev-card">
+          <div class="ev-label">${ev.label}</div>
+          <h4>${ev.heading}</h4>
+          <p>${ev.text}</p>
+          ${media}
+          ${links ? `<div class="ev-links">${links}</div>` : ''}
+        </div>`;
+      }).join('');
+
+      document.getElementById('modalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function closeModalOnOverlay(e) {
+      if (e.target === document.getElementById('modalOverlay')) closeModal();
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  </script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.165.0/build/three.module.js"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from 'https://unpkg.com/three@0.165.0/build/three.module.js';
+    import { OrbitControls } from 'https://unpkg.com/three@0.165.0/examples/jsm/controls/OrbitControls.js';
+    import { GLTFLoader } from 'https://unpkg.com/three@0.165.0/examples/jsm/loaders/GLTFLoader.js';
+
+    const aircraftStage = document.getElementById('aircraftStage');
+    const aircraftStatus = document.getElementById('aircraftStatus');
+    const aircraftPanel = document.getElementById('aircraftPanel');
+
+    if (aircraftStage && aircraftPanel) {
+      const scene = new THREE.Scene();
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.setClearColor(0x000000, 0);
+      aircraftStage.appendChild(renderer.domElement);
+
+      const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+      camera.position.set(0, 1.2, 7.2);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enablePan = false;
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 0.9;
+      controls.minDistance = 4.8;
+      controls.maxDistance = 9.5;
+      controls.minPolarAngle = Math.PI * 0.34;
+      controls.maxPolarAngle = Math.PI * 0.68;
+      controls.target.set(0, 0.2, 0);
+
+      const ambient = new THREE.AmbientLight(0xa9d8ff, 1.6);
+      const key = new THREE.DirectionalLight(0x7fc8ff, 1.8);
+      key.position.set(5, 6, 7);
+      const rim = new THREE.DirectionalLight(0x48d5ff, 1.1);
+      rim.position.set(-6, 2, -5);
+      scene.add(ambient, key, rim);
+
+      const blueprintGroup = new THREE.Group();
+      scene.add(blueprintGroup);
+
+      const rings = new THREE.Group();
+      [1.1, 1.75, 2.45].forEach((radius, index) => {
+        const geometry = new THREE.RingGeometry(radius - 0.012, radius, 96);
+        const material = new THREE.MeshBasicMaterial({
+          color: 0x4a9eff,
+          transparent: true,
+          opacity: index === 0 ? 0.16 : 0.08,
+          side: THREE.DoubleSide
+        });
+        const ring = new THREE.Mesh(geometry, material);
+        ring.rotation.x = Math.PI / 2;
+        rings.add(ring);
+      });
+      blueprintGroup.add(rings);
+
+      const loader = new GLTFLoader();
+      let mixer = null;
+
+      function applyBlueprintLook(root) {
+        root.traverse(child => {
+          if (!child.isMesh) return;
+          child.material = new THREE.MeshStandardMaterial({
+            color: 0x0a1630,
+            emissive: 0x1a6fff,
+            emissiveIntensity: 0.22,
+            metalness: 0.08,
+            roughness: 0.62,
+            transparent: true,
+            opacity: 0.22
+          });
+
+          const edges = new THREE.EdgesGeometry(child.geometry, 28);
+          const edgeLines = new THREE.LineSegments(
+            edges,
+            new THREE.LineBasicMaterial({
+              color: 0x9ed8ff,
+              transparent: true,
+              opacity: 0.92
+            })
+          );
+          child.add(edgeLines);
+        });
+      }
+
+      function frameModel(object) {
+        const box = new THREE.Box3().setFromObject(object);
+        const size = new THREE.Vector3();
+        const center = new THREE.Vector3();
+        box.getSize(size);
+        box.getCenter(center);
+
+        object.position.sub(center);
+        const maxDim = Math.max(size.x, size.y, size.z) || 1;
+        const targetSize = 4.6;
+        const scale = targetSize / maxDim;
+        object.scale.setScalar(scale);
+
+        const framedBox = new THREE.Box3().setFromObject(object);
+        const framedCenter = new THREE.Vector3();
+        framedBox.getCenter(framedCenter);
+        object.position.sub(framedCenter);
+
+        controls.target.set(0, 0.1, 0);
+        camera.position.set(0, 1.2, 7.2);
+        controls.update();
+      }
+
+      function resizeRenderer() {
+        const { clientWidth, clientHeight } = aircraftPanel;
+        renderer.setSize(clientWidth, clientHeight, false);
+        camera.aspect = clientWidth / clientHeight;
+        camera.updateProjectionMatrix();
+      }
+
+      loader.load(
+        'assets/icons/plane.glb',
+        gltf => {
+          const model = gltf.scene;
+          applyBlueprintLook(model);
+          frameModel(model);
+          blueprintGroup.add(model);
+
+          if (gltf.animations && gltf.animations.length) {
+            mixer = new THREE.AnimationMixer(model);
+            gltf.animations.forEach(clip => {
+              const action = mixer.clipAction(clip);
+              action.reset();
+              action.setLoop(THREE.LoopRepeat, Infinity);
+              action.play();
+            });
+            if (aircraftStatus) aircraftStatus.textContent = 'GLB Animated';
+          } else {
+            if (aircraftStatus) aircraftStatus.textContent = 'GLB Ready';
+          }
+        },
+        undefined,
+        () => {
+          if (aircraftStatus) aircraftStatus.textContent = 'Load Failed';
+        }
+      );
+
+      const resizeObserver = new ResizeObserver(() => resizeRenderer());
+      resizeObserver.observe(aircraftPanel);
+      resizeRenderer();
+
+      const clock = new THREE.Clock();
+
+      function animate() {
+        const delta = clock.getDelta();
+        const elapsed = clock.elapsedTime;
+        rings.rotation.z = elapsed * 0.08;
+        rings.children.forEach((ring, index) => {
+          ring.material.opacity = 0.05 + Math.sin(elapsed * 0.7 + index) * 0.015 + index * 0.03;
+        });
+        if (mixer) mixer.update(delta);
+        controls.update();
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+  </script>
+
+</body>
+
+</html>
