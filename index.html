@@ -314,13 +314,14 @@
        HERO — CINEMATIC OPENING
     ══════════════════════════════════════ */
     #hero {
-      height: 100vh;
+      min-height: 100vh;
       min-height: 700px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       padding-top: 64px;
-      overflow: hidden;
+      padding-bottom: 40px;
+      overflow: clip;
     }
 
     .hero-bg {
@@ -350,7 +351,7 @@
       display: grid;
       grid-template-columns: minmax(0, 560px) minmax(320px, 1fr);
       gap: 48px;
-      align-items: center;
+      align-items: start;
       min-height: calc(100vh - 64px);
     }
 
@@ -362,11 +363,20 @@
     .hero-visual {
       position: relative;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 24px;
       min-height: 520px;
+      padding-top: 86px;
       opacity: 0;
       animation: fadeUp 1s 1.05s forwards;
+    }
+
+    .hero-visual-inner {
+      display: flex;
+      justify-content: center;
+      width: 100%;
     }
 
     .aircraft-panel {
@@ -374,14 +384,10 @@
       width: min(100%, 560px);
       aspect-ratio: 1 / 1;
       border-radius: 28px;
-      border: 1px solid rgba(74, 158, 255, 0.12);
-      background:
-        radial-gradient(circle at center, rgba(61, 214, 200, 0.08), transparent 48%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
-      box-shadow:
-        inset 0 0 0 1px rgba(255, 255, 255, 0.03),
-        0 36px 90px rgba(0, 0, 0, 0.34);
-      overflow: hidden;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      overflow: visible;
       cursor: grab;
     }
 
@@ -389,58 +395,17 @@
       cursor: grabbing;
     }
 
-    .aircraft-panel::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(74, 158, 255, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(74, 158, 255, 0.08) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: radial-gradient(circle at center, black 34%, transparent 94%);
-      opacity: 0.42;
-      pointer-events: none;
-    }
-
-    .aircraft-panel::after {
-      content: '';
-      position: absolute;
-      inset: 11%;
-      border-radius: 50%;
-      border: 1px solid rgba(74, 158, 255, 0.14);
-      box-shadow:
-        0 0 0 36px rgba(74, 158, 255, 0.035),
-        0 0 0 92px rgba(74, 158, 255, 0.02);
-      pointer-events: none;
-    }
-
     .aircraft-stage {
       position: absolute;
       inset: 0;
       z-index: 2;
+      filter: drop-shadow(0 24px 42px rgba(0, 0, 0, 0.22));
     }
 
     .aircraft-stage canvas {
       width: 100%;
       height: 100%;
       display: block;
-    }
-
-    .aircraft-status {
-      position: absolute;
-      top: 22px;
-      right: 22px;
-      z-index: 3;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(74, 158, 255, 0.16);
-      background: rgba(6, 10, 18, 0.72);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.66rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #98c9ff;
-      backdrop-filter: blur(10px);
     }
 
     .hero-eyebrow {
@@ -456,9 +421,9 @@
 
     .hero-headline {
       font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(3.6rem, 8vw, 7.2rem);
-      line-height: 0.92;
+      font-weight: 700;
+      font-size: clamp(3.2rem, 7vw, 6.4rem);
+      line-height: 0.95;
       letter-spacing: -0.04em;
       opacity: 0;
       animation: fadeUp 1s 0.5s forwards;
@@ -470,12 +435,16 @@
       -webkit-text-stroke: 1px rgba(240, 244, 255, 0.35);
     }
 
+    .hero-headline .line-3 {
+      display: block;
+    }
+
     .hero-sub {
-      margin-top: 32px;
+      margin-top: 28px;
       max-width: 540px;
       color: var(--muted);
-      font-size: 1.1rem;
-      line-height: 1.75;
+      font-size: 1.02rem;
+      line-height: 1.72;
       opacity: 0;
       animation: fadeUp 1s 0.75s forwards;
     }
@@ -486,7 +455,7 @@
     }
 
     .hero-cta-row {
-      margin-top: 40px;
+      margin-top: 32px;
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
@@ -532,14 +501,28 @@
     }
 
     .hero-stats-row {
-      margin-top: 64px;
+      margin-top: 0;
       display: flex;
-      gap: 48px;
+      gap: 24px;
       flex-wrap: wrap;
+      justify-content: space-between;
       border-top: 1px solid var(--line);
-      padding-top: 32px;
+      padding-top: 24px;
       opacity: 0;
       animation: fadeUp 1s 1.2s forwards;
+    }
+
+    .hero-visual .hero-stats-row {
+      width: min(100%, 560px);
+      align-self: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 20px 22px 0;
+      border-radius: 22px 22px 0 0;
+    }
+
+    .hero-stat {
+      min-width: 110px;
     }
 
     .hero-stat span {
@@ -666,13 +649,16 @@
 
     .timeline {
       position: relative;
-      padding-left: 48px;
+      --timeline-axis: 8px;
+      --timeline-indent: 48px;
+      --timeline-dot-size: 16px;
+      padding-left: var(--timeline-indent);
     }
 
     .timeline::before {
       content: '';
       position: absolute;
-      left: 8px;
+      left: var(--timeline-axis);
       top: 12px;
       bottom: 12px;
       width: 1px;
@@ -690,10 +676,10 @@
 
     .timeline-dot {
       position: absolute;
-      left: -44px;
+      left: calc(var(--timeline-axis) - var(--timeline-indent) - (var(--timeline-dot-size) / 2));
       top: 6px;
-      width: 16px;
-      height: 16px;
+      width: var(--timeline-dot-size);
+      height: var(--timeline-dot-size);
       border-radius: 50%;
       background: var(--bg);
       border: 2px solid var(--gold);
@@ -1113,6 +1099,146 @@
       border-top: 1px solid var(--line);
     }
 
+    /* CONTACT / FOOTER */
+#contact {
+  padding: 140px 0 70px;
+  border-top: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(7, 9, 14, 0.65), rgba(4, 6, 10, 1));
+}
+
+.contact-panel {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  padding: 34px;
+  border-radius: 28px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
+}
+
+.contact-left .section-title {
+  margin-bottom: 18px;
+}
+
+.contact-left .section-lead {
+  max-width: 520px;
+  margin-bottom: 28px;
+}
+
+.contact-details {
+  display: grid;
+  gap: 18px;
+}
+
+.contact-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-kicker {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.contact-row a {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 1rem;
+  word-break: break-word;
+}
+
+.contact-row a:hover {
+  color: var(--gold);
+}
+
+.contact-right {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.social-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.025);
+  text-decoration: none;
+  color: var(--muted);
+  transition: transform 0.22s, border-color 0.22s, color 0.22s, background 0.22s;
+}
+
+.social-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(212, 168, 67, 0.26);
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--ink);
+}
+
+.social-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(212, 168, 67, 0.08);
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.social-text {
+  font-size: 0.98rem;
+  color: inherit;
+}
+
+.contact-footer-strip {
+  margin-top: 30px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.contact-footer-strip .footer-brand {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.contact-footer-strip .footer-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+@media (max-width: 900px) {
+  .contact-panel {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 24px;
+  }
+
+  .contact-footer-strip {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
     .person-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1227,6 +1353,8 @@
     .footer-right a:hover {
       color: var(--ink);
     }
+
+    
 
     /* ══════════════════════════════════════
        MODAL
@@ -1482,6 +1610,7 @@
 
       .hero-visual {
         min-height: 420px;
+        padding-top: 8px;
       }
 
       .aircraft-panel {
@@ -1522,7 +1651,8 @@
       }
 
       .timeline {
-        padding-left: 32px;
+        --timeline-indent: 32px;
+        padding-left: var(--timeline-indent);
       }
     }
 
@@ -1595,14 +1725,26 @@
         <h1 class="hero-headline">
           Pilot.<br>
           <span class="line-2">Builder.</span>
+          <span class="line-3">Problem Solver.</span>
         </h1>
         <p class="hero-sub">
-          I care about doing useful work well. That has taken me from flight training to building products to teaching
-          younger students. <strong>This site is a more honest look at how I work and what matters to me.</strong>
+          <strong>
+            I have always believed that growth begins when I step beyond what feels comfortable. That mindset has pushed me to take
+            on demanding experiences that challenged me to mature, adapt, and think beyond myself. Along the way, I have come to
+            value not just personal growth, but also the responsibility to serve, contribute, and use what I learn to make a
+            meaningful difference to the people around me.
+          </strong>
         </p>
         <div class="hero-cta-row">
           <a class="btn-primary" href="#experiences">Read the Stories</a>
           <!-- <a class="btn-ghost" href="#experiences">Open the Stories →</a> -->
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-visual-inner">
+          <div class="aircraft-panel" id="aircraftPanel">
+            <div class="aircraft-stage" id="aircraftStage"></div>
+          </div>
         </div>
         <div class="hero-stats-row">
           <div class="hero-stat">
@@ -1623,12 +1765,6 @@
           </div>
         </div>
       </div>
-      <div class="hero-visual" aria-hidden="true">
-        <div class="aircraft-panel" id="aircraftPanel">
-          <div class="aircraft-stage" id="aircraftStage"></div>
-          <div class="aircraft-status" id="aircraftStatus">Loading GLB</div>
-        </div>
-      </div>
     </div>
     <!-- <div class="scroll-hint">
       <div class="scroll-mouse"></div>
@@ -1646,48 +1782,67 @@
           <span class="chapter-num">01 / Journey</span>
           <div class="chapter-line"></div>
         </div>
-        <h2 class="section-title reveal">There is a clear pattern<br>to my work.</h2>
-        <p class="section-lead reveal">I keep ending up in situations where people need something dependable, and I have
-          found that I like building in that kind of environment.</p>
+        <h2 class="section-title reveal">The pattern in my journey is growth through discomfort.</h2>
+        <p class="section-lead reveal">I have often grown the most when I chose not to stay where things felt easy.
+          Looking back, each phase of my journey
+          shaped me in a different way — through service, leadership, engineering, and challenge.</p>
       </div>
-
+  
       <div class="timeline">
         <div class="timeline-item reveal stagger-1">
           <div class="timeline-dot"></div>
-          <div class="timeline-year">Secondary School</div>
-          <h3 class="timeline-title">I started teaching after noticing how uneven access to good help really was.</h3>
-          <p class="timeline-body">I began with a YouTube channel and community centre sessions. It was the first time I
-            built something simply because I had seen a real gap and wanted to help close it.</p>
+          <div class="timeline-year"><b>Secondary School</b> • Teaching & Community Service</div>
+          <h3 class="timeline-title">Teaching first showed me that growth is most meaningful when it helps someone else
+            grow too.</h3>
+          <p class="timeline-body">Working with younger students made me more patient, more adaptable, and more aware of
+            how much thoughtful guidance can
+            change a student’s confidence and mindset.</p>
         </div>
         <div class="timeline-item reveal stagger-2">
           <div class="timeline-dot"></div>
-          <div class="timeline-year">JC1 – JC2</div>
-          <h3 class="timeline-title">Flight training taught me how composure is built.</h3>
-          <p class="timeline-body">I logged 76+ hours at SYFC, cleared 7 aviation theory papers under the <i>Civil Aviation Authority of Singapore (CAAS)</i>, and passed my Final Flying Test a week before JC2 prelims. The biggest lesson was learning how to stay steady when things become difficult very quickly.</p>
+          <div class="timeline-year"><b>JC1 – JC2</b> • My growth</div>
+          <h3 class="timeline-title">I started stepping out of my comfort zone more deliberately.</h3>
+          <p class="timeline-body">Balancing academics with cricket, entrepreneurship, volunteering, and flying stretched
+            me in every direction, but it also made me more disciplined, resilient, and intentional about how I used my
+            time.</p>
         </div>
         <div class="timeline-item reveal stagger-3">
           <div class="timeline-dot"></div>
-          <div class="timeline-year">2023</div>
+          <div class="timeline-year"><b>2023</b> • Engineering Innovation Challenge</div>
           <h3 class="timeline-title">EIC was when engineering stopped feeling abstract to me.</h3>
-          <p class="timeline-body">Our team placed in the national top 10 and presented at the World Engineers Summit. We worked on elderly loneliness, which mattered to me personally after seeing my grandfather go through a spinal injury the year before.</p>
+          <p class="timeline-body">After seeing my grandfather struggle following a spinal injury, working on elderly
+            loneliness made engineering feel personal. It was the first time I saw how technical ideas could respond to a
+            deeply human problem.</p>
+        </div>
+        <div class="timeline-item reveal stagger-7">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year"><b>2023-2024</b> • Singapore Youth Flying Club</div>
+          <h3 class="timeline-title">Flight training taught me composure, discipline, and responsibility in a way nothing else had before.</h3>
+          <p class="timeline-body">SYFC demanded precision, consistency, and calm under pressure. Over time, it changed how I approach uncertainty,
+          setbacks, and high-stakes decisions.</p>
         </div>
         <div class="timeline-item reveal stagger-4">
           <div class="timeline-dot"></div>
-          <div class="timeline-year">2024</div>
-          <h3 class="timeline-title">Leading EntreWeek showed me that teams do better when people really own their part.</h3>
-          <p class="timeline-body">Instead of making every decision myself, I split the team into smaller groups with clear ownership. The event reached 85% of the school, and that experience shaped how I think about leadership much more than the award that followed.</p>
+          <div class="timeline-year"><b>2024</b> • Raffles Entrepreneurs' Network</div>
+          <h3 class="timeline-title">Leadership became less about directing people and more about serving them well.</h3>
+          <p class="timeline-body">Leading EntreWeek taught me that strong teams are built through trust, communication,
+            and giving people real ownership over their work, not by trying to control everything yourself.</p>
         </div>
         <div class="timeline-item reveal stagger-5">
           <div class="timeline-dot"></div>
-          <div class="timeline-year">National Service</div>
-          <h3 class="timeline-title">WebForce taught me what it means to build for people who need reliability.</h3>
-          <p class="timeline-body">Magicians use it live in front of real audiences, so it had to work when it counted. It has reached 60+ installs across 10 countries, brought in SGD 1,700 in revenue, and is now growing through a UK distributor.</p>
+          <div class="timeline-year"><b>National Service</b> • Global Impact</div>
+          <h3 class="timeline-title">Developing WebForce during National Service taught me what it means to build for people who need reliability.</h3>
+          <p class="timeline-body">Developing something for live performance made me think differently about
+            responsibility, precision, and trust. It showed me that building well is not just about having an idea, but
+            about making something people can genuinely rely on when it matters.</p>
         </div>
         <div class="timeline-item reveal stagger-6">
           <div class="timeline-dot"></div>
-          <div class="timeline-year">Next</div>
-          <h3 class="timeline-title">REP feels like the next right environment for me.</h3>
-          <p class="timeline-body">It brings together rigorous engineering, interdisciplinary thinking, and real-world application in a way that fits how I already like to learn and build.</p>
+          <div class="timeline-year"><b>Moving Forward</b> • Continuous Growth</div>
+          <h3 class="timeline-title">What ties these experiences together is the kind of person I am trying to become.
+          </h3>
+          <p class="timeline-body">I want to keep growing in environments that are demanding, meaningful, and bigger than
+            myself — where I can keep learning, contribute seriously, and build things that matter to people.</p>
         </div>
       </div>
     </div>
@@ -1703,8 +1858,9 @@
           <span class="chapter-num">02 / Stories</span>
           <div class="chapter-line"></div>
         </div>
-        <h2 class="section-title reveal">The experiences that<br>shaped how I think.</h2>
-        <p class="section-lead reveal">Each one changed me in a different way. Click any card to read more and see the supporting evidence.</p>
+        <h2 class="section-title reveal">The experiences behind the journey.</h2>
+        <p class="section-lead reveal">These are the moments I have referred to above in fuller detail — what I did, what they
+          taught me, and why they still matter to me now.</p>
       </div>
 
       <div class="exp-cards">
@@ -1715,7 +1871,8 @@
           </div>
           <div class="exp-tag">Aviation</div>
           <h3>Private Pilot Licence — earned in JC alongside A-Levels</h3>
-          <p>Flying taught me how to stay calm, trust preparation, and keep thinking clearly when the pressure is real.</p>
+          <p>Flying taught me to stay grounded under pressure, trust my preparation, and keep thinking clearly when things do
+            not go as planned.</p>
           <div class="exp-chips">
             <span class="chip">76+ hours</span>
             <span class="chip">7 theory exams</span>
@@ -1738,7 +1895,8 @@
           </div>
           <div class="exp-tag">Product</div>
           <h3>WebForce — Android app for magicians</h3>
-          <p>What began as a simple favour for a friend became a product performers now rely on during live shows in 10 countries.</p>
+          <p>What started as a simple request from a friend became a product used by performers during live shows across 10
+            countries.</p>
           <div class="exp-chips">
             <span class="chip">Live on Google Play</span>
             <span class="chip">10 countries</span>
@@ -1760,7 +1918,8 @@
             <div>
               <div class="exp-tag">Engineering</div>
               <h3>Engineers Innovation Challenge 2023 — Top 10 nationwide</h3>
-              <p>This project mattered because the problem felt close to home. We built an AI device aimed at supporting elderly people living alone, especially on the days when life becomes too quiet.</p>
+              <p>This project mattered deeply to me because it was the first time engineering stopped feeling like theory and
+                started feeling human. We worked on elderly loneliness, a problem that had already become personal to me.</p>
             </div>
             <div>
               <div class="exp-media">
@@ -1790,11 +1949,12 @@
           </div>
           <div class="exp-tag">Leadership</div>
           <h3>REN — Member of the Year</h3>
-          <p>Leading EntreWeek taught me that good leadership is less about control and more about helping people feel real ownership over the work.</p>
+          <p>Leading EntreWeek changed the way I understood leadership. I came away seeing that strong teams are built not by
+            control, but by trust, communication, and shared ownership.</p>
           <div class="exp-chips">
             <span class="chip">85% school engagement</span>
             <span class="chip">Member of the Year</span>
-            <span class="chip">Ownership-led</span>
+            <span class="chip">Ownership-led teamwork</span>
           </div>
           <div class="exp-open">
             Read full story
@@ -1812,7 +1972,8 @@
           </div>
           <div class="exp-tag">Teaching</div>
           <h3>Teaching, mentoring, giving back</h3>
-          <p>Teaching showed me how meaningful simple help can be. Sometimes the clearest sign that something mattered was one student saying, "I finally get it."</p>
+          <p>Teaching made me realise how powerful simple, patient help can be. Sometimes the most meaningful progress was
+            seeing someone go from confusion to quiet confidence.</p>
           <div class="exp-chips">
             <span class="chip">Educational YouTube</span>
             <span class="chip">Community tutoring</span>
@@ -1931,55 +2092,62 @@
   <section id="why-rep">
     <div class="container">
       <div class="chapter-divider reveal">
-        <span class="chapter-num">04 / Fit</span>
+        <span class="chapter-num">04 / Direction</span>
         <div class="chapter-line"></div>
       </div>
       <div class="why-rep-layout">
         <div>
-          <h2 class="section-title reveal">Why REP,<br>specifically.</h2>
-
+          <h2 class="section-title reveal">What I want to build<br>and grow into next.</h2>
+  
           <div class="why-rep-points">
             <div class="rep-point reveal stagger-1">
-              <div class="rep-point-num">01</div>
-              <h4>Real problems rarely fit neatly into one discipline.</h4>
-              <p>That is something I have seen in flying, product work, and team leadership. REP appeals to me because it reflects the way real problems actually show up.</p>
+              <div class="rep-point-num"><b>01 • Problem-Solving</b></div>
+              <h4>I want to work on problems that do not sit within one discipline.</h4>
+              <p>Across flying, engineering, and building products, I have seen that real problems are rarely isolated. I
+                want to learn how to approach them with both technical depth and a broader, systems-level perspective.</p>
             </div>
             <div class="rep-point reveal stagger-2">
-              <div class="rep-point-num">02</div>
-              <h4>Entrepreneurship is already part of how I work, not just something I do on the side.</h4>
-              <p>WebForce is a real product, and experiences like ExpertConnect Asia exposed me to fast-changing, messy environments. What I want now is deeper engineering training underneath that instinct.</p>
+              <div class="rep-point-num"><b>02 • Innovation</b></div>
+              <h4>I want to build things that people can genuinely rely on.</h4>
+              <p>Experiences like flight training and WebForce showed me that reliability is not a bonus — it is the
+                standard. I want to deepen my engineering ability so that what I build holds up in real situations, not
+                just controlled ones.</p>
             </div>
             <div class="rep-point reveal stagger-3">
-              <div class="rep-point-num">03</div>
-              <h4>I want to build things people can actually depend on.</h4>
-              <p>Flying and product-building both taught me the same thing: reliability is not a nice extra. REP feels like the place where I can sharpen that standard with stronger engineering depth.</p>
+              <div class="rep-point-num"><b>03 • Growth</b></div>
+              <h4>I want to keep growing in environments that are demanding and real.</h4>
+              <p>I have learned the most when I was stretched — managing multiple commitments, working with people, and
+                building under pressure. I am looking for an environment that continues to challenge me in that way.</p>
             </div>
           </div>
         </div>
-
+  
         <div class="why-rep-quote reveal-right">
-          <p class="big-quote">"Engineering matters most when it quietly helps real people in real situations."</p>
-
+          <p class="big-quote">"I want to become someone who can take on difficult problems and build solutions that
+            people can trust."</p>
+  
           <div class="bring-grid">
             <div class="bring-item">
               <div class="bring-icon">✦</div>
               <div>
                 <strong>Calm under pressure</strong>
-                <p>Built through flight training, setbacks at home, and learning how to keep moving without losing focus.</p>
+                <p>Built through flight training and learning to stay steady when situations change quickly.</p>
               </div>
             </div>
             <div class="bring-item">
               <div class="bring-icon">⬡</div>
               <div>
-                <strong>Products that need to work</strong>
-                <p>I care about building things that hold up outside a demo, especially when someone is relying on them in public.</p>
+                <strong>Builds for real use</strong>
+                <p>I care about creating things that work outside ideal conditions, especially when someone depends on
+                  them.</p>
               </div>
             </div>
             <div class="bring-item">
               <div class="bring-icon">◈</div>
               <div>
-                <strong>Leadership through ownership</strong>
-                <p>The best teams I have been part of worked well because people felt trusted to own their piece of the whole.</p>
+                <strong>Leadership through trust</strong>
+                <p>I believe strong teams are built when people feel ownership over their work, not just responsibility.
+                </p>
               </div>
             </div>
           </div>
@@ -2000,16 +2168,27 @@
       <div class="person-layout">
         <div class="person-photo-wrap reveal-left">
           <div class="person-photo-inner">
-            <img src="assets/images/B_Garv.jpg" alt="Garv Batra">
+            <img src="assets/images/GARV_MAIN_PIC.jpg" alt="Garv Batra">
           </div>
           <div class="person-photo-tag">Garv Batra</div>
         </div>
 
         <div class="person-copy reveal-right">
           <h2 class="section-title">The person<br>behind the work.</h2>
-          <p>I want to become the kind of engineer people trust when the work is difficult and the stakes are real.</p>
-          <p>Flying taught me composure. Building taught me how to iterate. Teaching taught me patience. Leadership taught me that people do their best work when they feel trusted.</p>
-          <p>If there is a common thread across everything here, it is that I like being close to the real problem and responsible for helping solve it.</p>
+        
+          <p>I think what drives me most is the need to be close to real problems, not just talk about them from a distance.</p>
+        
+          <p>Over time, different experiences have shaped how I approach that. Flying made me more aware of responsibility and
+            how quickly situations can change. Building things showed me that ideas are easy, but making something actually work
+            for people takes patience and iteration. Teaching reminded me that progress is often quiet, and that helping someone
+            understand something can matter more than any visible outcome.</p>
+        
+          <p>I am still figuring things out, but I know I am drawn to environments where the work is real, the expectations are
+            high, and there is something at stake. I find that I grow the most in those situations.</p>
+        
+          <p>More than anything, I want to become someone people can rely on — not just to have ideas, but to take
+            responsibility and see things through properly.</p>
+        
           <div class="person-traits">
             <span class="trait">Comfortable under pressure</span>
             <span class="trait">Builds for real users</span>
@@ -2023,15 +2202,73 @@
     </div>
   </section>
 
-  <!-- ── FOOTER ── -->
-  <footer>
+  <!-- ── CONTACT / FOOTER ── -->
+  <footer id="contact">
     <div class="container">
-      <div class="footer-inner">
-        <div class="footer-brand">Garv Batra</div>
-        <div class="footer-right">
-          <div class="footer-note">NTU REP &amp; Scholarship Application</div>
-          <a href="mailto:garvbatracrown@gmail.com">garvbatracrown@gmail.com</a>
+      <div class="chapter-divider reveal">
+        <span class="chapter-num">06 / Contact</span>
+        <div class="chapter-line"></div>
+      </div>
+  
+      <div class="contact-panel reveal">
+        <div class="contact-left">
+          <h2 class="section-title">Get in touch</h2>
+          <p class="section-lead">
+            If you would like to reach out or discuss anything further, I would be glad to connect.
+          </p>
+  
+          <div class="contact-details">
+            <div class="contact-row">
+              <span class="contact-kicker">Email</span>
+              <a href="mailto:garvbatracrown@gmail.com">garvbatracrown@gmail.com</a>
+            </div>
+  
+            <div class="contact-row">
+              <span class="contact-kicker">Phone</span>
+              <a href="tel:+6592314873">+65 9231 4873</a>
+            </div>
+          </div>
         </div>
+  
+        <div class="contact-right">
+          <a href="https://github.com/GarvBatra123" target="_blank" rel="noopener" class="social-card"
+            aria-label="GitHub">
+            <span class="social-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                <path
+                  d="M12 0C5.37 0 0 5.37 0 12a12 12 0 0 0 8.2 11.39c.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.72.08-.72 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .11-.78.42-1.3.76-1.6-2.66-.3-5.47-1.33-5.47-5.91 0-1.3.46-2.36 1.23-3.2-.12-.3-.53-1.52.12-3.17 0 0 1-.32 3.3 1.22a11.4 11.4 0 0 1 6 0c2.29-1.54 3.29-1.22 3.29-1.22.66 1.65.25 2.87.13 3.17.77.84 1.22 1.9 1.22 3.2 0 4.59-2.81 5.61-5.49 5.91.43.37.82 1.1.82 2.22v3.29c0 .32.21.7.83.58A12 12 0 0 0 24 12c0-6.63-5.37-12-12-12Z" />
+              </svg>
+            </span>
+            <span class="social-text">GitHub</span>
+          </a>
+  
+          <a href="https://www.linkedin.com/in/garvbatra100" target="_blank" rel="noopener" class="social-card"
+            aria-label="LinkedIn">
+            <span class="social-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                <path
+                  d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5ZM.5 8h4V24h-4V8Zm7 0h3.83v2.19h.06c.53-1.01 1.83-2.08 3.77-2.08 4.03 0 4.77 2.65 4.77 6.09V24h-4v-7.01c0-1.67-.03-3.82-2.33-3.82-2.34 0-2.7 1.82-2.7 3.7V24h-4V8Z" />
+              </svg>
+            </span>
+            <span class="social-text">LinkedIn</span>
+          </a>
+  
+          <a href="https://www.youtube.com/@garvbatra3103" target="_blank" rel="noopener" class="social-card"
+            aria-label="YouTube">
+            <span class="social-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                <path
+                  d="M23.5 6.2a3 3 0 0 0-2.11-2.12C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.39.58A3 3 0 0 0 .5 6.2 31.2 31.2 0 0 0 0 12a31.2 31.2 0 0 0 .5 5.8 3 3 0 0 0 2.11 2.12c1.89.58 9.39.58 9.39.58s7.5 0 9.39-.58a3 3 0 0 0 2.11-2.12A31.2 31.2 0 0 0 24 12a31.2 31.2 0 0 0-.5-5.8ZM9.75 15.5v-7l6 3.5-6 3.5Z" />
+              </svg>
+            </span>
+            <span class="social-text">YouTube</span>
+          </a>
+        </div>
+      </div>
+  
+      <div class="contact-footer-strip">
+        <div class="footer-brand">Garv Batra</div>
+        <div class="footer-note">NTU REP &amp; Scholarship Application</div>
       </div>
     </div>
   </footer>
@@ -2193,84 +2430,142 @@
       ppl: {
         tag: 'Aviation · Private Pilot Licence',
         title: 'Private Pilot Licence',
-        subtitle: 'Flying taught me that calm is something you practise, not something you either naturally have or do not.',
+        subtitle: 'Flying taught me that composure is built slowly — through preparation, repetition, and learning to stay steady when it matters.',
         coverImage: { src: 'assets/images/da40.jpg', alt: 'Private Pilot Licence flight photograph' },
         body: `
-        <p>I joined SYFC because I had wanted to fly for as long as I could remember. What I didn't expect was that flying would change the way I think about everything else.</p>
-        <p>Over 1.5 years, I trained through ground school, simulator sessions, dual flights, and solo sorties — while sitting A-Level subjects, playing cricket for school, and leading entrepreneurship projects in REN. There was no quiet period to focus. I had to learn to manage everything simultaneously, and I had to do it at a standard where mistakes had real consequences.</p>
-        <p>The moment that stayed with me wasn't my first solo. It was an engine failure scenario my instructor simulated mid-flight — throttle cut, cockpit quiet, no warning. For a fraction of a second, my mind went blank. Then training took over. I stabilised the aircraft, ran through the checks, scanned for landing options, and committed. What I understood in that moment: panic is a choice. Thinking clearly is also a choice. You prepare for one so you can make the other.</p>
-        <p>I cleared the Final Flying Test one week before my JC2 preliminary examinations. I didn't defer it. I didn't ask for more time. I knew if I had earned the licence, I had earned it — and that knowledge going into prelims was worth more than an extra week of study.</p>
-      `,
+    <p>I joined SYFC because flying had been a dream of mine for as long as I can remember. What I did not fully expect was how deeply the experience would shape me beyond aviation itself.</p>
+    <p>Over one and a half years, I trained through ground school, simulator sessions, dual flights, and solo sorties, all while managing A-Levels, cricket, and leadership responsibilities in REN. There was never a long stretch of calm where I could focus on only one thing. I had to learn how to stay organised, recover quickly, and keep moving even when everything felt compressed at once.</p>
+    <p>One of the moments that stayed with me most was not my first solo, but an engine failure scenario my instructor simulated in flight. For a brief moment, I felt the shock of how quickly things could change. Then training took over. I focused on controlling the aircraft, worked through the checks, looked for my options, and committed to the procedure. That experience stayed with me because it showed me that staying calm is not automatic. It is something you build through discipline and practice.</p>
+    <p>I eventually cleared my Final Flying Test one week before my JC2 preliminary examinations. It was a demanding period, but it meant a lot to me to see the journey through properly. Earning the licence during that phase of life reminded me that some of the most meaningful growth happens when you continue showing up, even when the timing is far from comfortable.</p>
+  `,
         evidence: [
-          { label: 'Flight Hours', heading: 'Nearly 80 hours logged', text: 'Across structured progression — circuits, navigation sorties, cross-country planning, emergency procedures, and final test readiness. 12.6 of those hours were solo, no instructor beside me.', images: ['assets/images/profile.jpg', 'assets/images/B_Garv.jpg'] },
-          { label: '7 Theory Exams', heading: 'Alongside A-Levels', text: 'Air law, flight mechanics, meteorology, radiotelephony, navigation, aircraft systems, human performance — cleared while managing 5 A-Level subjects, cricket NSG, and REN leadership. The schedule had no margin. That is precisely why it was worth doing.', images: ['assets/images/SYFC_PPL.jpg'] },
-          { label: 'Public Recognition', heading: 'External Feature', text: 'Recognition beyond the school community — external validation that this was not a typical student extracurricular.', links: [{ href: 'https://share.google/JnxtzzweOzFFzPUp9', label: 'Read feature article' }] }
+          {
+            label: 'Flight Hours',
+            heading: 'Nearly 80 hours logged',
+            text: 'Across structured progression — circuits, navigation sorties, cross-country planning, emergency procedures, and final test readiness. 12.6 of those hours were solo, without an instructor beside me.',
+            images: ['assets/images/profile.jpg', 'assets/images/B_Garv.jpg']
+          },
+          {
+            label: '7 Theory Exams',
+            heading: 'Alongside A-Levels',
+            text: 'Air law, flight mechanics, meteorology, radiotelephony, navigation, aircraft systems, and human performance — all cleared while balancing academics, cricket, and leadership responsibilities.',
+            images: ['assets/images/SYFC_PPL.jpg']
+          },
+          {
+            label: 'Public Recognition',
+            heading: 'External Feature',
+            text: 'My PPL journey was also featured publicly outside the school community.',
+            links: [{ href: 'https://share.google/JnxtzzweOzFFzPUp9', label: 'Read feature article' }]
+          },
+          {
+            label: 'Giving Back',
+            heading: 'Returning to SYFC to mentor aspiring cadets',
+            text: 'Even after completing my PPL, I still go back to SYFC to speak with and guide newer cadets who are just starting their training. Having gone through the same process myself, I understand the uncertainty and pressure they face early on, and I try to share what helped me navigate it.',
+            images: ['assets/images/SYFC_MENTORING.jpg']
+          }
         ]
       },
       webforce: {
         tag: 'Product · Android App',
         title: 'WebForce',
-        subtitle: 'It started with a friend\'s problem. It became a product trusted on stage in 10 countries.',
+        subtitle: 'Building WebForce taught me that reliability matters most when someone is depending on your product in a real moment.',
         coverImage: { src: 'assets/images/WebForceBanner.png', alt: 'WebForce product image' },
         body: `
-        <p>A friend who performed magic professionally asked me a simple question: is there an Android app that does what the iOS tools do? There wasn't. I built the first version to solve one person's problem.</p>
-        <p>What I didn't anticipate was that the problems would keep coming. Performers would find edge cases. The app had to work at the exact moment it was needed — on stage, in front of an audience, under pressure. There was no room for "it usually works." The feedback loop was brutal and direct, and every iteration made the product more trustworthy.</p>
-        <p>iOS had tools for phone-based magic performance. Android had nothing reliable. That gap — and the community of performers who needed it filled — was the entire brief.</p>
-        <p>60+ installs across 10 countries. SGD 1,700 in revenue. Now scaling through a UK distributor. The numbers aren't the point. The trust is. When a performer in the UK chooses WebForce for a live show, that is the measure that matters.</p>
-      `,
+    <p>WebForce began with a simple question from a friend who performs magic professionally. He asked whether there was an Android app that could do what existing iOS tools already did. There was not, so I decided to build one.</p>
+    <p>At first, it was just about solving one practical problem. But once performers started using it in live shows, the standard changed completely. It was no longer enough for the app to work in theory or in a controlled setting. It had to work at the exact moment someone needed it, in front of a real audience, without hesitation or failure.</p>
+    <p>That changed how I thought about building. Every piece of feedback mattered more because it came from real use, not abstract testing. I had to keep refining the app, fixing edge cases, and thinking more carefully about what trust actually means in a product. Over time, I realised that building something useful is not just about having an idea. It is about making something dependable enough that people feel comfortable relying on it.</p>
+    <p>Since then, WebForce has reached users across 10 countries, generated around SGD 1,700 in revenue, and begun growing through a UK distributor. Those milestones matter, but what matters more to me is that it began with a real gap, and became something genuinely useful to the people it was built for.</p>
+  `,
         evidence: [
-          { label: 'Live on Google Play', heading: 'Publicly verifiable product', text: 'Listed, active, and downloadable. This is a real product being used, not just a portfolio mock-up.', links: [{ href: 'https://play.google.com/store/apps/details?id=com.webforce.webforce', label: 'Google Play listing' }] },
-          { label: 'Coverage', heading: 'Third-party article', text: 'WebForce was covered independently by an external publication.', links: [{ href: 'https://thedailymagician.com/webforce', label: 'Independent press coverage' }] }
+          {
+            label: 'Live on Google Play',
+            heading: 'Publicly available product',
+            text: 'WebForce is live on Google Play and available to verify directly.',
+            links: [{ href: 'https://play.google.com/store/apps/details?id=com.webforce.webforce', label: 'Google Play listing' }]
+          },
+          {
+            label: 'Coverage',
+            heading: 'Independent article',
+            text: 'The product was also covered independently by an external publication.',
+            links: [{ href: 'https://thedailymagician.com/webforce', label: 'Read coverage' }]
+          }
         ]
       },
       eic: {
         tag: 'Engineering · National Competition',
         title: 'Engineers Innovation Challenge 2023',
-        subtitle: 'We didn\'t build a device. We tried to solve loneliness — with engineering.',
+        subtitle: 'EIC was the first time I felt, very clearly, that engineering could be used to respond to something deeply human.',
         coverImage: { src: 'assets/images/EIC_POSTER.jpg', alt: 'EIC project poster' },
         body: `
-        <p>The EIC prompt asked teams to address Singapore's ageing population. My team chose something specific: elderly people living alone, and the risk of cognitive decline that comes from prolonged social isolation.</p>
-        <p>My grandfather had suffered a spinal injury the year before. I had spent months watching how quickly isolation affects a person's sharpness and spirit. That made this problem personal, not academic.</p>
-        <p>We designed a table-mounted AI device that could hold conversations with elderly individuals, detect emotional cues through voice analysis, and respond in ways that were supportive and mentally engaging. The goal was not to replace human connection — it was to make sure that on the days when no one called, there was still something that noticed.</p>
-        <p>Working through the prototype forced me to confront a question I think about constantly: what is the difference between a technically functioning solution and one that a real person would actually trust and use? That question drove every iteration.</p>
-        <p>Being shortlisted in the national top 10 and invited to present at the World Engineers Summit mattered. But what I took away was quieter: even as a student, you can work on problems that genuinely need solving. The engineering doesn't have to wait.</p>
-      `,
+    <p>The EIC prompt focused on Singapore’s ageing population. My team chose to work on elderly loneliness, particularly the quiet form of isolation that can build up when someone is living alone for long periods of time.</p>
+    <p>This problem felt personal to me. The year before, my grandfather had suffered a spinal injury, and I had seen more closely how physical difficulty and isolation can slowly affect a person’s spirit. Because of that, this project never felt like just another competition brief. I cared about the problem long before we started building.</p>
+    <p>We designed a table-mounted AI device that could interact with elderly users, hold simple conversations, and respond in ways that felt supportive and engaging. The purpose was never to replace human connection. It was to offer some form of presence on the days when life felt especially quiet.</p>
+    <p>What stayed with me most from the project was not just the prototype itself, but the shift in how I saw engineering. For the first time, it stopped feeling abstract. It no longer felt like equations, systems, or technical ideas sitting on paper. It felt like a way of responding to a real human need with care, thought, and purpose.</p>
+    <p>Our team eventually placed in the national top 10 and was invited to present at the World Engineers Summit. I was grateful for the recognition, but what stayed with me more was the realisation that meaningful engineering begins with understanding people first.</p>
+  `,
         evidence: [
-          { label: 'National Recognition', heading: 'Top 10 Nationwide', text: 'Shortlisted from entries across Singapore and invited to present at the World Engineers Summit at Marina Bay Sands.', images: ['assets/images/EIC_NED_AWARD_PRESENTATION.jpg', 'assets/images/EIC_NED_GROUP_PHOTO.jpg'] },
-          { label: 'The Problem', heading: 'Why we chose elderly loneliness', text: 'We chose it because it felt real, urgent, and personally meaningful to me after what my grandfather had gone through.' }
+          {
+            label: 'National Recognition',
+            heading: 'Top 10 nationwide',
+            text: 'Our team was shortlisted nationally and invited to present the project at the World Engineers Summit at Marina Bay Sands.',
+            images: ['assets/images/EIC_NED_AWARD_PRESENTATION.jpg', 'assets/images/EIC_NED_GROUP_PHOTO.jpg']
+          },
+          {
+            label: 'The Problem',
+            heading: 'Why this project mattered to me',
+            text: 'We chose elderly loneliness because it was a real and urgent issue, and because my own experience with my grandfather made the problem feel close to home.'
+          }
         ]
       },
       ren: {
         tag: 'Leadership · Raffles Entrepreneurs Network',
         title: 'Raffles Entrepreneurs Network',
-        subtitle: 'This experience mattered less because of the title and more because it changed how I think about leadership.',
+        subtitle: 'This experience mattered to me because it changed how I think about leadership, teamwork, and what it really means to guide people well.',
         coverImage: { src: 'assets/images/REN_MemberOfTheYear.jpg', alt: 'REN Member of the Year recognition' },
         body: `
-        <p>I joined REN because entrepreneurship was the thing I was already doing — not because I wanted another line on a CV. What I didn't expect was that leading a school-wide event would teach me more about how teams actually work than anything else I had done.</p>
-        <p>EntreWeek was a week-long school event on sustainable entrepreneurship — speakers, vendors, student-run activities, and coordination across a team with very different ideas of how it should go. The timeline was tight. The brief was vague. The team kept looking to me to make every decision, because it was faster.</p>
-        <p>I pushed back. I split the team into groups that owned specific parts of the event — and made clear that their ownership meant their judgment, not mine. It slowed us down at first. It made the event far stronger.</p>
-        <p>We engaged 85% of the student population that week. The Member of the Year award came after. But the thing I remember is that every person on the team felt the event was theirs.</p>
-      `,
+    <p>I joined REN because I had always been drawn to entrepreneurship, ideas, and the process of building something meaningful with other people. Over time, it became one of the experiences that shaped me most, not just because of the projects I worked on, but because of what it taught me about leadership.</p>
+    <p>One of the most defining moments was EntreWeek, a school-wide event focused on sustainable entrepreneurship. It involved coordinating speakers, vendors, logistics, and a team of people with different working styles, all within a short timeline. At the start, it would have been much easier for me to make the decisions myself and simply assign tasks.</p>
+    <p>But I realised that would only make the team dependent on me. Instead, I split the team into smaller groups, gave them ownership over different parts of the event, and let them make real decisions within their areas. It felt slower at first, and there were moments of uncertainty, but gradually the team became more invested, more proactive, and more confident in their work.</p>
+    <p>The event eventually reached about 85% of the school population, and I was later awarded Member of the Year. I was grateful for the recognition, but the deeper takeaway for me was the lesson itself. Leadership is not about trying to hold everything together by yourself. It is about creating the conditions for other people to step up, contribute fully, and feel that the work belongs to them too.</p>
+  `,
         evidence: [
-          { label: 'Member of the Year', heading: 'One award, one recipient annually', text: 'The citation recognised consistent effort, genuine ownership, and a willingness to contribute beyond what was required.', images: ['assets/images/REN_MemberOfTheYear.jpg'] },
-          { label: 'EntreWeek', heading: '85% school engagement', text: 'A school-wide entrepreneurship event — managed from brief to execution, with a team operating autonomously rather than waiting for direction.' }
+          {
+            label: 'Member of the Year',
+            heading: 'Recognition for contribution and initiative',
+            text: 'The award recognised sustained effort, willingness to contribute beyond what was expected, and a genuine sense of ownership within the CCA.',
+            images: ['assets/images/REN_MemberOfTheYear.jpg']
+          },
+          {
+            label: 'EntreWeek',
+            heading: 'A school-wide event built through team ownership',
+            text: 'EntreWeek engaged around 85% of the school population and became one of the clearest examples, for me, of how trust and shared responsibility can strengthen a team.'
+          }
         ]
       },
       teaching: {
         tag: 'Teaching · Mentoring',
         title: 'Teaching, mentoring, giving back',
-        subtitle: 'Teaching reminded me that helping someone understand something is one of the most meaningful kinds of work.',
+        subtitle: 'Teaching reminded me that helping someone understand something can be one of the most meaningful forms of contribution.',
         coverImage: { src: 'assets/images/SKEYN_Volunteering_GEMINI.jpg', alt: 'Teaching and volunteering' },
         body: `
-        <p>I started a YouTube channel for PSLE Maths and Science because it bothered me that good tutoring was often least available to the students who needed it most.</p>
-        <p>The channel was never huge, but one comment from a student saying that an explanation finally made circles make sense for them stayed with me for a long time. Moments like that feel small from the outside, but they are very real.</p>
-        <p>I also mentored Primary 6 students through my alma mater and community centres. Teaching forced me to slow down, listen properly, and explain the same idea in different ways until it finally clicked. It made me much more patient and much more careful with communication.</p>
-        <p>Later, I ran coding bootcamps for younger students through REN. Across all of it, the motivation stayed the same: make useful help more accessible.</p>
-      `,
+    <p>I started teaching because I had seen how uneven access to good academic support could be. Some students simply needed someone patient enough to explain things clearly and stay with them until it finally made sense.</p>
+    <p>That led me to start a YouTube channel for PSLE Maths and Science, and later to mentor younger students through my alma mater and community settings. None of it felt glamorous. Most of the time, it was just a matter of slowing down, finding a different way to explain something, and trying again until it clicked.</p>
+    <p>What stayed with me most was how personal learning can be. Two students can struggle with the same topic for completely different reasons. Teaching forced me to listen more carefully, communicate more thoughtfully, and be much more patient than I used to be. It made me realise that helping someone grow is not about giving them answers quickly, but about giving them the confidence to understand things for themselves.</p>
+    <p>Later, I also helped run coding bootcamps for younger students through REN. Across all of these experiences, the motivation stayed the same. I wanted to make useful help more accessible, and in the process, I found that teaching was shaping me just as much as I was trying to help shape others.</p>
+  `,
         evidence: [
-          { label: 'Educational YouTube', heading: 'PSLE Maths & Science', text: 'Free, publicly accessible content for students who couldn\'t access private tutoring. Small in scale, real in intent.', links: [{ href: 'https://www.youtube.com/@garvbatra3103', label: 'Visit channel' }] },
-          { label: 'Mentoring', heading: 'Community and school mentoring', text: 'Mentoring for Primary 6 students through school and community settings, along with coding bootcamps for younger students through REN.', images:['assets/images/SKEYN_Volunteering.jpg'] }
-          
+          {
+            label: 'Educational YouTube',
+            heading: 'PSLE Maths & Science',
+            text: 'Free, publicly accessible teaching content for students who may not have had the same access to extra academic support.',
+            links: [{ href: 'https://www.youtube.com/@garvbatra3103', label: 'Visit channel' }]
+          },
+          {
+            label: 'Mentoring',
+            heading: 'Community and school-based teaching',
+            text: 'Mentoring for Primary 6 students through school and community settings, along with coding bootcamps for younger students through REN.',
+            images: ['assets/images/SKEYN_Volunteering.jpg']
+          }
         ]
       }
     };
