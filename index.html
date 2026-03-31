@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Garv Batra — Portfolio</title>
-  <meta name="description" content="Portfolio of Garv Batra — Pilot, Builder, Engineer." />
+  <title>Garv Batra - Portfolio</title>
+  <meta name="description" content="Portfolio of Garv Batra - Pilot, Builder, Engineer." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -45,6 +45,49 @@
       line-height: 1.7;
       overflow-x: hidden;
       cursor: none;
+    }
+
+    html,
+    body,
+    .modal {
+      scrollbar-gutter: stable;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(212, 168, 67, 0.38) rgba(255, 255, 255, 0.035);
+    }
+
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar,
+    .modal::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    html::-webkit-scrollbar-track,
+    body::-webkit-scrollbar-track,
+    .modal::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 999px;
+    }
+
+    html::-webkit-scrollbar-thumb,
+    body::-webkit-scrollbar-thumb,
+    .modal::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, rgba(212, 168, 67, 0.46), rgba(74, 158, 255, 0.24));
+      border-radius: 999px;
+      border: 2px solid rgba(6, 8, 13, 0.8);
+      min-height: 44px;
+    }
+
+    html::-webkit-scrollbar-thumb:hover,
+    body::-webkit-scrollbar-thumb:hover,
+    .modal::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, rgba(212, 168, 67, 0.62), rgba(74, 158, 255, 0.34));
+    }
+
+    html::-webkit-scrollbar-corner,
+    body::-webkit-scrollbar-corner,
+    .modal::-webkit-scrollbar-corner {
+      background: transparent;
     }
 
     /* ── CUSTOM CURSOR ── */
@@ -311,7 +354,7 @@
     }
 
     /* ══════════════════════════════════════
-       HERO — CINEMATIC OPENING
+       HERO - CINEMATIC OPENING
     ══════════════════════════════════════ */
     #hero {
       min-height: 100vh;
@@ -364,7 +407,7 @@
       position: relative;
       display: flex;
       flex-direction: column;
-      align-items: stretch;
+      align-items: center;
       justify-content: flex-start;
       gap: 24px;
       min-height: 520px;
@@ -377,18 +420,21 @@
       display: flex;
       justify-content: center;
       width: 100%;
+      overflow: visible;
     }
 
     .aircraft-panel {
       position: relative;
-      width: min(100%, 560px);
-      aspect-ratio: 1 / 1;
+      width: min(162%, 1180px);
+      max-width: 1180px;
+      aspect-ratio: 1.62 / 1;
       border-radius: 28px;
       border: none;
       background: transparent;
       box-shadow: none;
       overflow: visible;
       cursor: grab;
+      transform: translateX(18px) translateY(-2px);
     }
 
     .aircraft-panel:active {
@@ -432,7 +478,7 @@
     .hero-headline .line-2 {
       display: block;
       color: transparent;
-      -webkit-text-stroke: 1px rgba(240, 244, 255, 0.35);
+      -webkit-text-stroke: 2px rgba(240, 244, 255, 0.65);
     }
 
     .hero-headline .line-3 {
@@ -447,6 +493,7 @@
       line-height: 1.72;
       opacity: 0;
       animation: fadeUp 1s 0.75s forwards;
+      text-align: justify;
     }
 
     .hero-sub strong {
@@ -500,44 +547,218 @@
       border-color: rgba(255, 255, 255, 0.3);
     }
 
-    .hero-stats-row {
-      margin-top: 0;
+    .hero-stats-wrap {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      margin-top: 36px;
+      margin-bottom: 56px;
       display: flex;
+      justify-content: center;
+      padding: 0 24px;
+    }
+
+    .hero-stats-row {
+      width: min(980px, 100%);
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 24px;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      border-top: 1px solid var(--line);
-      padding-top: 24px;
+      background: linear-gradient(180deg, rgba(18, 23, 34, 0.92), rgba(11, 15, 24, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 28px;
+      padding: 28px 32px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
       opacity: 0;
       animation: fadeUp 1s 1.2s forwards;
     }
 
-    .hero-visual .hero-stats-row {
-      width: min(100%, 560px);
-      align-self: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.03);
-      padding: 20px 22px 0;
-      border-radius: 22px 22px 0 0;
-    }
-
     .hero-stat {
-      min-width: 110px;
+      min-width: 0;
     }
 
     .hero-stat span {
       display: block;
       font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 2rem;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 3vw, 3.3rem);
       letter-spacing: -0.03em;
       color: var(--ink);
+      line-height: 0.95;
     }
 
     .hero-stat p {
-      font-size: 0.8rem;
+      font-size: 1rem;
+      color: #aeb8cb;
+      margin-top: 10px;
+      line-height: 1.45;
+    }
+
+    .accolade-strip-section {
+      position: relative;
+      z-index: 1;
+      padding: 10px 0 36px;
+      overflow: hidden;
+    }
+
+    .accolade-strip-head {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto 22px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .accolade-strip-kicker {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .accolade-strip-note {
+      font-size: 0.9rem;
       color: var(--muted);
-      margin-top: 2px;
+    }
+
+    .accolade-marquee {
+      position: relative;
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      mask-image: linear-gradient(90deg, transparent 0, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, black 8%, black 92%, transparent 100%);
+      cursor: grab;
+      scrollbar-width: none;
+    }
+
+    .accolade-marquee::-webkit-scrollbar {
+      display: none;
+    }
+
+    .accolade-marquee.is-dragging {
+      cursor: grabbing;
+    }
+
+    .accolade-track {
+      display: flex;
+      gap: 18px;
+      width: max-content;
+      padding: 8px 24px;
+    }
+
+    .accolade-card {
+      width: 270px;
+      flex: 0 0 270px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(16, 20, 30, 0.94), rgba(11, 14, 22, 0.98));
+      padding: 14px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
+    }
+
+    .accolade-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212, 168, 67, 0.26);
+      box-shadow: 0 24px 56px rgba(0, 0, 0, 0.34);
+    }
+
+    .accolade-media {
+      position: relative;
+      height: 158px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 14px;
+    }
+
+    .accolade-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .accolade-card.is-pdf .accolade-media {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 18px;
+      background:
+        linear-gradient(135deg, rgba(212, 168, 67, 0.14), rgba(74, 158, 255, 0.08)),
+        rgba(255, 255, 255, 0.025);
+    }
+
+    .accolade-filetype {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 54px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 168, 67, 0.24);
+      background: rgba(212, 168, 67, 0.08);
+      color: var(--gold);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .accolade-doc-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--ink);
+      max-width: 180px;
+    }
+
+    .accolade-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .accolade-kind {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .accolade-arrow {
+      color: rgba(240, 244, 255, 0.5);
+      font-size: 0;
+    }
+
+    .accolade-arrow::before {
+      content: '\2197';
+      font-size: 0.95rem;
+    }
+
+    .accolade-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.02rem;
+      line-height: 1.18;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+
+    .accolade-card p {
+      color: #aab3c5;
+      font-size: 0.9rem;
+      line-height: 1.45;
     }
 
     .scroll-hint {
@@ -621,15 +842,31 @@
     }
 
     /* ══════════════════════════════════════
-       TIMELINE — JOURNEY
+       TIMELINE - JOURNEY
     ══════════════════════════════════════ */
     #journey {
       padding: 140px 0;
     }
 
     .journey-header {
-      max-width: 660px;
-      margin-bottom: 80px;
+      max-width: 760px;
+      margin: 0 auto 80px;
+      text-align: center;
+    }
+
+    .journey-header .chapter-divider {
+      width: fit-content;
+      margin: 0 auto 24px;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .journey-header .chapter-divider::before,
+    .journey-header .chapter-line {
+      content: '';
+      width: 160px;
+      height: 1px;
+      background: var(--line);
     }
 
     .section-title {
@@ -645,20 +882,21 @@
       color: var(--muted);
       font-size: 1.08rem;
       max-width: 580px;
+      margin: 0 auto;
     }
 
     .timeline {
       position: relative;
-      --timeline-axis: 8px;
-      --timeline-indent: 48px;
       --timeline-dot-size: 16px;
-      padding-left: var(--timeline-indent);
+      max-width: 1120px;
+      margin: 0 auto;
     }
 
     .timeline::before {
       content: '';
       position: absolute;
-      left: var(--timeline-axis);
+      left: 50%;
+      transform: translateX(-50%);
       top: 12px;
       bottom: 12px;
       width: 1px;
@@ -667,16 +905,22 @@
 
     .timeline-item {
       position: relative;
-      padding: 0 0 64px 40px;
+      width: 50%;
+      padding: 0 56px 64px 0;
     }
 
     .timeline-item:last-child {
       padding-bottom: 0;
     }
 
+    .timeline-item:nth-child(even) {
+      margin-left: auto;
+      padding: 0 0 64px 56px;
+    }
+
     .timeline-dot {
       position: absolute;
-      left: calc(var(--timeline-axis) - var(--timeline-indent) - (var(--timeline-dot-size) / 2));
+      right: calc(var(--timeline-dot-size) / -2);
       top: 6px;
       width: var(--timeline-dot-size);
       height: var(--timeline-dot-size);
@@ -691,6 +935,11 @@
       box-shadow: 0 0 20px rgba(212, 168, 67, 0.5);
     }
 
+    .timeline-item:nth-child(even) .timeline-dot {
+      left: calc(var(--timeline-dot-size) / -2);
+      right: auto;
+    }
+
     .timeline-year {
       font-family: 'DM Mono', monospace;
       font-size: 0.72rem;
@@ -700,21 +949,36 @@
       margin-bottom: 8px;
     }
 
+    .timeline-item:nth-child(odd) .timeline-year,
+    .timeline-item:nth-child(odd) .timeline-title,
+    .timeline-item:nth-child(odd) .timeline-body {
+      text-align: right;
+      margin-left: auto;
+    }
+
+    .timeline-item:nth-child(even) .timeline-year,
+    .timeline-item:nth-child(even) .timeline-title,
+    .timeline-item:nth-child(even) .timeline-body {
+      text-align: left;
+    }
+
     .timeline-title {
       font-family: 'Syne', sans-serif;
       font-weight: 700;
       font-size: 1.25rem;
       margin-bottom: 10px;
       color: var(--ink);
+      text-align: justify;
     }
 
     .timeline-body {
       color: var(--muted);
       max-width: 560px;
+      text-align: justify;
     }
 
     /* ══════════════════════════════════════
-       EXPERIENCES — THE CORE
+       EXPERIENCES - THE CORE
     ══════════════════════════════════════ */
     #experiences {
       padding: 140px 0;
@@ -722,7 +986,30 @@
     }
 
     .exp-header {
-      margin-bottom: 80px;
+      max-width: 760px;
+      margin: 0 auto 80px;
+      text-align: center;
+    }
+
+    .exp-header .chapter-divider {
+      width: fit-content;
+      margin: 0 auto 24px;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .exp-header .chapter-divider::before,
+    .exp-header .chapter-line {
+      content: '';
+      width: 160px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .exp-header .section-lead {
+      margin-bottom: 0;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .exp-cards {
@@ -868,7 +1155,7 @@
     }
 
     /* ══════════════════════════════════════
-       PROOF — THE EVIDENCE
+       PROOF - THE EVIDENCE
     ══════════════════════════════════════ */
     #proof {
       display: none;
@@ -981,7 +1268,7 @@
     }
 
     /* ══════════════════════════════════════
-       WHY REP — TARGETED
+       WHY REP - TARGETED
     ══════════════════════════════════════ */
     #why-rep {
       padding: 140px 0;
@@ -1021,11 +1308,17 @@
       margin-bottom: 10px;
     }
 
+    .rep-point-num b {
+      font-weight: 500;
+    }
+
     .rep-point h4 {
       font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 0.96rem;
+      line-height: 1.35;
+      color: #dbe3f3;
+      margin-bottom: 10px;
     }
 
     .rep-point p {
@@ -1040,10 +1333,12 @@
 
     .big-quote {
       font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
-      line-height: 1.2;
+      font-weight: 700;
+      font-size: clamp(1.34rem, 2.15vw, 1.9rem);
+      line-height: 1.28;
       letter-spacing: -0.02em;
+      color: #d9e2f2;
+      max-width: 16ch;
       margin-bottom: 32px;
     }
 
@@ -1086,13 +1381,14 @@
 
     .bring-item strong {
       display: block;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
+      font-weight: 600;
       color: var(--ink);
       margin-bottom: 3px;
     }
 
     /* ══════════════════════════════════════
-       PERSON — THE FINAL WORD
+       PERSON - THE FINAL WORD
     ══════════════════════════════════════ */
     #person {
       padding: 140px 0;
@@ -1100,144 +1396,144 @@
     }
 
     /* CONTACT / FOOTER */
-#contact {
-  padding: 140px 0 70px;
-  border-top: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(7, 9, 14, 0.65), rgba(4, 6, 10, 1));
-}
+    #contact {
+      padding: 140px 0 70px;
+      border-top: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(7, 9, 14, 0.65), rgba(4, 6, 10, 1));
+    }
 
-.contact-panel {
-  margin-top: 34px;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 40px;
-  padding: 34px;
-  border-radius: 28px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.03);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
-}
+    .contact-panel {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      padding: 34px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
+    }
 
-.contact-left .section-title {
-  margin-bottom: 18px;
-}
+    .contact-left .section-title {
+      margin-bottom: 18px;
+    }
 
-.contact-left .section-lead {
-  max-width: 520px;
-  margin-bottom: 28px;
-}
+    .contact-left .section-lead {
+      max-width: 520px;
+      margin-bottom: 28px;
+    }
 
-.contact-details {
-  display: grid;
-  gap: 18px;
-}
+    .contact-details {
+      display: grid;
+      gap: 18px;
+    }
 
-.contact-row {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+    .contact-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
 
-.contact-kicker {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
+    .contact-kicker {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
 
-.contact-row a {
-  color: var(--ink);
-  text-decoration: none;
-  font-size: 1rem;
-  word-break: break-word;
-}
+    .contact-row a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 1rem;
+      word-break: break-word;
+    }
 
-.contact-row a:hover {
-  color: var(--gold);
-}
+    .contact-row a:hover {
+      color: var(--gold);
+    }
 
-.contact-right {
-  display: grid;
-  gap: 14px;
-  align-content: start;
-}
+    .contact-right {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
 
-.social-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px 18px;
-  border-radius: 16px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.025);
-  text-decoration: none;
-  color: var(--muted);
-  transition: transform 0.22s, border-color 0.22s, color 0.22s, background 0.22s;
-}
+    .social-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.025);
+      text-decoration: none;
+      color: var(--muted);
+      transition: transform 0.22s, border-color 0.22s, color 0.22s, background 0.22s;
+    }
 
-.social-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(212, 168, 67, 0.26);
-  background: rgba(255, 255, 255, 0.045);
-  color: var(--ink);
-}
+    .social-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(212, 168, 67, 0.26);
+      background: rgba(255, 255, 255, 0.045);
+      color: var(--ink);
+    }
 
-.social-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(212, 168, 67, 0.08);
-  color: var(--gold);
-  flex-shrink: 0;
-}
+    .social-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(212, 168, 67, 0.08);
+      color: var(--gold);
+      flex-shrink: 0;
+    }
 
-.social-text {
-  font-size: 0.98rem;
-  color: inherit;
-}
+    .social-text {
+      font-size: 0.98rem;
+      color: inherit;
+    }
 
-.contact-footer-strip {
-  margin-top: 30px;
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 14px;
-}
+    .contact-footer-strip {
+      margin-top: 30px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
 
-.contact-footer-strip .footer-brand {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 1rem;
-  color: var(--ink);
-}
+    .contact-footer-strip .footer-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--ink);
+    }
 
-.contact-footer-strip .footer-note {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
+    .contact-footer-strip .footer-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
 
-@media (max-width: 900px) {
-  .contact-panel {
-    grid-template-columns: 1fr;
-    gap: 28px;
-    padding: 24px;
-  }
+    @media (max-width: 900px) {
+      .contact-panel {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 24px;
+      }
 
-  .contact-footer-strip {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
+      .contact-footer-strip {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
 
     .person-layout {
       display: grid;
@@ -1354,7 +1650,7 @@
       color: var(--ink);
     }
 
-    
+
 
     /* ══════════════════════════════════════
        MODAL
@@ -1508,6 +1804,56 @@
       font-size: 0.9rem;
     }
 
+    .ev-media-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: minmax(170px, auto);
+    }
+
+    .ev-media-grid.count-1 {
+      grid-template-columns: 1fr;
+    }
+
+    .ev-media-grid.count-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ev-media-grid.count-3 .ev-media-item:first-child {
+      grid-row: span 2;
+    }
+
+    .ev-media-grid.count-5,
+    .ev-media-grid.count-6 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .ev-media-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 170px;
+      padding: 8px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02)),
+        rgba(9, 12, 18, 0.92);
+      overflow: hidden;
+    }
+
+    .ev-media-item img {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: none;
+      object-fit: contain;
+      display: block;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
     .ev-links {
       margin-top: 12px;
       display: flex;
@@ -1604,17 +1950,41 @@
         display: inline-flex;
       }
 
-      .hero-stats-row {
-        gap: 28px;
-      }
-
       .hero-visual {
         min-height: 420px;
         padding-top: 8px;
+        align-items: center;
+      }
+
+      .hero-stats-wrap {
+        margin-top: 28px;
+        margin-bottom: 40px;
+        padding: 0 24px;
+      }
+
+      .hero-stats-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px 18px;
+        padding: 24px;
+      }
+
+      .accolade-strip-head {
+        width: calc(100% - 48px);
+        margin-bottom: 18px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .accolade-card {
+        width: 236px;
+        flex-basis: 236px;
       }
 
       .aircraft-panel {
+        width: min(100%, 460px);
         max-width: 460px;
+        aspect-ratio: 1 / 1;
+        transform: none;
       }
 
       .exp-cards {
@@ -1650,9 +2020,55 @@
         max-width: 360px;
       }
 
+      .journey-header {
+        text-align: left;
+        margin: 0 0 64px;
+      }
+
+      .journey-header .chapter-divider {
+        width: auto;
+        margin: 0 0 24px;
+        justify-content: flex-start;
+        gap: 12px;
+      }
+
+      .journey-header .chapter-divider::before {
+        display: none;
+      }
+
+      .journey-header .chapter-line {
+        width: auto;
+        flex: 1;
+      }
+
       .timeline {
-        --timeline-indent: 32px;
-        padding-left: var(--timeline-indent);
+        padding-left: 32px;
+        max-width: none;
+      }
+
+      .timeline::before {
+        left: 8px;
+        transform: none;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(even) {
+        width: 100%;
+        margin-left: 0;
+        padding: 0 0 56px 40px;
+      }
+
+      .timeline-dot,
+      .timeline-item:nth-child(even) .timeline-dot {
+        left: calc(-32px - (var(--timeline-dot-size) / 2) + 8px);
+        right: auto;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-year,
+      .timeline-item:nth-child(odd) .timeline-title,
+      .timeline-item:nth-child(odd) .timeline-body {
+        text-align: left;
+        margin-left: 0;
       }
     }
 
@@ -1676,6 +2092,60 @@
       .aircraft-panel {
         aspect-ratio: 1.05 / 1;
         border-radius: 22px;
+        width: 100%;
+        max-width: none;
+      }
+
+      .hero-stats-wrap {
+        padding: 0 20px;
+      }
+
+      .hero-stats-row {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 22px 20px;
+      }
+
+      .hero-stat span {
+        font-size: 2.3rem;
+      }
+
+      .hero-stat p {
+        font-size: 0.95rem;
+      }
+
+      .accolade-strip-section {
+        padding: 4px 0 28px;
+      }
+
+      .accolade-strip-head {
+        width: calc(100% - 40px);
+      }
+
+      .accolade-track {
+        gap: 14px;
+        padding: 6px 20px;
+      }
+
+      .accolade-card {
+        width: 212px;
+        flex-basis: 212px;
+        padding: 12px;
+      }
+
+      .accolade-media {
+        height: 136px;
+      }
+
+      .ev-media-grid,
+      .ev-media-grid.count-2,
+      .ev-media-grid.count-5,
+      .ev-media-grid.count-6 {
+        grid-template-columns: 1fr;
+      }
+
+      .ev-media-grid.count-3 .ev-media-item:first-child {
+        grid-row: span 1;
       }
 
     }
@@ -1729,9 +2199,12 @@
         </h1>
         <p class="hero-sub">
           <strong>
-            I have always believed that growth begins when I step beyond what feels comfortable. That mindset has pushed me to take
-            on demanding experiences that challenged me to mature, adapt, and think beyond myself. Along the way, I have come to
-            value not just personal growth, but also the responsibility to serve, contribute, and use what I learn to make a
+            I have always believed that growth begins when I step beyond what feels comfortable. That mindset has pushed
+            me to take
+            on demanding experiences that challenged me to mature, adapt, and think beyond myself. Along the way, I have
+            come to
+            value not just personal growth, but also the responsibility to serve, contribute, and use what I learn to
+            make a
             meaningful difference to the people around me.
           </strong>
         </p>
@@ -1746,26 +2219,216 @@
             <div class="aircraft-stage" id="aircraftStage"></div>
           </div>
         </div>
-        <div class="hero-stats-row">
-          <div class="hero-stat">
-            <span id="stat-hours">0+</span>
-            <p>Flight hours, SYFC</p>
-          </div>
-          <div class="hero-stat">
-            <span id="stat-countries">0+</span>
-            <p>Countries, WebForce</p>
-          </div>
-          <div class="hero-stat">
-            <span>Top 10</span>
-            <p>Nationwide, EIC 2023</p>
-          </div>
-          <div class="hero-stat">
-            <span id="stat-rev">SGD 1700</span>
-            <p>Revenue, built in NS</p>
-          </div>
+      </div>
+    </div>
+    <div class="hero-stats-wrap">
+      <div class="hero-stats-row">
+        <div class="hero-stat">
+          <span id="stat-hours">0+</span>
+          <p>Flight hours, SYFC</p>
+        </div>
+        <div class="hero-stat">
+          <span id="stat-countries">0+</span>
+          <p>Countries, WebForce</p>
+        </div>
+        <div class="hero-stat">
+          <span>Top 10</span>
+          <p>Nationwide, EIC 2023</p>
+        </div>
+        <div class="hero-stat">
+          <span id="stat-rev">SGD 1700</span>
+          <p>Revenue, built in NS</p>
         </div>
       </div>
     </div>
+    <section class="accolade-strip-section" aria-label="Certificates and accolades">
+      <div class="accolade-strip-head reveal">
+        <div class="accolade-strip-kicker">Certificates / Accolades</div>
+        <div class="accolade-strip-note">A moving strip of proof points before the deeper story begins.</div>
+      </div>
+      <div class="accolade-marquee reveal">
+        <div class="accolade-track">
+          <a class="accolade-card" href="assets/images/SYFC_PPL.jpg" target="_blank" rel="noopener">
+            <div class="accolade-media">
+              <img src="assets/images/SYFC_PPL.jpg" alt="Singapore Youth Flying Club training photograph">
+            </div>
+            <div class="accolade-meta">
+              <span class="accolade-kind">Aviation</span>
+              <span class="accolade-arrow">↗</span>
+            </div>
+            <h3>Singapore Youth Flying Club</h3>
+            <p>A visual record from the flight training journey that led to my Private Pilot Licence.</p>
+          </a>
+
+          <a class="accolade-card" href="assets/images/eic_award.jpg" target="_blank" rel="noopener">
+            <div class="accolade-media">
+              <img src="assets/images/eic_award.jpg" alt="Engineering Innovation Challenge award certificate">
+            </div>
+            <div class="accolade-meta">
+              <span class="accolade-kind">Award</span>
+              <span class="accolade-arrow">↗</span>
+            </div>
+            <h3>Engineering Innovation Challenge award</h3>
+            <p>The certificate image from our Top 10 nationwide finish at EIC 2023.</p>
+          </a>
+
+
+          <a class="accolade-card" href="assets/images/REN_MemberOfTheYear.jpg" target="_blank" rel="noopener">
+            <div class="accolade-media">
+              <img src="assets/images/REN_MemberOfTheYear.jpg" alt="REN Member of the Year recognition image">
+            </div>
+            <div class="accolade-meta">
+              <span class="accolade-kind">Leadership</span>
+              <span class="accolade-arrow">↗</span>
+            </div>
+            <h3>Member Of The Year</h3>
+            <p>The image version of the recognition that marked a meaningful leadership milestone.</p>
+          </a>
+
+
+
+          <a class="accolade-card" href="assets/images/SYFC_MENTORING.JPG" target="_blank" rel="noopener">
+            <div class="accolade-media">
+              <img src="assets/images/SYFC_MENTORING.JPG" alt="Mentoring cadets at Singapore Youth Flying Club">
+            </div>
+            <div class="accolade-meta">
+              <span class="accolade-kind">Giving Back</span>
+              <span class="accolade-arrow">↗</span>
+            </div>
+            <h3>Mentoring aspiring cadets</h3>
+            <p>A proof image from returning to support newer cadets after completing the journey myself.</p>
+          </a>
+
+          <a class="accolade-card" href="assets/images/SKEYN_Volunteering.jpg" target="_blank" rel="noopener">
+            <div class="accolade-media">
+              <img src="assets/images/SKEYN_Volunteering.jpg" alt="Volunteering at SKEYN">
+            </div>
+            <div class="accolade-meta">
+              <span class="accolade-kind">Volunteering</span>
+              <span class="accolade-arrow">â†—</span>
+            </div>
+            <h3>Volunteering recognition</h3>
+            <p>A certificate-style record of contribution through volunteering, service, and student support.</p>
+          </a>
+
+          <a class="accolade-card" href="https://www.youtube.com/@garvbatra3103" target="_blank" rel="noopener">
+            <div class="accolade-media">
+              <img src="assets/images/YouTube_Logo.jpg" alt="YouTube channel screenshot">
+            </div>
+            <div class="accolade-meta">
+              <span class="accolade-kind">YouTube</span>
+              <span class="accolade-arrow">â†—</span>
+            </div>
+            <h3>Educational YouTube channel</h3>
+            <p>A channel built to teach PSLE Maths and Science in a simpler, more accessible way.</p>
+          </a>
+
+          <a class="accolade-card" href="assets/images/WebForcePro.jpg" target="_blank" rel="noopener">
+            <div class="accolade-media">
+              <img src="assets/images/WebForcePro.jpg" alt="WebForce development image">
+            </div>
+            <div class="accolade-meta">
+              <span class="accolade-kind">Development</span>
+              <span class="accolade-arrow">â†—</span>
+            </div>
+            <h3>WebForce development</h3>
+            <p>A build-stage visual from the product development journey behind WebForce.</p>
+          </a>
+
+          <a class="accolade-card" href="assets/images/SYFC_PPL.jpg" target="_blank" rel="noopener">
+            <div class="accolade-media">
+              <img src="assets/images/SYFC_PPL.jpg" alt="Singapore Youth Flying Club training photograph">
+            </div>
+            <div class="accolade-meta">
+              <span class="accolade-kind">Aviation</span>
+              <span class="accolade-arrow">↗</span>
+            </div>
+            <h3>Singapore Youth Flying Club</h3>
+            <p>A visual record from the flight training journey that led to my Private Pilot Licence.</p>
+          </a>
+
+          <a class="accolade-card" href="assets/images/eic_award.jpg" target="_blank" rel="noopener">
+            <div class="accolade-media">
+              <img src="assets/images/eic_award.jpg" alt="Engineering Innovation Challenge award certificate">
+            </div>
+            <div class="accolade-meta">
+              <span class="accolade-kind">Award</span>
+              <span class="accolade-arrow">↗</span>
+            </div>
+            <h3>Engineering Innovation Challenge award</h3>
+            <p>The certificate image from our Top 10 nationwide finish at EIC 2023.</p>
+          </a>
+
+
+          <a class="accolade-card" href="assets/images/REN_MemberOfTheYear.jpg" target="_blank" rel="noopener">
+            <div class="accolade-media">
+              <img src="assets/images/REN_MemberOfTheYear.jpg" alt="REN Member of the Year recognition image">
+            </div>
+            <div class="accolade-meta">
+              <span class="accolade-kind">Leadership</span>
+              <span class="accolade-arrow">↗</span>
+            </div>
+            <h3>Member Of The Year</h3>
+            <p>The image version of the recognition that marked a meaningful leadership milestone.</p>
+          </a>
+
+
+
+          <a class="accolade-card" href="assets/images/SYFC_MENTORING.JPG" target="_blank" rel="noopener">
+            <div class="accolade-media">
+              <img src="assets/images/SYFC_MENTORING.JPG" alt="Mentoring cadets at Singapore Youth Flying Club">
+            </div>
+            <div class="accolade-meta">
+              <span class="accolade-kind">Giving Back</span>
+              <span class="accolade-arrow">↗</span>
+            </div>
+            <h3>Mentoring aspiring cadets</h3>
+            <p>A proof image from returning to support newer cadets after completing the journey myself.</p>
+          </a>
+
+          <a class="accolade-card" href="assets/images/SKEYN_Volunteering.jpg" target="_blank" rel="noopener">
+            <div class="accolade-media">
+              <img src="assets/images/SKEYN_Volunteering.jpg" alt="Volunteering at SKEYN">
+            </div>
+            <div class="accolade-meta">
+              <span class="accolade-kind">Volunteering</span>
+              <span class="accolade-arrow">â†—</span>
+            </div>
+            <h3>Volunteering recognition</h3>
+            <p>A certificate-style record of contribution through volunteering, service, and student support.</p>
+          </a>
+
+          <a class="accolade-card" href="https://www.youtube.com/@garvbatra3103" target="_blank" rel="noopener">
+            <div class="accolade-media">
+              <img src="assets/images/YouTube_Logo.jpg" alt="YouTube channel screenshot">
+            </div>
+            <div class="accolade-meta">
+              <span class="accolade-kind">YouTube</span>
+              <span class="accolade-arrow">â†—</span>
+            </div>
+            <h3>Educational YouTube channel</h3>
+            <p>A channel built to teach PSLE Maths and Science in a simpler, more accessible way.</p>
+          </a>
+
+          <a class="accolade-card" href="assets/images/WebForcePro.jpg" target="_blank" rel="noopener">
+            <div class="accolade-media">
+              <img src="assets/images/WebForcePro.jpg" alt="WebForce development image">
+            </div>
+            <div class="accolade-meta">
+              <span class="accolade-kind">Development</span>
+              <span class="accolade-arrow">â†—</span>
+            </div>
+            <h3>WebForce development</h3>
+            <p>A build-stage visual from the product development journey behind WebForce.</p>
+          </a>
+
+
+
+
+
+        </div>
+      </div>
+    </section>
     <!-- <div class="scroll-hint">
       <div class="scroll-mouse"></div>
       <p>Scroll</p>
@@ -1782,12 +2445,12 @@
           <span class="chapter-num">01 / Journey</span>
           <div class="chapter-line"></div>
         </div>
-        <h2 class="section-title reveal">The pattern in my journey is growth through discomfort.</h2>
+        <h2 class="section-title reveal">Metamorphosis</h2>
         <p class="section-lead reveal">I have often grown the most when I chose not to stay where things felt easy.
           Looking back, each phase of my journey
-          shaped me in a different way — through service, leadership, engineering, and challenge.</p>
+          shaped me in a different way - through service, leadership, engineering, and challenge.</p>
       </div>
-  
+
       <div class="timeline">
         <div class="timeline-item reveal stagger-1">
           <div class="timeline-dot"></div>
@@ -1802,7 +2465,8 @@
           <div class="timeline-dot"></div>
           <div class="timeline-year"><b>JC1 – JC2</b> • My growth</div>
           <h3 class="timeline-title">I started stepping out of my comfort zone more deliberately.</h3>
-          <p class="timeline-body">Balancing academics with cricket, entrepreneurship, volunteering, and flying stretched
+          <p class="timeline-body">Balancing academics with cricket, entrepreneurship, volunteering, and flying
+            stretched
             me in every direction, but it also made me more disciplined, resilient, and intentional about how I used my
             time.</p>
         </div>
@@ -1811,27 +2475,32 @@
           <div class="timeline-year"><b>2023</b> • Engineering Innovation Challenge</div>
           <h3 class="timeline-title">EIC was when engineering stopped feeling abstract to me.</h3>
           <p class="timeline-body">After seeing my grandfather struggle following a spinal injury, working on elderly
-            loneliness made engineering feel personal. It was the first time I saw how technical ideas could respond to a
+            loneliness made engineering feel personal. It was the first time I saw how technical ideas could respond to
+            a
             deeply human problem.</p>
         </div>
         <div class="timeline-item reveal stagger-7">
           <div class="timeline-dot"></div>
           <div class="timeline-year"><b>2023-2024</b> • Singapore Youth Flying Club</div>
-          <h3 class="timeline-title">Flight training taught me composure, discipline, and responsibility in a way nothing else had before.</h3>
-          <p class="timeline-body">SYFC demanded precision, consistency, and calm under pressure. Over time, it changed how I approach uncertainty,
-          setbacks, and high-stakes decisions.</p>
+          <h3 class="timeline-title">Flight training taught me composure, discipline, and responsibility in a way
+            nothing else had before.</h3>
+          <p class="timeline-body">SYFC demanded precision, consistency, and calm under pressure. Over time, it changed
+            how I approach uncertainty,
+            setbacks, and high-stakes decisions.</p>
         </div>
         <div class="timeline-item reveal stagger-4">
           <div class="timeline-dot"></div>
           <div class="timeline-year"><b>2024</b> • Raffles Entrepreneurs' Network</div>
-          <h3 class="timeline-title">Leadership became less about directing people and more about serving them well.</h3>
+          <h3 class="timeline-title">Leadership became less about directing people and more about serving them well.
+          </h3>
           <p class="timeline-body">Leading EntreWeek taught me that strong teams are built through trust, communication,
             and giving people real ownership over their work, not by trying to control everything yourself.</p>
         </div>
         <div class="timeline-item reveal stagger-5">
           <div class="timeline-dot"></div>
           <div class="timeline-year"><b>National Service</b> • Global Impact</div>
-          <h3 class="timeline-title">Developing WebForce during National Service taught me what it means to build for people who need reliability.</h3>
+          <h3 class="timeline-title">Developing WebForce during National Service taught me what it means to build for
+            people who need reliability.</h3>
           <p class="timeline-body">Developing something for live performance made me think differently about
             responsibility, precision, and trust. It showed me that building well is not just about having an idea, but
             about making something people can genuinely rely on when it matters.</p>
@@ -1841,15 +2510,16 @@
           <div class="timeline-year"><b>Moving Forward</b> • Continuous Growth</div>
           <h3 class="timeline-title">What ties these experiences together is the kind of person I am trying to become.
           </h3>
-          <p class="timeline-body">I want to keep growing in environments that are demanding, meaningful, and bigger than
-            myself — where I can keep learning, contribute seriously, and build things that matter to people.</p>
+          <p class="timeline-body">I want to keep growing in environments that are demanding, meaningful, and bigger
+            than
+            myself - where I can keep learning, contribute seriously, and build things that matter to people.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════
-     EXPERIENCES — THE STORIES
+     EXPERIENCES - THE STORIES
 ══════════════════════════════════════ -->
   <section id="experiences">
     <div class="container">
@@ -1858,8 +2528,9 @@
           <span class="chapter-num">02 / Stories</span>
           <div class="chapter-line"></div>
         </div>
-        <h2 class="section-title reveal">The experiences behind the journey.</h2>
-        <p class="section-lead reveal">These are the moments I have referred to above in fuller detail — what I did, what they
+        <h2 class="section-title reveal">FOUNDATION.</h2>
+        <p class="section-lead reveal">These are the moments I have referred to above in fuller detail - what I did,
+          what they
           taught me, and why they still matter to me now.</p>
       </div>
 
@@ -1870,8 +2541,9 @@
             <img src="assets/images/da40.jpg" alt="Private Pilot Licence flight photograph">
           </div>
           <div class="exp-tag">Aviation</div>
-          <h3>Private Pilot Licence — earned in JC alongside A-Levels</h3>
-          <p>Flying taught me to stay grounded under pressure, trust my preparation, and keep thinking clearly when things do
+          <h3>Private Pilot Licence - earned in JC alongside A-Levels</h3>
+          <p>Flying taught me to stay grounded under pressure, trust my preparation, and keep thinking clearly when
+            things do
             not go as planned.</p>
           <div class="exp-chips">
             <span class="chip">76+ hours</span>
@@ -1894,8 +2566,9 @@
             <img src="assets/images/WebForceBanner.png" alt="WebForce product image">
           </div>
           <div class="exp-tag">Product</div>
-          <h3>WebForce — Android app for magicians</h3>
-          <p>What started as a simple request from a friend became a product used by performers during live shows across 10
+          <h3>WebForce - Android app for magicians</h3>
+          <p>What started as a simple request from a friend became a product used by performers during live shows across
+            10
             countries.</p>
           <div class="exp-chips">
             <span class="chip">Live on Google Play</span>
@@ -1912,14 +2585,16 @@
           </div>
         </article>
 
-        <!-- EIC — spans 2 columns -->
+        <!-- EIC - spans 2 columns -->
         <article class="exp-card span-2 reveal stagger-3" onclick="openModal('eic')" tabindex="0" role="button">
           <div class="exp-inner">
             <div>
               <div class="exp-tag">Engineering</div>
-              <h3>Engineers Innovation Challenge 2023 — Top 10 nationwide</h3>
-              <p>This project mattered deeply to me because it was the first time engineering stopped feeling like theory and
-                started feeling human. We worked on elderly loneliness, a problem that had already become personal to me.</p>
+              <h3>Engineers Innovation Challenge 2023 - Top 10 nationwide</h3>
+              <p>This project mattered deeply to me because it was the first time engineering stopped feeling like
+                theory and
+                started feeling human. We worked on elderly loneliness, a problem that had already become personal to
+                me.</p>
             </div>
             <div>
               <div class="exp-media">
@@ -1948,8 +2623,9 @@
             <img src="assets/images/REN_MemberOfTheYear.jpg" alt="REN Member of the Year recognition">
           </div>
           <div class="exp-tag">Leadership</div>
-          <h3>REN — Member of the Year</h3>
-          <p>Leading EntreWeek changed the way I understood leadership. I came away seeing that strong teams are built not by
+          <h3>REN - Member of the Year</h3>
+          <p>Leading EntreWeek changed the way I understood leadership. I came away seeing that strong teams are built
+            not by
             control, but by trust, communication, and shared ownership.</p>
           <div class="exp-chips">
             <span class="chip">85% school engagement</span>
@@ -1972,7 +2648,8 @@
           </div>
           <div class="exp-tag">Teaching</div>
           <h3>Teaching, mentoring, giving back</h3>
-          <p>Teaching made me realise how powerful simple, patient help can be. Sometimes the most meaningful progress was
+          <p>Teaching made me realise how powerful simple, patient help can be. Sometimes the most meaningful progress
+            was
             seeing someone go from confusion to quiet confidence.</p>
           <div class="exp-chips">
             <span class="chip">Educational YouTube</span>
@@ -2003,7 +2680,8 @@
         </div>
         <h2 class="section-title reveal">The work matters more<br>when you can verify it.</h2>
         <p class="section-lead reveal">Here are the public links, records, and materials behind the stories above.</p>
-        <div class="proof-kicker reveal">Quick access to <strong>public links</strong>, <strong>award records</strong>, and <strong>supporting evidence</strong>.</div>
+        <div class="proof-kicker reveal">Quick access to <strong>public links</strong>, <strong>award records</strong>,
+          and <strong>supporting evidence</strong>.</div>
       </div>
 
       <div class="proof-list">
@@ -2015,7 +2693,7 @@
           </div>
           <div class="proof-body">
             <div class="proof-label">Live Product</div>
-            <h3>WebForce — Google Play</h3>
+            <h3>WebForce - Google Play</h3>
             <p>Live on Google Play and available to verify directly.</p>
           </div>
         </a>
@@ -2029,7 +2707,7 @@
           <div class="proof-body">
             <div class="proof-label">Independent Press</div>
             <h3>Third-Party Coverage</h3>
-            <p>WebForce covered independently — by someone with no stake in making it look good.</p>
+            <p>WebForce covered independently - by someone with no stake in making it look good.</p>
           </div>
         </a>
 
@@ -2052,7 +2730,7 @@
           </div>
           <div class="proof-body">
             <div class="proof-label">National Engineering Award</div>
-            <h3>EIC 2023 — Top 10</h3>
+            <h3>EIC 2023 - Top 10</h3>
             <p>Award records and presentation materials are included in the full story.</p>
           </div>
         </div>
@@ -2078,7 +2756,7 @@
           </div>
           <div class="proof-body">
             <div class="proof-label">Public Recognition</div>
-            <h3>PPL — External Feature</h3>
+            <h3>PPL - External Feature</h3>
             <p>An external feature on completing my PPL.</p>
           </div>
         </a>
@@ -2098,34 +2776,36 @@
       <div class="why-rep-layout">
         <div>
           <h2 class="section-title reveal">What I want to build<br>and grow into next.</h2>
-  
+
           <div class="why-rep-points">
             <div class="rep-point reveal stagger-1">
               <div class="rep-point-num"><b>01 • Problem-Solving</b></div>
               <h4>I want to work on problems that do not sit within one discipline.</h4>
-              <p>Across flying, engineering, and building products, I have seen that real problems are rarely isolated. I
-                want to learn how to approach them with both technical depth and a broader, systems-level perspective.</p>
+              <p>Across flying, engineering, and building products, I have seen that real problems are rarely isolated.
+                I
+                want to learn how to approach them with both technical depth and a broader, systems-level perspective.
+              </p>
             </div>
             <div class="rep-point reveal stagger-2">
               <div class="rep-point-num"><b>02 • Innovation</b></div>
               <h4>I want to build things that people can genuinely rely on.</h4>
-              <p>Experiences like flight training and WebForce showed me that reliability is not a bonus — it is the
+              <p>Experiences like flight training and WebForce showed me that reliability is not a bonus - it is the
                 standard. I want to deepen my engineering ability so that what I build holds up in real situations, not
                 just controlled ones.</p>
             </div>
             <div class="rep-point reveal stagger-3">
               <div class="rep-point-num"><b>03 • Growth</b></div>
               <h4>I want to keep growing in environments that are demanding and real.</h4>
-              <p>I have learned the most when I was stretched — managing multiple commitments, working with people, and
+              <p>I have learned the most when I was stretched - managing multiple commitments, working with people, and
                 building under pressure. I am looking for an environment that continues to challenge me in that way.</p>
             </div>
           </div>
         </div>
-  
+
         <div class="why-rep-quote reveal-right">
           <p class="big-quote">"I want to become someone who can take on difficult problems and build solutions that
             people can trust."</p>
-  
+
           <div class="bring-grid">
             <div class="bring-item">
               <div class="bring-icon">✦</div>
@@ -2175,26 +2855,31 @@
 
         <div class="person-copy reveal-right">
           <h2 class="section-title">The person<br>behind the work.</h2>
-        
-          <p>I think what drives me most is the need to be close to real problems, not just talk about them from a distance.</p>
-        
-          <p>Over time, different experiences have shaped how I approach that. Flying made me more aware of responsibility and
-            how quickly situations can change. Building things showed me that ideas are easy, but making something actually work
-            for people takes patience and iteration. Teaching reminded me that progress is often quiet, and that helping someone
+
+          <p>I think what drives me most is the need to be close to real problems, not just talk about them from a
+            distance.</p>
+
+          <p>Over time, different experiences have shaped how I approach that. Flying made me more aware of
+            responsibility and
+            how quickly situations can change. Building things showed me that ideas are easy, but making something
+            actually work
+            for people takes patience and iteration. Teaching reminded me that progress is often quiet, and that helping
+            someone
             understand something can matter more than any visible outcome.</p>
-        
-          <p>I am still figuring things out, but I know I am drawn to environments where the work is real, the expectations are
+
+          <p>I am still figuring things out, but I know I am drawn to environments where the work is real, the
+            expectations are
             high, and there is something at stake. I find that I grow the most in those situations.</p>
-        
-          <p>More than anything, I want to become someone people can rely on — not just to have ideas, but to take
+
+          <p>More than anything, I want to become someone people can rely on - not just to have ideas, but to take
             responsibility and see things through properly.</p>
-        
+
           <div class="person-traits">
             <span class="trait">Comfortable under pressure</span>
             <span class="trait">Builds for real users</span>
             <span class="trait">Leads through ownership</span>
             <span class="trait">Bias toward useful work</span>
-            <span class="trait">Cricket — NSG</span>
+            <span class="trait">Cricket - NSG</span>
             <span class="trait">Private Pilot</span>
           </div>
         </div>
@@ -2209,27 +2894,27 @@
         <span class="chapter-num">06 / Contact</span>
         <div class="chapter-line"></div>
       </div>
-  
+
       <div class="contact-panel reveal">
         <div class="contact-left">
           <h2 class="section-title">Get in touch</h2>
           <p class="section-lead">
             If you would like to reach out or discuss anything further, I would be glad to connect.
           </p>
-  
+
           <div class="contact-details">
             <div class="contact-row">
               <span class="contact-kicker">Email</span>
               <a href="mailto:garvbatracrown@gmail.com">garvbatracrown@gmail.com</a>
             </div>
-  
+
             <div class="contact-row">
               <span class="contact-kicker">Phone</span>
               <a href="tel:+6592314873">+65 9231 4873</a>
             </div>
           </div>
         </div>
-  
+
         <div class="contact-right">
           <a href="https://github.com/GarvBatra123" target="_blank" rel="noopener" class="social-card"
             aria-label="GitHub">
@@ -2241,7 +2926,7 @@
             </span>
             <span class="social-text">GitHub</span>
           </a>
-  
+
           <a href="https://www.linkedin.com/in/garvbatra100" target="_blank" rel="noopener" class="social-card"
             aria-label="LinkedIn">
             <span class="social-icon">
@@ -2252,7 +2937,7 @@
             </span>
             <span class="social-text">LinkedIn</span>
           </a>
-  
+
           <a href="https://www.youtube.com/@garvbatra3103" target="_blank" rel="noopener" class="social-card"
             aria-label="YouTube">
             <span class="social-icon">
@@ -2265,7 +2950,7 @@
           </a>
         </div>
       </div>
-  
+
       <div class="contact-footer-strip">
         <div class="footer-brand">Garv Batra</div>
         <div class="footer-note">NTU REP &amp; Scholarship Application</div>
@@ -2355,13 +3040,13 @@
     // Visible copy cleanup for this preview file
     const textFixes = new Map([
       ['Â·', '·'],
-      ['â€”', '—'],
+      ['â€”', '-'],
       ['â€“', '–'],
-      ['â†—', '↗'],
+      ['â†-', '↗'],
       ['â†’', '→'],
       ['â€¢', '•'],
       ['âœ¦', '✦'],
-      ['â—ˆ', '◈'],
+      ['â-ˆ', '◈'],
       ['â¬¡', '⬡']
     ]);
 
@@ -2430,7 +3115,7 @@
       ppl: {
         tag: 'Aviation · Private Pilot Licence',
         title: 'Private Pilot Licence',
-        subtitle: 'Flying taught me that composure is built slowly — through preparation, repetition, and learning to stay steady when it matters.',
+        subtitle: 'Flying taught me that composure is built slowly - through preparation, repetition, and learning to stay steady when it matters.',
         coverImage: { src: 'assets/images/da40.jpg', alt: 'Private Pilot Licence flight photograph' },
         body: `
     <p>I joined SYFC because flying had been a dream of mine for as long as I can remember. What I did not fully expect was how deeply the experience would shape me beyond aviation itself.</p>
@@ -2442,13 +3127,13 @@
           {
             label: 'Flight Hours',
             heading: 'Nearly 80 hours logged',
-            text: 'Across structured progression — circuits, navigation sorties, cross-country planning, emergency procedures, and final test readiness. 12.6 of those hours were solo, without an instructor beside me.',
+            text: 'Across structured progression - circuits, navigation sorties, cross-country planning, emergency procedures, and final test readiness. 12.6 of those hours were solo, without an instructor beside me.',
             images: ['assets/images/profile.jpg', 'assets/images/B_Garv.jpg']
           },
           {
             label: '7 Theory Exams',
             heading: 'Alongside A-Levels',
-            text: 'Air law, flight mechanics, meteorology, radiotelephony, navigation, aircraft systems, and human performance — all cleared while balancing academics, cricket, and leadership responsibilities.',
+            text: 'Air law, flight mechanics, meteorology, radiotelephony, navigation, aircraft systems, and human performance - all cleared while balancing academics, cricket, and leadership responsibilities.',
             images: ['assets/images/SYFC_PPL.jpg']
           },
           {
@@ -2508,7 +3193,7 @@
             label: 'National Recognition',
             heading: 'Top 10 nationwide',
             text: 'Our team was shortlisted nationally and invited to present the project at the World Engineers Summit at Marina Bay Sands.',
-            images: ['assets/images/EIC_NED_AWARD_PRESENTATION.jpg', 'assets/images/EIC_NED_GROUP_PHOTO.jpg']
+            images: ['assets/images/eic_award.jpg', 'assets/images/EIC_NED_AWARD_PRESENTATION.jpg', 'assets/images/EIC_NED_GROUP_PHOTO.jpg']
           },
           {
             label: 'The Problem',
@@ -2548,10 +3233,10 @@
         subtitle: 'Teaching reminded me that helping someone understand something can be one of the most meaningful forms of contribution.',
         coverImage: { src: 'assets/images/SKEYN_Volunteering_GEMINI.jpg', alt: 'Teaching and volunteering' },
         body: `
-    <p>I started teaching because I had seen how uneven access to good academic support could be. Some students simply needed someone patient enough to explain things clearly and stay with them until it finally made sense.</p>
-    <p>That led me to start a YouTube channel for PSLE Maths and Science, and later to mentor younger students through my alma mater and community settings. None of it felt glamorous. Most of the time, it was just a matter of slowing down, finding a different way to explain something, and trying again until it clicked.</p>
-    <p>What stayed with me most was how personal learning can be. Two students can struggle with the same topic for completely different reasons. Teaching forced me to listen more carefully, communicate more thoughtfully, and be much more patient than I used to be. It made me realise that helping someone grow is not about giving them answers quickly, but about giving them the confidence to understand things for themselves.</p>
-    <p>Later, I also helped run coding bootcamps for younger students through REN. Across all of these experiences, the motivation stayed the same. I wanted to make useful help more accessible, and in the process, I found that teaching was shaping me just as much as I was trying to help shape others.</p>
+    <p>The more I taught, the less I believed that learning problems could be solved by repeating the same explanation more loudly. What became clear to me instead was that learning is deeply personal. Two students can struggle with the same topic for completely different reasons. Helping them took more than just knowing the topic well. It took patience, attentiveness, and the willingness to explain the same thing in a different way until it finally clicked.</p>
+<p>That made me realise how uneven access to good academic support can be, especially for students from underprivileged backgrounds whose families may not have the resources or knowledge to provide additional assistance. Some students were not short of effort at all. They just needed someone to slow down, meet them where they were, and stay with the problem long enough for them to understand it for themselves. That was what pushed me to start a YouTube channel for PSLE Maths and Science, and later to mentor younger students through my alma mater and in community settings.</p>
+<p>Most of it was not glamorous. It was usually just a matter of trying again, changing the example, using a different analogy, or breaking the idea down more simply.</p>
+<p>Across all these experiences, the reason stayed the same. I wanted to make useful help more accessible. Somewhere along the way, I also realised that teaching was shaping me just as much as I was trying to help shape others.</p>
   `,
         evidence: [
           {
@@ -2563,7 +3248,7 @@
           {
             label: 'Mentoring',
             heading: 'Community and school-based teaching',
-            text: 'Mentoring for Primary 6 students through school and community settings, along with coding bootcamps for younger students through REN.',
+            text: 'Mentoring for Primary 6 students through school and community settings.',
             images: ['assets/images/SKEYN_Volunteering.jpg']
           }
         ]
@@ -2582,9 +3267,19 @@
       document.getElementById('modalBody').innerHTML = `${coverImageHTML}${d.body}`;
 
       const evEl = document.getElementById('modalEvidence');
+      const renderEvidenceImages = (images, heading) => {
+        if (!images || !images.length) return '';
+        const countClass = `count-${Math.min(images.length, 6)}`;
+        const items = images.map(src => `
+          <div class="ev-media-item">
+            <img src="${src}" alt="${heading}">
+          </div>
+        `).join('');
+        return `<div class="ev-media-grid ${countClass}">${items}</div>`;
+      };
       evEl.innerHTML = d.evidence.map(ev => {
         let media = '';
-        if (ev.images) media += ev.images.map(src => `<img src="${src}" alt="${ev.heading}" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,0.07);margin-top:12px;">`).join('');
+        if (ev.images) media += renderEvidenceImages(ev.images, ev.heading);
         if (ev.pdfs) media += ev.pdfs.map(src => `<div class="pdf-wrap"><iframe src="${src}" class="pdf-frame" title="${ev.heading}"></iframe></div>`).join('');
         const links = ev.links ? ev.links.map(l => `<a class="ev-link" href="${l.href}" target="_blank" rel="noopener">${l.label} ↗</a>`).join('') : '';
         return `
@@ -2611,6 +3306,82 @@
     }
 
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    const accoladeMarquee = document.querySelector('.accolade-marquee');
+    const accoladeTrack = document.querySelector('.accolade-track');
+
+    if (accoladeMarquee && accoladeTrack) {
+      let isDragging = false;
+      let dragStartX = 0;
+      let dragStartScrollLeft = 0;
+      let autoScrollPausedUntil = 0;
+      let autoScrollRaf = null;
+      let autoSpeed = 1.35;
+      let ignoreScrollPause = false;
+
+      const pauseAccoladeAutoScroll = (ms = 2200) => {
+        autoScrollPausedUntil = performance.now() + ms;
+      };
+
+      const maxScrollLeft = () => Math.max(0, accoladeMarquee.scrollWidth - accoladeMarquee.clientWidth);
+
+      const tickAccoladeScroll = now => {
+        if (!isDragging && now >= autoScrollPausedUntil) {
+          const limit = maxScrollLeft();
+          if (limit > 0) {
+            ignoreScrollPause = true;
+            accoladeMarquee.scrollLeft += autoSpeed;
+            if (accoladeMarquee.scrollLeft >= limit - 1) {
+              accoladeMarquee.scrollLeft = 0;
+            }
+            ignoreScrollPause = false;
+          }
+        }
+        autoScrollRaf = requestAnimationFrame(tickAccoladeScroll);
+      };
+
+      accoladeMarquee.addEventListener('mouseenter', () => pauseAccoladeAutoScroll(1800));
+      accoladeMarquee.addEventListener('wheel', e => {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          e.preventDefault();
+          accoladeMarquee.scrollLeft += e.deltaY;
+        }
+        pauseAccoladeAutoScroll();
+      }, { passive: false });
+
+      accoladeMarquee.addEventListener('pointerdown', e => {
+        isDragging = true;
+        dragStartX = e.clientX;
+        dragStartScrollLeft = accoladeMarquee.scrollLeft;
+        accoladeMarquee.classList.add('is-dragging');
+        accoladeMarquee.setPointerCapture(e.pointerId);
+        pauseAccoladeAutoScroll();
+      });
+
+      accoladeMarquee.addEventListener('pointermove', e => {
+        if (!isDragging) return;
+        const delta = e.clientX - dragStartX;
+        accoladeMarquee.scrollLeft = dragStartScrollLeft - delta;
+      });
+
+      const endDrag = e => {
+        if (!isDragging) return;
+        isDragging = false;
+        accoladeMarquee.classList.remove('is-dragging');
+        if (e && accoladeMarquee.hasPointerCapture(e.pointerId)) {
+          accoladeMarquee.releasePointerCapture(e.pointerId);
+        }
+        pauseAccoladeAutoScroll(1600);
+      };
+
+      accoladeMarquee.addEventListener('pointerup', endDrag);
+      accoladeMarquee.addEventListener('pointercancel', endDrag);
+      accoladeMarquee.addEventListener('scroll', () => {
+        if (!ignoreScrollPause && isDragging) pauseAccoladeAutoScroll(1200);
+      }, { passive: true });
+
+      autoScrollRaf = requestAnimationFrame(tickAccoladeScroll);
+    }
 
   </script>
   <script type="importmap">
@@ -2644,8 +3415,8 @@
       controls.enablePan = false;
       controls.enableDamping = true;
       controls.dampingFactor = 0.05;
-      controls.autoRotate = true;
-      controls.autoRotateSpeed = 0.9;
+      controls.autoRotate = false;
+      controls.autoRotateSpeed = 0;
       controls.minDistance = 4.8;
       controls.maxDistance = 9.5;
       controls.minPolarAngle = Math.PI * 0.34;
@@ -2679,6 +3450,7 @@
 
       const loader = new GLTFLoader();
       let mixer = null;
+      let aircraftModel = null;
 
       function applyBlueprintLook(root) {
         root.traverse(child => {
@@ -2707,25 +3479,51 @@
       }
 
       function frameModel(object) {
-        const box = new THREE.Box3().setFromObject(object);
-        const size = new THREE.Vector3();
-        const center = new THREE.Vector3();
-        box.getSize(size);
-        box.getCenter(center);
+        object.position.set(0, 0, 0);
+        object.scale.setScalar(1);
+        object.updateMatrixWorld(true);
 
-        object.position.sub(center);
-        const maxDim = Math.max(size.x, size.y, size.z) || 1;
-        const targetSize = 4.6;
-        const scale = targetSize / maxDim;
+        const baseBox = new THREE.Box3().setFromObject(object);
+        const baseSize = new THREE.Vector3();
+        const baseCenter = new THREE.Vector3();
+        baseBox.getSize(baseSize);
+        baseBox.getCenter(baseCenter);
+
+        object.position.set(-baseCenter.x, -baseCenter.y, -baseCenter.z);
+
+        const aspect = Math.max(camera.aspect || 1, 0.6);
+        const isDesktopWide = aspect > 1.22;
+        const targetSpan = aspect < 1.05 ? 4.55 : aspect < 1.3 ? 6.45 : 8.9;
+        const maxDim = Math.max(baseSize.x, baseSize.y, baseSize.z) || 1;
+        const scale = targetSpan / maxDim;
         object.scale.setScalar(scale);
+        object.updateMatrixWorld(true);
 
         const framedBox = new THREE.Box3().setFromObject(object);
+        const framedSize = new THREE.Vector3();
         const framedCenter = new THREE.Vector3();
+        framedBox.getSize(framedSize);
         framedBox.getCenter(framedCenter);
         object.position.sub(framedCenter);
+        object.position.y -= framedSize.y * 0.035;
+        object.rotation.set(0, 0, 0);
+        object.updateMatrixWorld(true);
 
-        controls.target.set(0, 0.1, 0);
-        camera.position.set(0, 1.2, 7.2);
+        const finalBox = new THREE.Box3().setFromObject(object);
+        const vFov = THREE.MathUtils.degToRad(camera.fov);
+        const hFov = 2 * Math.atan(Math.tan(vFov / 2) * aspect);
+        const targetY = finalBox.min.y + (finalBox.max.y - finalBox.min.y) * 0.46;
+        const halfHeight = Math.max(Math.abs(finalBox.max.y - targetY), Math.abs(finalBox.min.y - targetY));
+        const halfWidth = Math.max(Math.abs(finalBox.max.x), Math.abs(finalBox.min.x));
+        const fitHeightDistance = halfHeight / Math.tan(vFov / 2);
+        const fitWidthDistance = halfWidth / Math.tan(hFov / 2);
+        const distance = Math.max(fitHeightDistance, fitWidthDistance) * (isDesktopWide ? 1.015 : 1.08);
+        const verticalOffset = finalBox.min.y + (finalBox.max.y - finalBox.min.y) * 0.6;
+
+        controls.target.set(0, targetY, 0);
+        camera.position.set(0, verticalOffset, distance);
+        controls.minDistance = distance * 1.005;
+        controls.maxDistance = distance * 1.55;
         controls.update();
       }
 
@@ -2734,6 +3532,7 @@
         renderer.setSize(clientWidth, clientHeight, false);
         camera.aspect = clientWidth / clientHeight;
         camera.updateProjectionMatrix();
+        if (aircraftModel) frameModel(aircraftModel);
       }
 
       loader.load(
@@ -2741,6 +3540,7 @@
         gltf => {
           const model = gltf.scene;
           applyBlueprintLook(model);
+          aircraftModel = model;
           frameModel(model);
           blueprintGroup.add(model);
 
@@ -2777,6 +3577,10 @@
           ring.material.opacity = 0.05 + Math.sin(elapsed * 0.7 + index) * 0.015 + index * 0.03;
         });
         if (mixer) mixer.update(delta);
+        if (aircraftModel) {
+          aircraftModel.rotation.y = elapsed * 0.22;
+          aircraftModel.rotation.z = Math.sin(elapsed * 0.45) * 0.015;
+        }
         controls.update();
         renderer.render(scene, camera);
         requestAnimationFrame(animate);
@@ -2789,7 +3593,3 @@
 </body>
 
 </html>
-
-
-
-
