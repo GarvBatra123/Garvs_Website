@@ -562,35 +562,66 @@
       width: min(980px, 100%);
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 24px;
+      gap: 0;
+      align-items: start;
       background: linear-gradient(180deg, rgba(18, 23, 34, 0.92), rgba(11, 15, 24, 0.96));
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 28px;
-      padding: 28px 32px;
+      padding: 24px 18px;
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
       opacity: 0;
       animation: fadeUp 1s 1.2s forwards;
     }
 
     .hero-stat {
+      position: relative;
       min-width: 0;
+      min-height: 116px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      row-gap: 12px;
+      padding: 0 22px;
+      text-align: center;
+    }
+
+    .hero-stat:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 10px;
+      right: 0;
+      bottom: 10px;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.05);
     }
 
     .hero-stat span {
-      display: block;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
       font-family: 'Syne', sans-serif;
       font-weight: 800;
-      font-size: clamp(2.2rem, 3vw, 3.3rem);
-      letter-spacing: -0.03em;
+      width: 100%;
+      max-width: 100%;
+      min-height: 52px;
+      font-size: clamp(1.7rem, 2vw, 2.35rem);
+      letter-spacing: -0.04em;
       color: var(--ink);
-      line-height: 0.95;
+      line-height: 0.92;
+      white-space: nowrap;
+      text-align: center;
     }
 
     .hero-stat p {
-      font-size: 1rem;
+      font-size: 0.88rem;
       color: #aeb8cb;
-      margin-top: 10px;
-      line-height: 1.45;
+      margin: 0;
+      line-height: 1.2;
+      max-width: none;
+      min-height: 1.2em;
+      white-space: nowrap;
+      text-align: center;
     }
 
     .accolade-strip-section {
@@ -604,9 +635,11 @@
       width: min(1120px, calc(100% - 48px));
       margin: 0 auto 22px;
       display: flex;
-      align-items: baseline;
-      justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       gap: 18px;
+      text-align: center;
     }
 
     .accolade-strip-kicker {
@@ -824,19 +857,33 @@
     .chapter-divider {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 16px;
-      margin-bottom: 20px;
+      width: fit-content;
+      margin: 0 auto 20px;
+    }
+
+    .chapter-divider::before {
+      content: '';
+      width: 160px;
+      height: 1px;
+      background: var(--line);
+      flex: 0 0 160px;
     }
 
     .chapter-num {
       font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.92rem;
       letter-spacing: 0.18em;
       color: var(--gold);
+      white-space: nowrap;
+      line-height: 1;
+      flex: 0 1 auto;
     }
 
     .chapter-line {
-      flex: 1;
+      width: 160px;
+      flex: 0 0 160px;
       height: 1px;
       background: var(--line);
     }
@@ -925,14 +972,31 @@
       width: var(--timeline-dot-size);
       height: var(--timeline-dot-size);
       border-radius: 50%;
-      background: var(--bg);
+      background: rgba(8, 12, 20, 0.98);
       border: 2px solid var(--gold);
-      transition: background 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 0 0 rgba(212, 168, 67, 0);
+      transition: box-shadow 0.38s ease, transform 0.38s ease;
     }
 
-    .timeline-item:hover .timeline-dot {
+    .timeline-dot::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      border-radius: 50%;
       background: var(--gold);
+      transform: scale(0);
+      opacity: 0;
+      transition: transform 0.38s ease, opacity 0.3s ease;
+    }
+
+    .timeline-item.is-active .timeline-dot {
       box-shadow: 0 0 20px rgba(212, 168, 67, 0.5);
+      transform: scale(1.06);
+    }
+
+    .timeline-item.is-active .timeline-dot::after {
+      transform: scale(1);
+      opacity: 1;
     }
 
     .timeline-item:nth-child(even) .timeline-dot {
@@ -1062,12 +1126,35 @@
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
     }
 
+    .exp-card.story-spotlight {
+      border-color: rgba(212, 168, 67, 0.44);
+      box-shadow: 0 0 0 1px rgba(212, 168, 67, 0.14), 0 34px 78px rgba(0, 0, 0, 0.34);
+      animation: storySpotlight 1.2s ease;
+    }
+
     .exp-card:hover .exp-media img {
       transform: scale(1.04);
     }
 
     .exp-card:hover::before {
       opacity: 1;
+    }
+
+    @keyframes storySpotlight {
+      0% {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 0 0 0 rgba(212, 168, 67, 0), 0 18px 42px rgba(0, 0, 0, 0.22);
+      }
+
+      35% {
+        transform: translateY(-8px) scale(1.01);
+        box-shadow: 0 0 0 10px rgba(212, 168, 67, 0.12), 0 34px 78px rgba(0, 0, 0, 0.34);
+      }
+
+      100% {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 0 0 1px rgba(212, 168, 67, 0.14), 0 34px 78px rgba(0, 0, 0, 0.34);
+      }
     }
 
     .exp-card.span-2 {
@@ -1277,19 +1364,27 @@
 
     .why-rep-layout {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 28px;
       align-items: start;
+    }
+
+    .why-rep-layout>.reveal,
+    .why-rep-layout>div>.section-title {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .why-rep-points {
       display: grid;
-      gap: 24px;
-      margin-top: 40px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 0;
     }
 
     .rep-point {
-      padding: 24px;
+      padding: 20px 22px;
       border-radius: 16px;
       border: 1px solid var(--line);
       background: var(--panel);
@@ -1302,14 +1397,14 @@
 
     .rep-point-num {
       font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 1.3rem;
       color: var(--blue);
       letter-spacing: 0.14em;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .rep-point-num b {
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .rep-point h4 {
@@ -1326,65 +1421,8 @@
       font-size: 0.92rem;
     }
 
-    .why-rep-quote {
-      position: sticky;
-      top: 100px;
-    }
-
-    .big-quote {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: clamp(1.34rem, 2.15vw, 1.9rem);
-      line-height: 1.28;
-      letter-spacing: -0.02em;
-      color: #d9e2f2;
-      max-width: 16ch;
-      margin-bottom: 32px;
-    }
-
-    .big-quote em {
-      font-style: normal;
-      color: var(--blue);
-    }
-
-    .bring-grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    .bring-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 16px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .bring-icon {
-      width: 32px;
-      height: 32px;
-      flex-shrink: 0;
-      border-radius: 8px;
-      background: rgba(74, 158, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-    }
-
-    .bring-item p {
-      font-size: 0.92rem;
-      color: var(--muted);
-    }
-
-    .bring-item strong {
-      display: block;
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 3px;
+    .why-rep-points .rep-point:nth-child(3) {
+      display: none;
     }
 
     /* ══════════════════════════════════════
@@ -1928,18 +1966,36 @@
         cursor: auto;
       }
 
+      html,
+      body {
+        overflow-x: hidden;
+      }
+
+      .container {
+        width: 100%;
+        max-width: none;
+        padding-left: 16px;
+        padding-right: 16px;
+        box-sizing: border-box;
+      }
+
       #cursor,
       #cursor-ring {
         display: none;
       }
 
       nav {
-        padding: 0 24px;
+        padding: 0 16px;
       }
 
       #hero .container {
+        width: 100%;
         grid-template-columns: 1fr;
         min-height: auto;
+      }
+
+      .hero-copy {
+        text-align: center;
       }
 
       .nav-links {
@@ -1956,23 +2012,46 @@
         align-items: center;
       }
 
+      .hero-eyebrow {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-sub {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+
+      .hero-cta-row {
+        justify-content: center;
+      }
+
       .hero-stats-wrap {
+        width: 100%;
         margin-top: 28px;
         margin-bottom: 40px;
-        padding: 0 24px;
+        padding: 0 16px;
+        box-sizing: border-box;
       }
 
       .hero-stats-row {
+        width: 100%;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 22px 18px;
         padding: 24px;
       }
 
       .accolade-strip-head {
-        width: calc(100% - 48px);
+        width: 100%;
+        max-width: none;
         margin-bottom: 18px;
+        padding-left: 16px;
+        padding-right: 16px;
+        box-sizing: border-box;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        text-align: center;
       }
 
       .accolade-card {
@@ -2005,11 +2084,29 @@
 
       .why-rep-layout {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 28px;
       }
 
-      .why-rep-quote {
-        position: static;
+      .exp-header,
+      .proof-header,
+      .why-rep-layout>div,
+      .person-copy,
+      .contact-left {
+        width: 100%;
+        max-width: none;
+        text-align: center;
+      }
+
+      .section-lead,
+      .person-copy p,
+      .contact-left .section-lead {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+
+      .why-rep-points {
+        grid-template-columns: 1fr;
       }
 
       .person-layout {
@@ -2018,27 +2115,27 @@
 
       .person-photo-wrap {
         max-width: 360px;
+        margin: 0 auto;
       }
 
-      .journey-header {
-        text-align: left;
-        margin: 0 0 64px;
+      .chapter-divider::before,
+      .chapter-line {
+        width: clamp(28px, 15vw, 90px);
+        flex: 1 1 clamp(28px, 15vw, 90px);
       }
 
-      .journey-header .chapter-divider {
-        width: auto;
-        margin: 0 0 24px;
-        justify-content: flex-start;
-        gap: 12px;
+      .journey-header .chapter-divider,
+      .exp-header .chapter-divider {
+        width: 100%;
+        justify-content: center;
       }
 
-      .journey-header .chapter-divider::before {
-        display: none;
-      }
-
-      .journey-header .chapter-line {
-        width: auto;
-        flex: 1;
+      .journey-header .chapter-divider::before,
+      .journey-header .chapter-line,
+      .exp-header .chapter-divider::before,
+      .exp-header .chapter-line {
+        width: clamp(28px, 15vw, 90px);
+        flex: 1 1 clamp(28px, 15vw, 90px);
       }
 
       .timeline {
@@ -2070,6 +2167,17 @@
         text-align: left;
         margin-left: 0;
       }
+
+      .timeline-item:nth-child(even) .timeline-year,
+      .timeline-item:nth-child(even) .timeline-title,
+      .timeline-item:nth-child(even) .timeline-body {
+        text-align: left;
+      }
+
+      .person-traits,
+      .contact-details {
+        justify-content: center;
+      }
     }
 
     @media (max-width: 600px) {
@@ -2082,7 +2190,8 @@
       }
 
       .container {
-        width: calc(100% - 40px);
+        padding-left: 12px;
+        padding-right: 12px;
       }
 
       .hero-visual {
@@ -2097,7 +2206,12 @@
       }
 
       .hero-stats-wrap {
-        padding: 0 20px;
+        padding: 0 12px;
+      }
+
+      .accolade-strip-head {
+        padding-left: 12px;
+        padding-right: 12px;
       }
 
       .hero-stats-row {
@@ -2167,8 +2281,9 @@
     <ul class="nav-links">
       <li><a href="#journey">Journey</a></li>
       <li><a href="#experiences">Stories</a></li>
-      <li><a href="#why-rep">Why REP</a></li>
+      <li><a href="#why-rep">Direction</a></li>
       <li><a href="#person">The Person</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false">
       <span></span>
@@ -2181,6 +2296,7 @@
     <a href="#experiences">Stories</a>
     <a href="#why-rep">Why REP</a>
     <a href="#person">The Person</a>
+    <a href="#contact">Contact</a>
   </div>
 
   <!-- ══════════════════════════════════════
@@ -2191,7 +2307,7 @@
     <div class="grid-overlay"></div>
     <div class="container">
       <div class="hero-copy">
-        <p class="hero-eyebrow">NTU REP & Scholarship Application · Garv Batra</p>
+        <!-- <p class="hero-eyebrow">NTU REP & Scholarship Application · Garv Batra</p> -->
         <h1 class="hero-headline">
           Pilot.<br>
           <span class="line-2">Builder.</span>
@@ -2243,12 +2359,11 @@
     </div>
     <section class="accolade-strip-section" aria-label="Certificates and accolades">
       <div class="accolade-strip-head reveal">
-        <div class="accolade-strip-kicker">Certificates / Accolades</div>
-        <div class="accolade-strip-note">A moving strip of proof points before the deeper story begins.</div>
+        <div class="accolade-strip-kicker">Quick Snapshot</div>
       </div>
       <div class="accolade-marquee reveal">
         <div class="accolade-track">
-          <a class="accolade-card" href="assets/images/SYFC_PPL.jpg" target="_blank" rel="noopener">
+          <a class="accolade-card" href="#experiences" data-story="ppl">
             <div class="accolade-media">
               <img src="assets/images/SYFC_PPL.jpg" alt="Singapore Youth Flying Club training photograph">
             </div>
@@ -2260,7 +2375,7 @@
             <p>A visual record from the flight training journey that led to my Private Pilot Licence.</p>
           </a>
 
-          <a class="accolade-card" href="assets/images/eic_award.jpg" target="_blank" rel="noopener">
+          <a class="accolade-card" href="#experiences" data-story="eic">
             <div class="accolade-media">
               <img src="assets/images/eic_award.jpg" alt="Engineering Innovation Challenge award certificate">
             </div>
@@ -2273,7 +2388,7 @@
           </a>
 
 
-          <a class="accolade-card" href="assets/images/REN_MemberOfTheYear.jpg" target="_blank" rel="noopener">
+          <a class="accolade-card" href="#experiences" data-story="ren">
             <div class="accolade-media">
               <img src="assets/images/REN_MemberOfTheYear.jpg" alt="REN Member of the Year recognition image">
             </div>
@@ -2287,7 +2402,7 @@
 
 
 
-          <a class="accolade-card" href="assets/images/SYFC_MENTORING.JPG" target="_blank" rel="noopener">
+          <a class="accolade-card" href="#experiences" data-story="teaching">
             <div class="accolade-media">
               <img src="assets/images/SYFC_MENTORING.JPG" alt="Mentoring cadets at Singapore Youth Flying Club">
             </div>
@@ -2299,7 +2414,7 @@
             <p>A proof image from returning to support newer cadets after completing the journey myself.</p>
           </a>
 
-          <a class="accolade-card" href="assets/images/SKEYN_Volunteering.jpg" target="_blank" rel="noopener">
+          <a class="accolade-card" href="#experiences" data-story="teaching">
             <div class="accolade-media">
               <img src="assets/images/SKEYN_Volunteering.jpg" alt="Volunteering at SKEYN">
             </div>
@@ -2311,7 +2426,7 @@
             <p>A certificate-style record of contribution through volunteering, service, and student support.</p>
           </a>
 
-          <a class="accolade-card" href="https://www.youtube.com/@garvbatra3103" target="_blank" rel="noopener">
+          <a class="accolade-card" href="#experiences" data-story="teaching">
             <div class="accolade-media">
               <img src="assets/images/YouTube_Logo.jpg" alt="YouTube channel screenshot">
             </div>
@@ -2323,7 +2438,7 @@
             <p>A channel built to teach PSLE Maths and Science in a simpler, more accessible way.</p>
           </a>
 
-          <a class="accolade-card" href="assets/images/WebForcePro.jpg" target="_blank" rel="noopener">
+          <a class="accolade-card" href="#experiences" data-story="webforce">
             <div class="accolade-media">
               <img src="assets/images/WebForcePro.jpg" alt="WebForce development image">
             </div>
@@ -2335,7 +2450,7 @@
             <p>A build-stage visual from the product development journey behind WebForce.</p>
           </a>
 
-          <a class="accolade-card" href="assets/images/SYFC_PPL.jpg" target="_blank" rel="noopener">
+          <a class="accolade-card" href="#experiences" data-story="ppl">
             <div class="accolade-media">
               <img src="assets/images/SYFC_PPL.jpg" alt="Singapore Youth Flying Club training photograph">
             </div>
@@ -2347,7 +2462,7 @@
             <p>A visual record from the flight training journey that led to my Private Pilot Licence.</p>
           </a>
 
-          <a class="accolade-card" href="assets/images/eic_award.jpg" target="_blank" rel="noopener">
+          <a class="accolade-card" href="#experiences" data-story="eic">
             <div class="accolade-media">
               <img src="assets/images/eic_award.jpg" alt="Engineering Innovation Challenge award certificate">
             </div>
@@ -2360,7 +2475,7 @@
           </a>
 
 
-          <a class="accolade-card" href="assets/images/REN_MemberOfTheYear.jpg" target="_blank" rel="noopener">
+          <a class="accolade-card" href="#experiences" data-story="ren">
             <div class="accolade-media">
               <img src="assets/images/REN_MemberOfTheYear.jpg" alt="REN Member of the Year recognition image">
             </div>
@@ -2374,7 +2489,7 @@
 
 
 
-          <a class="accolade-card" href="assets/images/SYFC_MENTORING.JPG" target="_blank" rel="noopener">
+          <a class="accolade-card" href="#experiences" data-story="teaching">
             <div class="accolade-media">
               <img src="assets/images/SYFC_MENTORING.JPG" alt="Mentoring cadets at Singapore Youth Flying Club">
             </div>
@@ -2386,7 +2501,7 @@
             <p>A proof image from returning to support newer cadets after completing the journey myself.</p>
           </a>
 
-          <a class="accolade-card" href="assets/images/SKEYN_Volunteering.jpg" target="_blank" rel="noopener">
+          <a class="accolade-card" href="#experiences" data-story="teaching">
             <div class="accolade-media">
               <img src="assets/images/SKEYN_Volunteering.jpg" alt="Volunteering at SKEYN">
             </div>
@@ -2398,7 +2513,7 @@
             <p>A certificate-style record of contribution through volunteering, service, and student support.</p>
           </a>
 
-          <a class="accolade-card" href="https://www.youtube.com/@garvbatra3103" target="_blank" rel="noopener">
+          <a class="accolade-card" href="#experiences" data-story="teaching">
             <div class="accolade-media">
               <img src="assets/images/YouTube_Logo.jpg" alt="YouTube channel screenshot">
             </div>
@@ -2410,7 +2525,7 @@
             <p>A channel built to teach PSLE Maths and Science in a simpler, more accessible way.</p>
           </a>
 
-          <a class="accolade-card" href="assets/images/WebForcePro.jpg" target="_blank" rel="noopener">
+          <a class="accolade-card" href="#experiences" data-story="webforce">
             <div class="accolade-media">
               <img src="assets/images/WebForcePro.jpg" alt="WebForce development image">
             </div>
@@ -2442,7 +2557,7 @@
     <div class="container">
       <div class="journey-header">
         <div class="chapter-divider reveal">
-          <span class="chapter-num">01 / Journey</span>
+          <span class="chapter-num">01 • Journey</span>
           <div class="chapter-line"></div>
         </div>
         <h2 class="section-title reveal">Metamorphosis</h2>
@@ -2525,7 +2640,7 @@
     <div class="container">
       <div class="exp-header">
         <div class="chapter-divider reveal">
-          <span class="chapter-num">02 / Stories</span>
+          <span class="chapter-num">02 • Stories</span>
           <div class="chapter-line"></div>
         </div>
         <h2 class="section-title reveal">FOUNDATION.</h2>
@@ -2536,7 +2651,8 @@
 
       <div class="exp-cards">
         <!-- PPL -->
-        <article class="exp-card reveal stagger-1" onclick="openModal('ppl')" tabindex="0" role="button">
+        <article class="exp-card reveal stagger-1" data-story="ppl" onclick="openModal('ppl')" tabindex="0"
+          role="button">
           <div class="exp-media">
             <img src="assets/images/da40.jpg" alt="Private Pilot Licence flight photograph">
           </div>
@@ -2561,7 +2677,8 @@
         </article>
 
         <!-- WebForce -->
-        <article class="exp-card reveal stagger-2" onclick="openModal('webforce')" tabindex="0" role="button">
+        <article class="exp-card reveal stagger-2" data-story="webforce" onclick="openModal('webforce')" tabindex="0"
+          role="button">
           <div class="exp-media">
             <img src="assets/images/WebForceBanner.png" alt="WebForce product image">
           </div>
@@ -2586,7 +2703,8 @@
         </article>
 
         <!-- EIC - spans 2 columns -->
-        <article class="exp-card span-2 reveal stagger-3" onclick="openModal('eic')" tabindex="0" role="button">
+        <article class="exp-card span-2 reveal stagger-3" data-story="eic" onclick="openModal('eic')" tabindex="0"
+          role="button">
           <div class="exp-inner">
             <div>
               <div class="exp-tag">Engineering</div>
@@ -2618,7 +2736,8 @@
         </article>
 
         <!-- REN -->
-        <article class="exp-card reveal stagger-4" onclick="openModal('ren')" tabindex="0" role="button">
+        <article class="exp-card reveal stagger-4" data-story="ren" onclick="openModal('ren')" tabindex="0"
+          role="button">
           <div class="exp-media">
             <img src="assets/images/REN_MemberOfTheYear.jpg" alt="REN Member of the Year recognition">
           </div>
@@ -2642,7 +2761,8 @@
         </article>
 
         <!-- Teaching -->
-        <article class="exp-card reveal stagger-5" onclick="openModal('teaching')" tabindex="0" role="button">
+        <article class="exp-card reveal stagger-5" data-story="teaching" onclick="openModal('teaching')" tabindex="0"
+          role="button">
           <div class="exp-media">
             <img src="assets/images/SKEYN_Volunteering_GEMINI.jpg" alt="Teaching and volunteering">
           </div>
@@ -2675,7 +2795,7 @@
     <div class="container">
       <div class="proof-header">
         <div class="chapter-divider reveal">
-          <span class="chapter-num">03 / Evidence</span>
+          <span class="chapter-num">03 • Evidence</span>
           <div class="chapter-line"></div>
         </div>
         <h2 class="section-title reveal">The work matters more<br>when you can verify it.</h2>
@@ -2770,28 +2890,25 @@
   <section id="why-rep">
     <div class="container">
       <div class="chapter-divider reveal">
-        <span class="chapter-num">04 / Direction</span>
+        <span class="chapter-num">03 • Direction</span>
         <div class="chapter-line"></div>
       </div>
       <div class="why-rep-layout">
         <div>
-          <h2 class="section-title reveal">What I want to build<br>and grow into next.</h2>
+          <h2 class="section-title reveal">What's Next</h2>
 
           <div class="why-rep-points">
             <div class="rep-point reveal stagger-1">
               <div class="rep-point-num"><b>01 • Problem-Solving</b></div>
               <h4>I want to work on problems that do not sit within one discipline.</h4>
-              <p>Across flying, engineering, and building products, I have seen that real problems are rarely isolated.
-                I
-                want to learn how to approach them with both technical depth and a broader, systems-level perspective.
-              </p>
+              <p>Across flying, engineering, and product-building, I have learned that real problems rarely stay inside
+                one box.</p>
             </div>
             <div class="rep-point reveal stagger-2">
               <div class="rep-point-num"><b>02 • Innovation</b></div>
               <h4>I want to build things that people can genuinely rely on.</h4>
-              <p>Experiences like flight training and WebForce showed me that reliability is not a bonus - it is the
-                standard. I want to deepen my engineering ability so that what I build holds up in real situations, not
-                just controlled ones.</p>
+              <p>Flight training and WebForce both taught me that reliability is not a bonus. It is the standard when
+                someone is depending on what you do.</p>
             </div>
             <div class="rep-point reveal stagger-3">
               <div class="rep-point-num"><b>03 • Growth</b></div>
@@ -2802,9 +2919,8 @@
           </div>
         </div>
 
-        <div class="why-rep-quote reveal-right">
-          <p class="big-quote">"I want to become someone who can take on difficult problems and build solutions that
-            people can trust."</p>
+        <!-- <div class="why-rep-quote reveal-right">
+          <p class="big-quote">"I want to become someone who can solve difficult problems well, and build things people trust."</p>
 
           <div class="bring-grid">
             <div class="bring-item">
@@ -2831,7 +2947,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
@@ -2842,7 +2958,7 @@
   <section id="person">
     <div class="container">
       <div class="chapter-divider reveal">
-        <span class="chapter-num">05 / The Person</span>
+        <span class="chapter-num">04 • The Person</span>
         <div class="chapter-line"></div>
       </div>
       <div class="person-layout">
@@ -2891,7 +3007,7 @@
   <footer id="contact">
     <div class="container">
       <div class="chapter-divider reveal">
-        <span class="chapter-num">06 / Contact</span>
+        <span class="chapter-num">05 • Contact</span>
         <div class="chapter-line"></div>
       </div>
 
@@ -2953,7 +3069,7 @@
 
       <div class="contact-footer-strip">
         <div class="footer-brand">Garv Batra</div>
-        <div class="footer-note">NTU REP &amp; Scholarship Application</div>
+        <!-- <div class="footer-note">NTU REP &amp; Scholarship Application</div> -->
       </div>
     </div>
   </footer>
@@ -2994,7 +3110,7 @@
     const mobileNav = document.getElementById('mobileNav');
     const progressBar = document.getElementById('progress-bar');
     const navAnchors = Array.from(document.querySelectorAll('.nav-links a, .mobile-nav a'));
-    const trackedSections = ['journey', 'experiences', 'why-rep', 'person']
+    const trackedSections = ['journey', 'experiences', 'why-rep', 'person', 'contact']
       .map(id => document.getElementById(id))
       .filter(Boolean);
 
@@ -3036,6 +3152,39 @@
     window.addEventListener('scroll', updateChrome);
     window.addEventListener('resize', updateChrome);
     updateChrome();
+
+    const timelineItems = Array.from(document.querySelectorAll('.timeline-item'));
+    let activeTimelineIndex = -1;
+
+    function updateTimelineState() {
+      if (!timelineItems.length) return;
+
+      const viewportAnchor = window.innerHeight * 0.42;
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+
+      timelineItems.forEach((item, index) => {
+        const rect = item.getBoundingClientRect();
+        const itemCenter = rect.top + (rect.height * 0.38);
+        const distance = Math.abs(itemCenter - viewportAnchor);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      if (closestIndex === activeTimelineIndex) return;
+
+      activeTimelineIndex = closestIndex;
+      timelineItems.forEach((item, index) => {
+        item.classList.toggle('is-active', index === activeTimelineIndex);
+      });
+    }
+
+    window.addEventListener('scroll', updateTimelineState, { passive: true });
+    window.addEventListener('resize', updateTimelineState);
+    updateTimelineState();
 
     // Visible copy cleanup for this preview file
     const textFixes = new Map([
@@ -3255,6 +3404,41 @@
       }
     };
 
+    let accoladeOpenTimeout = null;
+
+    function spotlightStoryCard(card) {
+      document.querySelectorAll('.exp-card.story-spotlight').forEach(el => {
+        el.classList.remove('story-spotlight');
+      });
+      card.classList.add('story-spotlight');
+      window.setTimeout(() => card.classList.remove('story-spotlight'), 1700);
+    }
+
+    function goToStory(key) {
+      const storyCard = document.querySelector(`.exp-card[data-story="${key}"]`);
+      if (!storyCard || !modalData[key]) return;
+
+      if (accoladeOpenTimeout) {
+        window.clearTimeout(accoladeOpenTimeout);
+        accoladeOpenTimeout = null;
+      }
+
+      closeModal();
+      const navOffset = (nav?.offsetHeight || 64) + 24;
+      const cardRect = storyCard.getBoundingClientRect();
+      const centeredTop = window.scrollY + cardRect.top - Math.max((window.innerHeight - cardRect.height) / 2, navOffset);
+      window.scrollTo({
+        top: Math.max(0, centeredTop),
+        behavior: 'smooth'
+      });
+      spotlightStoryCard(storyCard);
+
+      accoladeOpenTimeout = window.setTimeout(() => {
+        openModal(key);
+        accoladeOpenTimeout = null;
+      }, 1000);
+    }
+
     function openModal(key) {
       const d = modalData[key];
       if (!d) return;
@@ -3307,11 +3491,22 @@
 
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+    document.querySelectorAll('.accolade-card[data-story]').forEach(card => {
+      card.addEventListener('click', e => {
+        e.preventDefault();
+        const key = card.dataset.story;
+        if (key) goToStory(key);
+      });
+    });
+
     const accoladeMarquee = document.querySelector('.accolade-marquee');
     const accoladeTrack = document.querySelector('.accolade-track');
 
     if (accoladeMarquee && accoladeTrack) {
       let isDragging = false;
+      let pointerIsDown = false;
+      let activePointerId = null;
+      let didDrag = false;
       let dragStartX = 0;
       let dragStartScrollLeft = 0;
       let autoScrollPausedUntil = 0;
@@ -3350,22 +3545,35 @@
       }, { passive: false });
 
       accoladeMarquee.addEventListener('pointerdown', e => {
-        isDragging = true;
+        pointerIsDown = true;
+        activePointerId = e.pointerId;
+        didDrag = false;
         dragStartX = e.clientX;
         dragStartScrollLeft = accoladeMarquee.scrollLeft;
-        accoladeMarquee.classList.add('is-dragging');
-        accoladeMarquee.setPointerCapture(e.pointerId);
         pauseAccoladeAutoScroll();
       });
 
       accoladeMarquee.addEventListener('pointermove', e => {
-        if (!isDragging) return;
+        if (!pointerIsDown || e.pointerId !== activePointerId) return;
         const delta = e.clientX - dragStartX;
+        if (!isDragging) {
+          if (Math.abs(delta) < 8) return;
+          isDragging = true;
+          didDrag = true;
+          accoladeMarquee.classList.add('is-dragging');
+          accoladeMarquee.setPointerCapture(e.pointerId);
+        }
         accoladeMarquee.scrollLeft = dragStartScrollLeft - delta;
       });
 
       const endDrag = e => {
-        if (!isDragging) return;
+        if (e && activePointerId !== null && e.pointerId !== activePointerId) return;
+        pointerIsDown = false;
+        activePointerId = null;
+        if (!isDragging) {
+          pauseAccoladeAutoScroll(1600);
+          return;
+        }
         isDragging = false;
         accoladeMarquee.classList.remove('is-dragging');
         if (e && accoladeMarquee.hasPointerCapture(e.pointerId)) {
@@ -3376,6 +3584,12 @@
 
       accoladeMarquee.addEventListener('pointerup', endDrag);
       accoladeMarquee.addEventListener('pointercancel', endDrag);
+      accoladeMarquee.addEventListener('click', e => {
+        if (!didDrag) return;
+        e.preventDefault();
+        e.stopPropagation();
+        didDrag = false;
+      }, true);
       accoladeMarquee.addEventListener('scroll', () => {
         if (!ignoreScrollPause && isDragging) pauseAccoladeAutoScroll(1200);
       }, { passive: true });
